@@ -3,6 +3,7 @@ Public class AddCriteriasManager_Test
 {	
  	public static testmethod void AddCriteriasMethod()
  	{
+		 //Git Commit
 		campaign cmp = marketingDataUtils.CreateCampaign();
 		String SFDCAPIName ='Test';
 		String operator = 'AND';
