@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Encounter</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Encounters</value>
+    </caseValues>
+    <fields>
+        <label><!-- Admitting NPIs --></label>
+        <name>Admitting_NPIs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Attending NPIs --></label>
+        <name>Attending_NPIs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selected Hospital Codes --></label>
+        <name>CRM_SelectedHospitalCodes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Service Line --></label>
+        <name>CRM_ServiceLine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Service Line --></label>
+        <name>CRM_SubServiceLine__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Encounters --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Discharge Date Ranges --></label>
+        <name>Discharge_Date_Ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- TO --></label>
+        <name>Discharge_Date_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- From --></label>
+        <name>Discharge_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discharge Date --></label>
+        <name>Discharge_Date_encounter__c</name>
+    </fields>
+    <fields>
+        <label><!-- ED Flag --></label>
+        <name>ED_Flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exclude Facility ID&apos;s --></label>
+        <name>Exclude_Facility_IDs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Exclude Physician NPI&apos;s --></label>
+        <name>Exclude_Physician_NPIs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hospital Ids --></label>
+        <name>HospitalIds__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hospitals --></label>
+        <name>Hospital_IDs__c</name>
+        <picklistValues>
+            <masterLabel>2000</masterLabel>
+            <translation><!-- 2000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3000</masterLabel>
+            <translation><!-- 3000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4000</masterLabel>
+            <translation><!-- 4000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5000</masterLabel>
+            <translation><!-- 5000 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hospital --></label>
+        <name>Hospital_Names__c</name>
+    </fields>
+    <fields>
+        <label><!-- Include Facility ID&apos;s --></label>
+        <name>Include_Facility_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Include Physician NPI&apos;s --></label>
+        <name>Include_Physician_NPIs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Labor and Delivery Flag --></label>
+        <name>Labor_and_Delivery_Flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- No of ER Encounters ranges --></label>
+        <name>No_of_ER_Encounters_ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Normal Newborn Flag --></label>
+        <name>Normal_Newborn_Flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of ER Encounters --></label>
+        <name>Number_of_ER_Encounters__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of ER Encounters_to --></label>
+        <name>Number_of_ER_Encounters_to__c</name>
+    </fields>
+    <fields>
+        <label><!-- Patient Type --></label>
+        <name>Patient__c</name>
+        <picklistValues>
+            <masterLabel>All</masterLabel>
+            <translation><!-- All --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Patient</masterLabel>
+            <translation><!-- In Patient --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Out Patient</masterLabel>
+            <translation><!-- Out Patient --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Most Recent Primary Payor Type --></label>
+        <name>Payor_Type__c</name>
+        <picklistValues>
+            <masterLabel>CHARITY</masterLabel>
+            <translation><!-- CHARITY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MANAGED CARE</masterLabel>
+            <translation><!-- MANAGED CARE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MANAGED EXCHANGE</masterLabel>
+            <translation><!-- MANAGED EXCHANGE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MEDICAID</masterLabel>
+            <translation><!-- MEDICAID --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MEDICAID MANAGED CARE</masterLabel>
+            <translation><!-- MEDICAID MANAGED CARE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MEDICARE</masterLabel>
+            <translation><!-- MEDICARE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MEDICARE MANAGED CARE</masterLabel>
+            <translation><!-- MEDICARE MANAGED CARE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OTHER</masterLabel>
+            <translation><!-- OTHER --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SELF PAY/UNINSURED</masterLabel>
+            <translation><!-- SELF PAY/UNINSURED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UNKNOWN</masterLabel>
+            <translation><!-- UNKNOWN --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Primary NPIs --></label>
+        <name>Primary_NPIs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Surgery Flag --></label>
+        <name>Surgery_Flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- To --></label>
+        <name>To_discharge_date_encounter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wunderman Preferred Hospitals --></label>
+        <name>Wunderman_Preferred_Hospitals__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,146 @@
+<apex:page standardController="Campaign" extensions="CRM_CountSummaryController" showHeader="false" title="Count Summary">
+  <apex:form >
+  <apex:pageBlock > 
+  
+        <apex:outputPanel >
+            <div align="center"  draggable="false">      
+           <apex:commandButton value="Back To Campaign" action="{!enc_back}" style="font-weight:600;line-height:1.3;" />
+           </div>              
+        </apex:outputPanel>        
+        
+        <div class="bPageTitle">
+			<div class="ptBody secondaryPalette brandSecondaryBrd">
+				<div class="content" style="width:97%;text-align:center">
+					<img src="/img/s.gif" class="pageTitleIcon" title="Campaigns" alt="Campaigns" />
+					<h1 class="pageType noSecondHeader">Count Summary</h1>
+				</div>
+				<div class="blank"></div>
+        	</div>
+        </div>
+        
+        <div align="center"  draggable="false">             
+        <html>          
+          <head>
+        
+              <style>
+                 div.content { width: 100% }
+                 
+                 table, th, td 
+                 {
+                   border-collapse: collapse;
+                 } 
+                 th, td 
+                 {
+                   padding: 5px;
+                   text-align: center;
+                 }
+                 
+              </style>
+          </head>
+        <body>
+        
+        <table border="1px" bgcolor="#e6e6fa" >
+        
+               <tr>
+                   <th ></th>
+                   <th>Totals</th>
+                   <apex:repeat value="{!lstSegmentCampaigns}" var="a" >
+                        <th>{!a.Segment__c}</th>
+                   </apex:repeat>
+                   <th style="display: {!IF(parentCampaign.Member_Types__c!='Campaign Segments', 'none', 'table-rpw')};">DeDuped</th>
+               </tr>
+               <tr>
+                    <td style="font-weight:bold">Audience</td> 
+                   <apex:repeat value="{!parentCampaign}" var="a" >
+                        <td bgcolor="#dfdfd0" >{!if (a.Current_count__c==null,0,a.Current_count__c)}</td>     
+                   </apex:repeat>
+                   <apex:repeat value="{!lstSegmentCampaigns}" var="a" >
+                        <td bgcolor="#dfdfd0">{!if (a.Current_count__c==null,0,a.Current_count__c)}</td>     
+                   </apex:repeat>
+                   <apex:repeat value="{!parentCampaign}" var="a" rendered="{!parentCampaign.Member_Types__c='Campaign Segments'}">
+                        <td bgcolor="#dfdfd0" >{!if (a.CRM_WundermanDuplicateCount__c==null,0,'-' & TEXT(a.CRM_WundermanDuplicateCount__c))}</td>     
+                    </apex:repeat>
+               </tr>
+                <tr>
+                    <td style="font-weight:bold">Suppressions</td> 
+                   <apex:repeat value="{!parentCampaign}" var="a" >
+                        <td bgcolor="#dfdfd0">{!a.Supp_Count__c}</td>     
+                   </apex:repeat>
+        
+                   <apex:repeat value="{!lstSegmentCampaigns}" var="a" >
+                        <td bgcolor="#dfdfd0">{!if(a.status!='Active',a.Supp_Count__c,a.Suppression_Count__c)}</td>     
+                   </apex:repeat>    
+                    
+                        <td style="display: {!IF(parentCampaign.Member_Types__c!='Campaign Segments', 'none', 'table-rpw')};" bgcolor="#dfdfd0">{!IF(totalSuppressionCount==0,0, '-' & TEXT(totalSuppressionCount))}</td>     
+                      
+               </tr>
+               <tr>              
+                    <td style="font-weight:bold">Missing</td>            
+                   <apex:repeat value="{!parentCampaign}" var="a" >
+                        <td bgcolor="#dfdfd0">{!if (a.Missing_Contact_Count__c==null,0,a.Missing_Contact_Count__c)}</td>     
+                   </apex:repeat>        
+                   <apex:repeat value="{!lstSegmentCampaigns}" var="a" >
+                        <td bgcolor="#dfdfd0">{!if (a.Missing_Contact_Count__c==null,0,a.Missing_Contact_Count__c)}</td>     
+                   </apex:repeat>     
+                    <td style="display: {!IF(parentCampaign.Member_Types__c!='Campaign Segments', 'none', 'table-rpw')};" bgcolor="#dfdfd0">{!IF(totalMissingCount==0,0, '-' & TEXT(totalMissingCount))}</td> 
+               </tr>
+           <!--    <tr>              
+                    <td style="font-weight:bold">De-duped</td>  
+                   
+                   <apex:repeat value="{!parentCampaign}" var="a" >
+                        <td bgcolor="#dfdfd0"></td>     
+                   </apex:repeat>        
+                   <apex:repeat value="{!lstSegmentCampaigns}" var="a" id="dedupe">
+                      
+                        <td bgcolor="#dfdfd0"></td>  
+                      
+                   </apex:repeat>     
+               </tr>   -->
+               <tr>              
+                    <td style="font-weight:bold">Control Group</td>          
+                   <apex:repeat value="{!parentCampaign}" var="a" >
+                        <td bgcolor="#dfdfd0">{!if( a.status!='Active',a.CG_Count__c,a.Control_Group_Count__c)}</td>     
+                   </apex:repeat>                  
+                   <apex:repeat value="{!lstSegmentCampaigns}" var="a" >
+                        <td bgcolor="#dfdfd0">{!if(a.CG_Count__c!=0,a.CG_Count__c,'NA')}</td>     
+                   </apex:repeat>    
+                    <td style="display: {!IF(parentCampaign.Member_Types__c!='Campaign Segments', 'none', 'table-rpw')};" bgcolor="#dfdfd0">NA</td>
+               </tr>
+               <tr>              
+                    <td style="font-weight:bold">Final Count</td>                
+                   <apex:repeat value="{!parentCampaign}" var="a" >
+                        <td bgcolor="#dfdfd0">{!a.Net_Count__c}</td>     
+                   </apex:repeat>                      
+                   <apex:repeat value="{!lstSegmentCampaigns}" var="a" >
+                        <td bgcolor="#dfdfd0">{!a.Net_Count__c}</td>     
+                   </apex:repeat> 
+                   <td style="display: {!IF(parentCampaign.Member_Types__c!='Campaign Segments', 'none', 'table-rpw')};" bgcolor="#dfdfd0">{!IF(totalFinalCount==0, 0, '-' & TEXT(totalFinalCount))}</td>
+               </tr>
+               
+       </table> 
+       </body>
+       </html>
+       </div>
+       <br/>
+       <apex:pageBlockSection columns="1"   title="Reports"> 
+        
+           <apex:outputPanel >
+            <div align="center" draggable="false">   
+             <apex:commandlink action="{!callAnalysisTotalsOnly}" target="_blank" style="text-decoration: none;">
+               <apex:commandButton value="Analysis Totals Only" />
+               </apex:commandLink>
+               <apex:commandlink action="{!callAnalysisByPreferredHospital}" target="_blank" style="text-decoration: none;">
+               <apex:commandButton value="Analysis By Preferred Hospital" />
+               </apex:commandLink>
+               <apex:commandlink action="{!callAnalysisByZipcode}" target="_blank" style="text-decoration: none;">
+               <apex:commandButton value="Analysis by ZIP Code"  />
+                </apex:commandLink>
+               </div>
+           </apex:outputPanel> 
+        
+       </apex:pageBlockSection>     
+          
+  </apex:pageBlock>
+ 
+  </apex:form>
+</apex:page>

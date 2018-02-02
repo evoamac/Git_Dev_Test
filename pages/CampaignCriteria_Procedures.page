@@ -1,0 +1,164 @@
+<apex:page standardController="Campaign"  sidebar="false" extensions="IncludeProcedureController" id="mainPage">
+    
+    <apex:form id="mainForm">
+        
+        <apex:includeScript value="{!$Resource.jquery1_12}"/>
+          <script type="text/javascript" value="https://github.com/aFarkas/html5shiv/blob/master/dist/html5shiv.min.js"></script>
+          <script src="/soap/ajax/9.0/connection.js" type="text/javascript"> </script>
+        <apex:includeScript value="{!URLFOR($Resource.datatable, 'datatables.min.js')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.datatable, 'datatables.min.css')}"/>
+        
+        
+        <script>
+           function checkAll(cb){
+                document.getElementById('{!$Component.masterSelectAll}').value=true;
+                var inputElem = document.getElementsByTagName("input");
+                for(var i=0; i<inputElem.length; i++){
+                    if(inputElem[i].id.indexOf("checkedone")!=-1)
+                        inputElem[i].checked = cb.checked;
+                }
+            }
+            
+            function unSelectAll(cb){
+                if(cb.checked==true)
+                    document.getElementById('{!$Component.masterSelectAll}').value=false;
+            }
+            
+            function allowOnlyNumber(eventInstance) {
+                  eventInstance = eventInstance || window.event;
+                  key = eventInstance.keyCode || eventInstance.which;
+                  if ((47 < key) && (key < 58) || key == 8 || key == 189 || key == 109) {
+                      return true;
+                  } else {
+                      if (eventInstance.preventDefault)
+                          eventInstance.preventDefault();
+                      eventInstance.returnValue = false;
+                      return false;
+                  }
+            }
+             $(document).keypress(function(e) { 
+            if (e.which == 13){
+                e.preventDefault();
+                $(".srchbtn").click();
+                                             
+        }
+      });
+        </script>
+        
+         <apex:sectionHeader title="{!IF(exclude, 'Exclude','Include')} Procedures"/>
+       
+         <apex:pageMessages id="showmsg" />
+        <apex:pageBlock > 
+            <apex:pageBlockSection columns="2" title="Search Field" collapsible="false">
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Procedure Code</apex:outputLabel>
+                    
+                    
+                     <apex:inputText value="{!IPCodes}" />  
+                  </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >Long Description</apex:outputLabel>
+                    <apex:inputText value="{!IPDis}" /> 
+             
+                  </apex:pageBlockSectionItem>
+                
+           <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Type Of Procedures"/>
+                    <apex:selectList value="{!selectedtypeofProcedures}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!typeofdiagnosislist}"/>
+                    </apex:selectList>
+                 </apex:pageBlockSectionItem>
+                
+                
+
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons location="bottom">
+            <div style="float:left;">
+                <apex:commandButton value="Search"  action="{!searchIncludeProcedure}" status="waitStatus" reRender="showmsg,searchResult" style="margin-left:189px;" styleClass="srchbtn"/>  
+                <apex:commandButton value="Cancel" action="{!cancel}" /> 
+                </div>    
+                <div style="padding-left:10px;float:left;">
+                    <apex:actionStatus id="waitStatus" >       
+                        <apex:facet name="start">
+                            <div id="loadingimage">
+                                <img src="/img/loading32.gif" height="23" width="25"/>
+                            </div>
+                        </apex:facet>
+                    </apex:actionStatus>
+                </div>
+           </apex:pageBlockButtons>
+        
+        </apex:pageBlock>
+        
+         <apex:outputPanel id="searchResult">
+         <apex:inputHidden value="{!masterSelectAll}" id="masterSelectAll"/>
+        <apex:pageBlock rendered="{!showSearchResult}" id="search_PB">
+            <apex:pageBlockSection collapsible="false" title="Search Result" columns="1" id="search_PB_SI"> 
+            <apex:pageBlockTable value="{!searchResult}" var="pro" id="locTab">
+                <apex:column >
+                    <apex:facet name="header">
+                       <apex:outputPanel >
+                                    <div style="float:left;">
+                                        <apex:inputCheckbox id="selectAll" value="{!selectAll}" onclick="checkAll(this)" />
+                                    </div>
+                                    <div style="float:left;padding-left:5px;">Select All</div>
+                               </apex:outputPanel>
+                      
+                    </apex:facet>
+                    
+                    <apex:inputCheckbox id="checkedone" value="{!pro.isSelected}" onClick="unSelectAll(this)"/>
+                     </apex:column>           
+         
+                        
+                
+                <apex:column headerValue="Procedure Code">
+                  <apex:outputField value="{!pro.wrapPro.Code__c}"/>
+                </apex:column>
+                
+                <apex:column headerValue="Long Description">
+                  <apex:outputField value="{!pro.wrapPro.LongDescription__c}"/>
+                </apex:column>
+                
+                
+                
+                 <apex:column headerValue="Type Of Procedure ">
+                  <apex:outputField value="{!pro.wrapPro.Type_Of_Procedure__c}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+             </apex:pageBlockSection>
+               
+                 <apex:pageBlockButtons >
+                  <div style="float:left;padding-right:200px;">
+              <!--      <apex:commandButton value="Back To Campaign" action="{!back}"/> -->
+                    <apex:commandButton value="Save" action="{!saveProcedure}" style="margin-left:173px;"/>
+                    <apex:commandButton value="Quick Save" action="{!quickSave}"  status="waitStatus" reRender="showmsg,searchResult"  style="margin-left:30px;">
+                    	<!-- <apex:param name="qc" value="1" /> -->
+                    </apex:commandButton>
+                     </div>
+                     <div style="float:left">
+                        <apex:actionStatus id="pageStatus" >       
+                            <apex:facet name="start">
+                                <div id="loadingimage">
+                                    <img src="/img/loading32.gif" height="23" width="25"/>
+                                </div>
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </div>
+                     <div style="float:right;"> 
+                        <apex:commandLink style="padding-right:10px;" status="pageStatus" reRender="searchResult" value="First" action="{!first}" rendered="{!setCon.hasPrevious}" /> 
+                        <apex:commandLink style="padding-right:10px;" status="pageStatus" reRender="searchResult" value="Previous" action="{!previous}" rendered="{!setCon.hasPrevious}"/> 
+                        <apex:commandLink style="padding-right:10px;" status="pageStatus" reRender="searchResult" value="Next"  action="{!next}" rendered="{!setCon.hasNext}"/> 
+                        <apex:commandLink style="padding-right:10px;" status="pageStatus" reRender="searchResult" value="Last"  action="{!last}" rendered="{!setCon.hasNext}"/>
+                        <apex:outputText >Total No of Records: {!noOfRecords}</apex:outputText>
+                    </div>
+                    
+               
+                 </apex:pageBlockButtons>
+         </apex:pageBlock>
+   </apex:outputPanel>
+    </apex:form>
+   
+</apex:page>

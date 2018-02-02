@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Data Element Identifier</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Data Element Identifiers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Book Name --></label>
+        <name>Book_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Criteria Group Name --></label>
+        <name>Criteria_Group_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data Element Description --></label>
+        <name>Data_Element_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data Element Identifier --></label>
+        <name>Data_Element_Identifier__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data Element Name --></label>
+        <name>Data_Element_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Display Type Code --></label>
+        <name>Display_Type_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC Field Name --></label>
+        <name>Field_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- List Product Description --></label>
+        <name>List_Product_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- List Product Identifier --></label>
+        <name>List_Product_Identifier__c</name>
+    </fields>
+    <fields>
+        <label><!-- List Product Name --></label>
+        <name>List_Product_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Value Mapping --></label>
+        <name>Value_Mapping__c</name>
+    </fields>
+    <layouts>
+        <layout>Data Element Identifier Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

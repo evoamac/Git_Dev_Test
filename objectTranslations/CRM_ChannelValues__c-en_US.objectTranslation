@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ChannelValues</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ChannelValues</value>
+    </caseValues>
+    <fields>
+        <label><!-- Demographics Email --></label>
+        <name>CRM_DemoEmail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Demographics Mailing Address --></label>
+        <name>CRM_DemoMailingAddress__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Targeted --></label>
+        <name>CRM_IsTargeted__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

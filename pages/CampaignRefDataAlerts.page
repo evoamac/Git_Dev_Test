@@ -1,0 +1,3 @@
+<apex:page standardController="Campaign" extensions="CampaignRefDataAlerts_Controller">
+    <apex:pageMessage severity="Warning" strength="2" title="Warning" escape="false"  summary="{!alertMessage}" rendered="{!alertMessage!=null}"/>
+</apex:page>

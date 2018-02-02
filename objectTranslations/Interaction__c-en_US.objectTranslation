@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Interaction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Interactions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Address_1 --></label>
+        <name>Address1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Address_2 --></label>
+        <name>Address_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Call_Type --></label>
+        <name>CallType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign_ID --></label>
+        <name>CampaignID__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Communication_Preference --></label>
+        <name>CommunicationPreference__c</name>
+    </fields>
+    <fields>
+        <label><!-- Communication_Type --></label>
+        <name>Communication_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Do_not_mail --></label>
+        <name>Donotmail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Encounter_Date --></label>
+        <name>EncounterDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- First_Name --></label>
+        <name>FirstName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hospital --></label>
+        <name>Hospital__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last_Name --></label>
+        <name>LastName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mobile --></label>
+        <name>Mobile__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other_Phone --></label>
+        <name>Other_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Response By Campaign Member --></label>
+        <name>Response_By_Campaign_Member__c</name>
+        <relationshipLabel><!-- Campaign Member Responses --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Response Detail --></label>
+        <name>Response_Detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Response For Campaign --></label>
+        <name>Response_For_Campaign__c</name>
+        <relationshipLabel><!-- Campaign Member Responses --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zip --></label>
+        <name>Zip__c</name>
+    </fields>
+    <fields>
+        <label><!-- eMail_Opt_In_Date --></label>
+        <name>eMailOptInDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- eMail_Opt_In --></label>
+        <name>eMailOptIn__c</name>
+    </fields>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

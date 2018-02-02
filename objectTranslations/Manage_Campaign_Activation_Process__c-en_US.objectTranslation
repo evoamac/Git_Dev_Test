@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Manage Campaign Activation Process</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Manage Campaign Activation Process</value>
+    </caseValues>
+    <fields>
+        <label><!-- Activate Process --></label>
+        <name>Activate_Process__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

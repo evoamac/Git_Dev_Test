@@ -1,0 +1,61 @@
+<apex:page standardController="Campaign" extensions="CampaignTemplateController" >
+
+<script>
+    var newWin=null;
+    function openLookupPopup(name, id)
+    {
+        var v =  window.opener.document.getElementById('j_id0:j_id3:j_id4:j_id5:targetName').value;
+        var url="/apex/ViewSavedCampaignTemplate?namefield=" + name + "&idfield=" + id+ "&lksrch=" + v;
+        newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');    
+        if (window.focus) 
+        {
+         newWin.focus();
+        }    
+         return false;
+    }
+    
+    function closeLookupPopup()
+    {
+        if (null!=newWin)
+        {
+         newWin.close();
+        }  
+    }
+    
+    function isEmpty()
+    {
+        if(document.getElementById('j_id0:j_id3:j_id4:j_id5:targetName').value == "" || document.getElementById('j_id0:j_id3:j_id4:j_id5:targetId').value== "")
+        {
+            alert("Please select the template");
+            return false;            
+        }
+        else
+        {
+            afterValidation();
+            return true;
+        }
+    }
+</script>
+
+    <apex:message />
+    <apex:form >
+     <apex:pageBlock >
+     
+   
+         <apex:pageBlockSection columns="1" title="Custom Lookup" collapsible="false" >
+             <apex:outputPanel >
+                 <apex:inputHidden value="{!c.id}" id="targetId" />
+                 <apex:outputLabel >Saved Template</apex:outputLabel>
+                  <apex:inputText value="{!c.name}" label="Saved Template" id="targetName"/>                
+                  <apex:commandButton onclick="openLookupPopup('{!$Component.targetName}', '{!$Component.targetId}'); return false" value="Find Template"/>                  
+             </apex:outputPanel> 
+                         
+             <apex:commandButton value="Create Campaign" onclick="isEmpty()" reRender="targetName" /><!--active Validation Change--> 
+             <apex:actionFunction name="afterValidation" action="{!SaveCamp}" reRender="msgs"/><!--active Validation Change-->
+         
+         </apex:pageBlockSection>   
+        
+        <apex:pageMessages escape="false" id="msgs"></apex:pageMessages><!--active Validation Change-->     
+     </apex:pageBlock>
+    </apex:form>    
+</apex:page>

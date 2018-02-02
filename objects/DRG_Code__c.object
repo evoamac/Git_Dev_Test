@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MS_DRG__c</fullName>
+        <externalId>false</externalId>
+        <label>DRG-Number</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Service_Line__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Line</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>All Other</fullName>
+                    <default>false</default>
+                    <label>All Other</label>
+                </value>
+                <value>
+                    <fullName>Behavioral</fullName>
+                    <default>false</default>
+                    <label>Behavioral</label>
+                </value>
+                <value>
+                    <fullName>Burn</fullName>
+                    <default>false</default>
+                    <label>Burn</label>
+                </value>
+                <value>
+                    <fullName>Cardiovascular</fullName>
+                    <default>false</default>
+                    <label>Cardiovascular</label>
+                </value>
+                <value>
+                    <fullName>Digestive Disease</fullName>
+                    <default>false</default>
+                    <label>Digestive Disease</label>
+                </value>
+                <value>
+                    <fullName>Endocrine</fullName>
+                    <default>false</default>
+                    <label>Endocrine</label>
+                </value>
+                <value>
+                    <fullName>ENT</fullName>
+                    <default>false</default>
+                    <label>ENT</label>
+                </value>
+                <value>
+                    <fullName>Hematology</fullName>
+                    <default>false</default>
+                    <label>Hematology</label>
+                </value>
+                <value>
+                    <fullName>Infectious Disease</fullName>
+                    <default>false</default>
+                    <label>Infectious Disease</label>
+                </value>
+                <value>
+                    <fullName>Miscellaneous</fullName>
+                    <default>false</default>
+                    <label>Miscellaneous</label>
+                </value>
+                <value>
+                    <fullName>Musculoskeletal</fullName>
+                    <default>false</default>
+                    <label>Musculoskeletal</label>
+                </value>
+                <value>
+                    <fullName>Nephrology/Urology</fullName>
+                    <default>false</default>
+                    <label>Nephrology/Urology</label>
+                </value>
+                <value>
+                    <fullName>Neuroscience</fullName>
+                    <default>false</default>
+                    <label>Neuroscience</label>
+                </value>
+                <value>
+                    <fullName>Newborn</fullName>
+                    <default>false</default>
+                    <label>Newborn</label>
+                </value>
+                <value>
+                    <fullName>OB/GYN</fullName>
+                    <default>false</default>
+                    <label>OB/GYN</label>
+                </value>
+                <value>
+                    <fullName>Oncology</fullName>
+                    <default>false</default>
+                    <label>Oncology</label>
+                </value>
+                <value>
+                    <fullName>Ophthalmology</fullName>
+                    <default>false</default>
+                    <label>Ophthalmology</label>
+                </value>
+                <value>
+                    <fullName>Poisoning/Drug Tox</fullName>
+                    <default>false</default>
+                    <label>Poisoning/Drug Tox</label>
+                </value>
+                <value>
+                    <fullName>Rehabilation</fullName>
+                    <default>false</default>
+                    <label>Rehabilation</label>
+                </value>
+                <value>
+                    <fullName>Respiratory</fullName>
+                    <default>false</default>
+                    <label>Respiratory</label>
+                </value>
+                <value>
+                    <fullName>Skin and Breast</fullName>
+                    <default>false</default>
+                    <label>Skin and Breast</label>
+                </value>
+                <value>
+                    <fullName>Spine</fullName>
+                    <default>false</default>
+                    <label>Spine</label>
+                </value>
+                <value>
+                    <fullName>Transplant</fullName>
+                    <default>false</default>
+                    <label>Transplant</label>
+                </value>
+                <value>
+                    <fullName>Trauma</fullName>
+                    <default>false</default>
+                    <label>Trauma</label>
+                </value>
+                <value>
+                    <fullName>Cardiac Services</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Cardiac Services</label>
+                </value>
+                <value>
+                    <fullName>General Medicines</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>General Medicines</label>
+                </value>
+                <value>
+                    <fullName>General Surgery</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>General Surgery</label>
+                </value>
+                <value>
+                    <fullName>Gynecology</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Gynecology</label>
+                </value>
+                <value>
+                    <fullName>Neonatology</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Neonatology</label>
+                </value>
+                <value>
+                    <fullName>Neurology</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Neurology</label>
+                </value>
+                <value>
+                    <fullName>Neurosurgery</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Neurosurgery</label>
+                </value>
+                <value>
+                    <fullName>Obstetrics</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Obstetrics</label>
+                </value>
+                <value>
+                    <fullName>Oncology/Hematology(Medical)</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Oncology/Hematology(Medical)</label>
+                </value>
+                <value>
+                    <fullName>Orthopedics</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Orthopedics</label>
+                </value>
+                <value>
+                    <fullName>Other Trauma</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Other Trauma</label>
+                </value>
+                <value>
+                    <fullName>Rehabilitation</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Rehabilitation</label>
+                </value>
+                <value>
+                    <fullName>Thoracic Surgery</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Thoracic Surgery</label>
+                </value>
+                <value>
+                    <fullName>Urology</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Urology</label>
+                </value>
+                <value>
+                    <fullName>Vascular Services</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Vascular Services</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sub_Service_Line__c</fullName>
+        <externalId>false</externalId>
+        <label>Sub Service Line</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Service_Line__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Dermatology</fullName>
+                    <default>false</default>
+                    <label>Dermatology</label>
+                </value>
+                <value>
+                    <fullName>Nephrology</fullName>
+                    <default>false</default>
+                    <label>Nephrology</label>
+                </value>
+                <value>
+                    <fullName>Psychiatry</fullName>
+                    <default>false</default>
+                    <label>Psychiatry</label>
+                </value>
+                <value>
+                    <fullName>Pulmonology</fullName>
+                    <default>false</default>
+                    <label>Pulmonology</label>
+                </value>
+                <value>
+                    <fullName>Substance Abuse</fullName>
+                    <default>false</default>
+                    <label>Substance Abuse</label>
+                </value>
+                <value>
+                    <fullName>Transplant</fullName>
+                    <default>false</default>
+                    <label>Transplant</label>
+                </value>
+                <value>
+                    <fullName>Trauma</fullName>
+                    <default>false</default>
+                    <label>Trauma</label>
+                </value>
+                <value>
+                    <fullName>Gynecology</fullName>
+                    <default>false</default>
+                    <label>Gynecology</label>
+                </value>
+                <value>
+                    <fullName>Neonate</fullName>
+                    <default>false</default>
+                    <label>Neonate</label>
+                </value>
+                <value>
+                    <fullName>Normal Newborn</fullName>
+                    <default>false</default>
+                    <label>Normal Newborn</label>
+                </value>
+                <value>
+                    <fullName>Neurology</fullName>
+                    <default>false</default>
+                    <label>Neurology</label>
+                </value>
+                <value>
+                    <fullName>Neurosurgery</fullName>
+                    <default>false</default>
+                    <label>Neurosurgery</label>
+                </value>
+                <value>
+                    <fullName>Hematology</fullName>
+                    <default>false</default>
+                    <label>Hematology</label>
+                </value>
+                <value>
+                    <fullName>Ophthalmology</fullName>
+                    <default>false</default>
+                    <label>Ophthalmology</label>
+                </value>
+                <value>
+                    <fullName>Burn</fullName>
+                    <default>false</default>
+                    <label>Burn</label>
+                </value>
+                <value>
+                    <fullName>Rehabilitation</fullName>
+                    <default>false</default>
+                    <label>Rehabilitation</label>
+                </value>
+                <value>
+                    <fullName>Thoracic Surgery</fullName>
+                    <default>false</default>
+                    <label>Thoracic Surgery</label>
+                </value>
+                <value>
+                    <fullName>Cancer - Surgical</fullName>
+                    <default>false</default>
+                    <label>Cancer - Surgical</label>
+                </value>
+                <value>
+                    <fullName>ENT - Surgical</fullName>
+                    <default>false</default>
+                    <label>ENT - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Dental</fullName>
+                    <default>false</default>
+                    <label>Dental</label>
+                </value>
+                <value>
+                    <fullName>BMT</fullName>
+                    <default>false</default>
+                    <label>BMT</label>
+                </value>
+                <value>
+                    <fullName>Cancer - Medical</fullName>
+                    <default>false</default>
+                    <label>Cancer - Medical</label>
+                </value>
+                <value>
+                    <fullName>ENT - Medical</fullName>
+                    <default>false</default>
+                    <label>ENT - Medical</label>
+                </value>
+                <value>
+                    <fullName>Cath/EP</fullName>
+                    <default>false</default>
+                    <label>Cath/EP</label>
+                </value>
+                <value>
+                    <fullName>Vascular - Surgical</fullName>
+                    <default>false</default>
+                    <label>Vascular - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Spine - Surgical</fullName>
+                    <default>false</default>
+                    <label>Spine - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Cardiology - Medical</fullName>
+                    <default>false</default>
+                    <label>Cardiology - Medical</label>
+                </value>
+                <value>
+                    <fullName>Vascular - Medical</fullName>
+                    <default>false</default>
+                    <label>Vascular - Medical</label>
+                </value>
+                <value>
+                    <fullName>Trach</fullName>
+                    <default>false</default>
+                    <label>Trach</label>
+                </value>
+                <value>
+                    <fullName>Digestive Disease - Surgical</fullName>
+                    <default>false</default>
+                    <label>Digestive Disease - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Digestive Disease - Medical</fullName>
+                    <default>false</default>
+                    <label>Digestive Disease - Medical</label>
+                </value>
+                <value>
+                    <fullName>Plastic Surgery</fullName>
+                    <default>false</default>
+                    <label>Plastic Surgery</label>
+                </value>
+                <value>
+                    <fullName>Orthopedics - Surgical</fullName>
+                    <default>false</default>
+                    <label>Orthopedics - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Miscellaneous - Medical</fullName>
+                    <default>false</default>
+                    <label>Miscellaneous - Medical</label>
+                </value>
+                <value>
+                    <fullName>Orthopedics - Medical</fullName>
+                    <default>false</default>
+                    <label>Orthopedics - Medical</label>
+                </value>
+                <value>
+                    <fullName>Breast Medical</fullName>
+                    <default>false</default>
+                    <label>Breast Medical</label>
+                </value>
+                <value>
+                    <fullName>Endocrine - Surgical</fullName>
+                    <default>false</default>
+                    <label>Endocrine - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Bariatric Surgery</fullName>
+                    <default>false</default>
+                    <label>Bariatric Surgery</label>
+                </value>
+                <value>
+                    <fullName>Endocrine - Medical</fullName>
+                    <default>false</default>
+                    <label>Endocrine - Medical</label>
+                </value>
+                <value>
+                    <fullName>Urology - Surgical</fullName>
+                    <default>false</default>
+                    <label>Urology - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Urology - Medical</fullName>
+                    <default>false</default>
+                    <label>Urology - Medical</label>
+                </value>
+                <value>
+                    <fullName>Obstetrics Delivered</fullName>
+                    <default>false</default>
+                    <label>Obstetrics Delivered</label>
+                </value>
+                <value>
+                    <fullName>Obstetrics Non Delivered</fullName>
+                    <default>false</default>
+                    <label>Obstetrics Non Delivered</label>
+                </value>
+                <value>
+                    <fullName>Miscellaneous - Surgical</fullName>
+                    <default>false</default>
+                    <label>Miscellaneous - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Infectious Disease - Surgical</fullName>
+                    <default>false</default>
+                    <label>Infectious Disease - Surgical</label>
+                </value>
+                <value>
+                    <fullName>Infectious Disease - Medical</fullName>
+                    <default>false</default>
+                    <label>Infectious Disease - Medical</label>
+                </value>
+                <value>
+                    <fullName>Poisoning/Drug Tox</fullName>
+                    <default>false</default>
+                    <label>Poisoning/Drug Tox</label>
+                </value>
+                <value>
+                    <fullName>Ungroupable</fullName>
+                    <default>false</default>
+                    <label>Ungroupable</label>
+                </value>
+                <value>
+                    <fullName>Cardiac Surgery</fullName>
+                    <default>false</default>
+                    <label>Cardiac Surgery</label>
+                </value>
+                <value>
+                    <fullName>Joint Replacement</fullName>
+                    <default>false</default>
+                    <label>Joint Replacement</label>
+                </value>
+                <value>
+                    <fullName>Rheumatology</fullName>
+                    <default>false</default>
+                    <label>Rheumatology</label>
+                </value>
+                <value>
+                    <fullName>Colorectal/Lower GI</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Colorectal/Lower GI</label>
+                </value>
+                <value>
+                    <fullName>Gyn Surgical Oncology</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Gyn Surgical Oncology</label>
+                </value>
+                <value>
+                    <fullName>Medical Trauma (Orthopedics)</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Medical Trauma (Orthopedics)</label>
+                </value>
+                <value>
+                    <fullName>Other General Surgery</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Other General Surgery</label>
+                </value>
+                <value>
+                    <fullName>Urinary System</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Urinary System</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Musculoskeletal</controllingFieldValue>
+                <valueName>Orthopedics - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Musculoskeletal</controllingFieldValue>
+                <valueName>Orthopedics - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Musculoskeletal</controllingFieldValue>
+                <valueName>Joint Replacement</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Musculoskeletal</controllingFieldValue>
+                <valueName>Rheumatology</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Spine</controllingFieldValue>
+                <valueName>Spine - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Nephrology/Urology</controllingFieldValue>
+                <valueName>Nephrology</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Nephrology/Urology</controllingFieldValue>
+                <valueName>Urology - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Nephrology/Urology</controllingFieldValue>
+                <valueName>Urology - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Transplant</controllingFieldValue>
+                <valueName>Transplant</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Neuroscience</controllingFieldValue>
+                <valueName>Neurology</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Neuroscience</controllingFieldValue>
+                <valueName>Neurosurgery</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Trauma</controllingFieldValue>
+                <valueName>Trauma</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Newborn</controllingFieldValue>
+                <valueName>Neonate</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Newborn</controllingFieldValue>
+                <valueName>Normal Newborn</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>OB/GYN</controllingFieldValue>
+                <valueName>Gynecology</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>OB/GYN</controllingFieldValue>
+                <valueName>Obstetrics Delivered</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>OB/GYN</controllingFieldValue>
+                <valueName>Obstetrics Non Delivered</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Oncology</controllingFieldValue>
+                <valueName>Cancer - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Oncology</controllingFieldValue>
+                <valueName>BMT</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Oncology</controllingFieldValue>
+                <valueName>Cancer - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Ophthalmology</controllingFieldValue>
+                <valueName>Ophthalmology</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Poisoning/Drug Tox</controllingFieldValue>
+                <valueName>Poisoning/Drug Tox</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rehabilation</controllingFieldValue>
+                <valueName>Rehabilitation</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>All Other</controllingFieldValue>
+                <valueName>Dental</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>All Other</controllingFieldValue>
+                <valueName>Trach</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>All Other</controllingFieldValue>
+                <valueName>Miscellaneous - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>All Other</controllingFieldValue>
+                <valueName>Miscellaneous - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Behavioral</controllingFieldValue>
+                <valueName>Psychiatry</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Behavioral</controllingFieldValue>
+                <valueName>Substance Abuse</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Burn</controllingFieldValue>
+                <valueName>Burn</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cardiovascular</controllingFieldValue>
+                <valueName>Cath/EP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cardiovascular</controllingFieldValue>
+                <valueName>Vascular - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cardiovascular</controllingFieldValue>
+                <valueName>Cardiology - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cardiovascular</controllingFieldValue>
+                <valueName>Vascular - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cardiovascular</controllingFieldValue>
+                <valueName>Cardiac Surgery</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Digestive Disease</controllingFieldValue>
+                <valueName>Digestive Disease - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Digestive Disease</controllingFieldValue>
+                <valueName>Digestive Disease - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Digestive Disease</controllingFieldValue>
+                <valueName>Bariatric Surgery</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Endocrine</controllingFieldValue>
+                <valueName>Endocrine - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Endocrine</controllingFieldValue>
+                <valueName>Endocrine - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ENT</controllingFieldValue>
+                <valueName>ENT - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ENT</controllingFieldValue>
+                <valueName>ENT - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Hematology</controllingFieldValue>
+                <valueName>Hematology</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Infectious Disease</controllingFieldValue>
+                <valueName>Infectious Disease - Surgical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Infectious Disease</controllingFieldValue>
+                <valueName>Infectious Disease - Medical</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Respiratory</controllingFieldValue>
+                <valueName>Pulmonology</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Respiratory</controllingFieldValue>
+                <valueName>Thoracic Surgery</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Miscellaneous</controllingFieldValue>
+                <valueName>Ungroupable</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Skin and Breast</controllingFieldValue>
+                <valueName>Dermatology</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Skin and Breast</controllingFieldValue>
+                <valueName>Plastic Surgery</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Skin and Breast</controllingFieldValue>
+                <valueName>Breast Medical</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <label>DRG Code</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>MS_DRG__c</columns>
+        <columns>Description__c</columns>
+        <columns>Service_Line__c</columns>
+        <columns>Sub_Service_Line__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>DRG-{0000}</displayFormat>
+        <label>DRG Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>DRG Code</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Admitting_NPIs__c</fullName>
+        <externalId>false</externalId>
+        <label>Admitting NPIs</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Attending_NPIs__c</fullName>
+        <externalId>false</externalId>
+        <label>Attending NPIs</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CRM_SelectedHospitalCodes__c</fullName>
+        <externalId>false</externalId>
+        <label>Selected Hospital Codes</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CRM_ServiceLine__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Line</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CRM_SubServiceLine__c</fullName>
+        <externalId>false</externalId>
+        <label>Sub Service Line</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Campaign__c</fullName>
+        <externalId>false</externalId>
+        <label>Campaign</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Encounters</relationshipLabel>
+        <relationshipName>Encounters</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Discharge_Date_Ranges__c</fullName>
+        <externalId>false</externalId>
+        <label>Discharge Date Ranges</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Discharge_Date_To__c</fullName>
+        <externalId>false</externalId>
+        <label>TO</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Discharge_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>From</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Discharge_Date_encounter__c</fullName>
+        <externalId>false</externalId>
+        <label>Discharge Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ED_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>ED Flag</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Exclude_Facility_IDs__c</fullName>
+        <externalId>false</externalId>
+        <label>Exclude Facility ID&apos;s</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Exclude_Physician_NPIs__c</fullName>
+        <externalId>false</externalId>
+        <label>Exclude Physician NPI&apos;s</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>HospitalIds__c</fullName>
+        <externalId>false</externalId>
+        <label>Hospital Ids</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Hospital_IDs__c</fullName>
+        <externalId>false</externalId>
+        <label>Hospitals</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>None</fullName>
+                    <default>false</default>
+                    <label>None</label>
+                </value>
+                <value>
+                    <fullName>5000</fullName>
+                    <default>false</default>
+                    <label>5000</label>
+                </value>
+                <value>
+                    <fullName>4000</fullName>
+                    <default>false</default>
+                    <label>4000</label>
+                </value>
+                <value>
+                    <fullName>3000</fullName>
+                    <default>false</default>
+                    <label>3000</label>
+                </value>
+                <value>
+                    <fullName>2000</fullName>
+                    <default>false</default>
+                    <label>2000</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Hospital_Names__c</fullName>
+        <externalId>false</externalId>
+        <label>Hospital</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Include_Facility_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Include Facility ID&apos;s</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Include_Physician_NPIs__c</fullName>
+        <externalId>false</externalId>
+        <label>Include Physician NPI&apos;s</label>
+        <length>131072</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Labor_and_Delivery_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Labor and Delivery Flag</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>No_of_ER_Encounters_ranges__c</fullName>
+        <externalId>false</externalId>
+        <label>No of ER Encounters ranges</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Normal_Newborn_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Normal Newborn Flag</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_ER_Encounters__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of ER Encounters</label>
+        <length>4</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_ER_Encounters_to__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of ER Encounters_to</label>
+        <length>4</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Patient__c</fullName>
+        <externalId>false</externalId>
+        <label>Patient Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>All</fullName>
+                    <default>false</default>
+                    <label>All</label>
+                </value>
+                <value>
+                    <fullName>In Patient</fullName>
+                    <default>false</default>
+                    <label>In Patient</label>
+                </value>
+                <value>
+                    <fullName>Out Patient</fullName>
+                    <default>false</default>
+                    <label>Out Patient</label>
+                </value>
+                <value>
+                    <fullName>In Patient(IP)</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>In Patient(IP)</label>
+                </value>
+                <value>
+                    <fullName>Out Patient(OP)</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Out Patient(OP)</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Payor_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Most Recent Primary Payor Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CHARITY</fullName>
+                    <default>false</default>
+                    <label>CHARITY</label>
+                </value>
+                <value>
+                    <fullName>MANAGED CARE</fullName>
+                    <default>false</default>
+                    <label>MANAGED CARE</label>
+                </value>
+                <value>
+                    <fullName>MANAGED EXCHANGE</fullName>
+                    <default>false</default>
+                    <label>MANAGED EXCHANGE</label>
+                </value>
+                <value>
+                    <fullName>MEDICAID</fullName>
+                    <default>false</default>
+                    <label>MEDICAID</label>
+                </value>
+                <value>
+                    <fullName>MEDICAID MANAGED CARE</fullName>
+                    <default>false</default>
+                    <label>MEDICAID MANAGED CARE</label>
+                </value>
+                <value>
+                    <fullName>MEDICARE</fullName>
+                    <default>false</default>
+                    <label>MEDICARE</label>
+                </value>
+                <value>
+                    <fullName>MEDICARE MANAGED CARE</fullName>
+                    <default>false</default>
+                    <label>MEDICARE MANAGED CARE</label>
+                </value>
+                <value>
+                    <fullName>OTHER</fullName>
+                    <default>false</default>
+                    <label>OTHER</label>
+                </value>
+                <value>
+                    <fullName>SELF PAY/UNINSURED</fullName>
+                    <default>false</default>
+                    <label>SELF PAY/UNINSURED</label>
+                </value>
+                <value>
+                    <fullName>UNKNOWN</fullName>
+                    <default>false</default>
+                    <label>UNKNOWN</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Primary_NPIs__c</fullName>
+        <externalId>false</externalId>
+        <label>Primary NPIs</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Surgery_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Surgery Flag</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>To_discharge_date_encounter__c</fullName>
+        <externalId>false</externalId>
+        <label>To</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Wunderman_Preferred_Hospitals__c</fullName>
+        <externalId>false</externalId>
+        <label>Wunderman Preferred Hospitals</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>Encounter</label>
+    <nameField>
+        <displayFormat>A-{0000}</displayFormat>
+        <label>Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Encounters</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

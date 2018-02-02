@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Encounter Service Line Selection</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Encounter Service Lines Selection</value>
+    </caseValues>
+    <fields>
+        <help><!-- Service and Sub Service Line lookup --></help>
+        <label><!-- Audience Criteria Reference Data --></label>
+        <name>CRM_AudienceCriteriaReferenceData__c</name>
+        <relationshipLabel><!-- Encounter Service Lines Selection --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Encounter --></help>
+        <label><!-- Encounter --></label>
+        <name>CRM_Encounter__c</name>
+        <relationshipLabel><!-- Encounter Service Lines Selection --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

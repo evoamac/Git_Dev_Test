@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Ref Data - Geography</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Ref Data - Geography</value>
+    </caseValues>
+    <fields>
+        <help><!-- Stores CBSA Name --></help>
+        <label><!-- CBSA --></label>
+        <name>CRM_CBSA__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the County Name of the County Record --></help>
+        <label><!-- County --></label>
+        <name>CRM_County__c</name>
+    </fields>
+    <fields>
+        <help><!-- State Name of the respective County record --></help>
+        <label><!-- County&apos;s State ID --></label>
+        <name>CRM_CountysStateID__c</name>
+        <relationshipLabel><!-- Ref Data - Geography --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- County&apos;s State Name --></label>
+        <name>CRM_CountysStateName__c</name>
+    </fields>
+    <fields>
+        <help><!-- Activate value for picklist --></help>
+        <label><!-- Active --></label>
+        <name>CRM_IsActive__c</name>
+    </fields>
+    <fields>
+        <help><!-- State Record: Stores Value of the State Code --></help>
+        <label><!-- State Code --></label>
+        <name>CRM_StateCode__c</name>
+    </fields>
+    <fields>
+        <label><!-- State-County --></label>
+        <name>CRM_StateCounty__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the State Name of the State Record --></help>
+        <label><!-- State --></label>
+        <name>CRM_State__c</name>
+    </fields>
+    <layouts>
+        <layout>CRM_CBSAPageLayout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>CRM_CountyPageLayout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>CRM_StatePageLayout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Campaign Geography Reference Data Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- CBSA --></label>
+        <name>CBSA</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- County --></label>
+        <name>County</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- State --></label>
+        <name>State</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Record Type Change is not allowed --></errorMessage>
+        <name>RecordTypeChange</name>
+    </validationRules>
+</CustomObjectTranslation>

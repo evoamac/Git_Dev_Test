@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Actual Spend</value>
+        </caseValues>
+        <name>actual_cost_campaign</name>
+        <startsWith>Vowel</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Campaign Budget</value>
+        </caseValues>
+        <name>budgeted_cost_campaign</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Campaign Description</value>
+        </caseValues>
+        <name>description_campaign</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Campaign End Date</value>
+        </caseValues>
+        <name>end_date_campaign</name>
+        <startsWith>Vowel</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Campaign Start Date</value>
+        </caseValues>
+        <name>start_date_campaign</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Campaign Status</value>
+        </caseValues>
+        <name>status_campaign</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <quickActions>
+        <label><!-- Child Campaign --></label>
+        <name>Child_Campaign</name>
+    </quickActions>
+</CustomObjectTranslation>

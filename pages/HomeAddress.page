@@ -1,0 +1,294 @@
+<apex:page standardController="Campaign" extensions="Homeaddress_Controller" sideBar="false">
+    <!-- defect#966 -->
+    <apex:sectionHeader subtitle="Geography" title="Campaign: {!campaign.Name}"/>
+    <!-- defect#966 -->
+    <apex:form id="mainform">
+    <script>
+        function allowOnlyNumber(eventInstance) {
+                  eventInstance = eventInstance || window.event;
+                  key = eventInstance.keyCode || eventInstance.which;
+                  if ((47 < key) && (key < 58) || key == 8 || key == 189) {
+                      return true;
+                  } else {
+                      if (eventInstance.preventDefault)
+                          eventInstance.preventDefault();
+                      eventInstance.returnValue = false;
+                      return false;
+                  }
+            }
+        </script>
+        <apex:pagemessages id="showmsg"/>
+        <apex:pageBlock title="Search" >
+            <apex:pageBlockSection id="searchLevel1" columns="2">
+                <apex:pageblockSectionItem >
+               
+                    <apex:outputLabel value="Geography: " /><!-- defect#966 -->
+                    <apex:inputField value="{!selectedSearchCriteria.CRM_Search_Criteria_Level_1__c}" >
+                        <apex:actionSupport event="onchange" action="{!refreshSearchLevel2}" reRender="searchLevel2,showmsg,searchLevel3,selectedSL3,selectedSL2,SA,zipcodes" status="ac"/>
+                    </apex:inputField>
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:actionStatus id="ac" startText="Processing...."  />
+                    <apex:outputLabel value="" />
+                </apex:pageblockSectionItem>
+            </apex:pageBlockSection>
+            
+            <apex:outputPanel id="SA">
+                <apex:pageBlockSection columns="2">                     
+                    
+                    <apex:pageBlockSectionItem rendered="{!IF(selectedSearchCriteria.CRM_Search_Criteria_Level_1__c=='By Distance',true,false)}">
+                        <apex:outputLabel value="Within: " />
+                        <apex:outputPanel layout="block">
+                            <apex:inputText value="{!withindistanceval}" onkeypress="return allowOnlyNumber(event)"/>
+                            <apex:outputText value="Miles" style="padding-left:10px"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem rendered="{!IF(showServiceArea==true ,true,false)}">
+                        <apex:outputLabel value="Service Areas:"/>
+                        <apex:outputPanel id="servicearea" layout="block" style="overflow:auto;height:95px;background-color:#ffffff;">
+                            <apex:selectCheckboxes value="{!selectedServiceArea}" layout="pageDirection">
+                                <apex:selectOptions value="{!serviceAreaList}"/> 
+                                <apex:actionSupport event="onchange" reRender="selectedSA,showmsg" status="ac" />
+                            </apex:selectCheckboxes>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem rendered="{!IF(showServiceArea==true ,true,false)}">
+                        <apex:outputLabel />
+                        <apex:outputPanel id="selectedSA">
+                            <apex:outputPanel rendered="{!selectedServiceArea.size>0}" layout="block" style="overflow: auto;padding:5px; height: 95px;background-color:#ffffff;">
+                                <apex:repeat value="{!selectedServiceArea}" var="SL">
+                                    {!selectedSAText[SL]}<br/><br/>
+                                </apex:repeat>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                </apex:pageBlockSection>
+            </apex:outputPanel>                     
+            
+            <apex:outputPanel id="searchLevel2">
+                <apex:pageBlockSection rendered="{!searchCriteriaLevel2.size>0 || searchCriteriaLevel3.size>0}" columns="2">
+                    
+                    <apex:pageBlockSectionItem rendered="{!searchCriteriaLevel2.size>0}">
+                       <apex:outputLabel value="{!dynamicLabel}"/>
+                       <apex:outputPanel layout="block" style="overflow:auto; height:150px;background-color:#ffffff;">
+                            <apex:selectCheckboxes value="{!selectedSearchCriteriaLevel2}" layout="pageDirection">
+                                <apex:selectOptions value="{!searchCriteriaLevel2}"/>
+                                <apex:actionSupport event="onchange" action="{!refreshSearchLevel3}" reRender="searchLevel3,showmsg, selectedSL2" status="ac" />
+                            </apex:selectCheckboxes>
+                       </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel />
+                        <apex:outputPanel id="selectedSL2">
+                            <apex:outputPanel rendered="{!selectedSearchCriteriaLevel2.size>0}" layout="block" style="overflow: auto;padding:5px; height: 150px;background-color:#ffffff;">
+                                <apex:repeat value="{!selectedSearchCriteriaLevel2}" var="SL">
+                                    {!selectedSAText[SL]}<br/><br/>
+                                </apex:repeat>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel> 
+            
+            <apex:outputPanel id="searchLevel3">
+                <apex:pageBlockSection columns="2" rendered="{!IF(selectedSearchCriteria.CRM_Search_Criteria_Level_1__c=='By County',true,false) && searchCriteriaLevel3.size>0}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Counties: " />
+                            <apex:outputPanel id="conutyList" layout="block" style="overflow: auto;height:150px;background-color:#ffffff;" >
+                                <apex:selectCheckboxes value="{!selectedVal}" layout="pageDirection" style="width:max-content" >
+                                    <apex:selectOptions value="{!searchCriteriaLevel3}" />
+                                    <apex:actionSupport event="onchange" reRender="selectedSL3" status="ac" />
+                                </apex:selectCheckboxes>
+                            </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel />
+                        <apex:outputPanel id="selectedSL3">
+                            <apex:outputPanel rendered="{!selectedVal.size>0}" layout="block" style="overflow: auto;padding:5px; height: 150px;background-color:#ffffff;">
+                                <apex:repeat value="{!selectedVal}" var="TL">
+                                     {!selectedSAText[TL]}<br/><br/>
+                                </apex:repeat>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+            <apex:outputPanel >
+                <div style="text-align:center;width:100%">
+                    <!--start of defect 970-->
+                    <input type="button" class="btn" value="Additional ZIP Codes" onclick="showBox('{!$Component.tstpopup}','{!$Component.tstpopup1}','{!$Component.inc_zipCodes}');" />
+                    <input type="button" class="btn" value="Excluded ZIP Codes" onclick="showBox('{!$Component.tstpopupexclude}','{!$Component.tstpopupexclude1}','{!$Component.exc_zipCodes}');" />
+                <!--end of defect 970-->
+                </div>
+            </apex:outputPanel>
+            
+            <apex:outputPanel layout="block" id="selectionList">
+                <div class="pbBody">
+                    <div>
+                        <div class="pbSubheader brandTertiaryBgr first tertiaryPalette">
+                             <!--start of defect 970-->
+                            <h3>Additional ZIP Codes</h3>
+                             <!--End of defect 970-->
+                        </div>
+                        <div id="slinc_zipCode">{!codes}</div>
+                    </div>
+                </div>
+                <div class="pbBody">
+                    <div>
+                        <div class="pbSubheader brandTertiaryBgr first tertiaryPalette">
+                             <!--start of defect 970-->
+                            <h3>Excluded ZIP Codes</h3>
+                             <!--End of defect 970-->
+                        </div>
+                        <div id="slexc_zipCode">{!codesexclude}</div>
+                    </div>
+                </div>
+            </apex:outputPanel>
+            
+            <apex:outputPanel >
+                <div style="text-align:center;width:100%">
+                    <apex:commandButton value="Save" action="{!saveHomeAddressSearch}" />
+                    <apex:commandButton value="Cancel" action="{!cancel}" />
+              <!-- defect#966 -->      <apex:commandButton value="Delete Geography Criteria" action="{!deleteCriteria}" rendered="{!selectedSearchCriteria.id!=null}"/> 
+                </div>
+            </apex:outputPanel>
+            
+            <apex:outputPanel styleClass="popupBackground" layout="block" id="tstpopup" />
+                 <apex:outputPanel styleClass="custPopup" layout="block" id="tstpopup1">
+                    <div style="float:left;text-align:top;width:27%">Additional ZIP Codes:&nbsp;&nbsp;</div>
+                    <div style="float:right;text-align:top;width:73%">
+                    <apex:inputTextarea value="{!codes}" id="inc_zipCodes" style="height: 92px;width:230px"/>
+                    </div>
+                    <div style="float:left;text-align:center;width:100%;padding:10px;">
+                    <input type="button" class="btn" value="Ok" onclick="hideBoxOK('{!$Component.tstpopup}','{!$Component.tstpopup1}','{!$Component.inc_zipCodes}');" />
+                    <input type="button" class="btn" value="Cancel" onclick="hideBox('{!$Component.tstpopup}','{!$Component.tstpopup1}','{!$Component.inc_zipCodes}');" />
+                    </div>
+            </apex:outputPanel>
+            <apex:outputPanel styleClass="popupBackground" layout="block" id="tstpopupexclude" />
+                 <apex:outputPanel styleClass="custPopup" layout="block" id="tstpopupexclude1">
+                    <div style="float:left;text-align:top;width:27%">Exclude ZIP Codes:&nbsp;&nbsp;</div>
+                    <div style="float:right;text-align:top;width:73%">
+                    <apex:inputTextarea value="{!codesexclude}" id="exc_zipCodes" style="height: 92px;width:230px"/>
+                    </div>
+                    <div style="float:left;text-align:center;width:100%;padding:10px;">
+                    <input type="button" class="btn" value="Ok" onclick="hideBoxOK('{!$Component.tstpopupexclude}','{!$Component.tstpopupexclude1}','{!$Component.exc_zipCodes}');" />
+                    <input type="button" class="btn" value="Cancel" onclick="hideBox('{!$Component.tstpopupexclude}','{!$Component.tstpopupexclude1}','{!$Component.exc_zipCodes}');" />
+                    </div>
+            </apex:outputPanel>
+             
+        </apex:pageBlock>
+        
+        
+        
+        <script>
+            var oldINC;
+            var oldEXC;
+            function showBox(op,ip,txtid){
+                
+                if(txtid.indexOf("inc_zipCodes")!=-1){
+                    oldINC = document.getElementById(txtid).value;
+                }
+                
+                if(txtid.indexOf("exc_zipCodes")!=-1){
+                    oldEXC = document.getElementById(txtid).value;
+                }
+                
+                document.getElementById(op).className= 'popupBackground-show';
+                document.getElementById(ip).className= 'custPopup-show';
+            }
+            
+            function hideBox(op,ip,txtid){
+                document.getElementById(op).className= 'popupBackground';
+                document.getElementById(ip).className= 'custPopup';
+                
+                if(txtid !=''){
+                    if(txtid.indexOf("inc_zipCodes")!=-1){
+                        document.getElementById(txtid).value=oldINC;
+                        document.getElementById("slinc_zipCode").innerText=document.getElementById(txtid).value;
+                    }
+                    if(txtid.indexOf("exc_zipCodes")!=-1){
+                        document.getElementById(txtid).value=oldEXC;
+                        document.getElementById("slexc_zipCode").innerText=document.getElementById(txtid).value;
+                    }
+                }
+            }
+            
+            function hideBoxOK(op,ip,txtid){
+                document.getElementById(op).className= 'popupBackground';
+                document.getElementById(ip).className= 'custPopup';
+                
+                
+                if(txtid.indexOf("inc_zipCodes")!=-1){
+                    var txt = document.getElementById(txtid).value;
+                    document.getElementById("slinc_zipCode").innerText=txt.replace(/\n/g, ";");
+                }
+                if(txtid.indexOf("exc_zipCodes")!=-1){
+                    var txt = document.getElementById(txtid).value;
+                    document.getElementById("slexc_zipCode").innerText=txt.replace(/\n/g, ";");
+                }
+                
+            }
+            
+        </script>
+        <style type="text/css">
+        
+            .custPopup
+            {
+                background-color: white;
+                border-width: 2px;
+                border-style: solid;
+                z-index: 9999;
+                left: 60%;
+                padding:10px;
+                width: 450px;
+                position: absolute;
+                margin-left: -421px;
+                top:54px;
+                display: none;
+            }
+            .custPopup-show
+            {
+                background-color: white;
+                border-width: 2px;
+                border-style: solid;
+                z-index: 9999;
+                left: 60%;
+                padding:10px;
+                width: 450px;
+                position: absolute;
+                margin-left: -421px;
+                top:54px;
+            }
+            .popupBackground
+            {
+                background-color:black;
+                opacity: 0.20;
+                filter: alpha(opacity = 20);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 9998;
+                display: none;
+            }
+            .popupBackground-show
+            {
+                background-color:black;
+                opacity: 0.20;
+                filter: alpha(opacity = 20);
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 9998;
+                
+            }
+        </style> 
+    </apex:form>
+</apex:page>

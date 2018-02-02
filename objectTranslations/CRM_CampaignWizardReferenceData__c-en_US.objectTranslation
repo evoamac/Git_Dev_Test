@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Ref Data - Campaign Wizard</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Ref Data - Campaign Wizard</value>
+    </caseValues>
+    <fields>
+        <help><!-- Stores Call To Action picklist values. --></help>
+        <label><!-- Call To Action --></label>
+        <name>CRM_CallToAction__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores Channel picklist values. --></help>
+        <label><!-- Channel --></label>
+        <name>CRM_Channel__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores default Email value for Demographics criteria. --></help>
+        <label><!-- Demographics Email --></label>
+        <name>CRM_DemoEmail__c</name>
+        <picklistValues>
+            <masterLabel>Doesn’t have an email address</masterLabel>
+            <translation><!-- Doesn’t have an email address --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Everyone</masterLabel>
+            <translation><!-- Everyone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Has an email address</masterLabel>
+            <translation><!-- Has an email address --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Stores default Mailing Address value for Demographics criteria. --></help>
+        <label><!-- Demographics Mailing Address --></label>
+        <name>CRM_DemoMailingAddress__c</name>
+        <picklistValues>
+            <masterLabel>Doesn’t have a valid or foreign mailing address</masterLabel>
+            <translation><!-- Doesn’t have a valid or foreign mailing address --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Everyone</masterLabel>
+            <translation><!-- Everyone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Has a valid or foreign mailing address</masterLabel>
+            <translation><!-- Has a valid or foreign mailing address --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Activate value for piclkist . --></help>
+        <label><!-- Active --></label>
+        <name>CRM_IsActive__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enable call to action picklist for channel value. --></help>
+        <label><!-- Is Call To Action Enabled --></label>
+        <name>CRM_IsCallToActionEnabled__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checkbox to mark channel as targeted or non targeted . --></help>
+        <label><!-- Is Targeted --></label>
+        <name>CRM_IsTargeted__c</name>
+    </fields>
+    <fields>
+        <help><!-- Mapping for service line and sub service line records. --></help>
+        <label><!-- Parent Service Line ID --></label>
+        <name>CRM_ParentServiceLineID__c</name>
+        <relationshipLabel><!-- Ref Data - Campaign Wizard --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Field to store name of Parent Service Line. --></help>
+        <label><!-- Parent Service Line --></label>
+        <name>CRM_ParentServiceLine__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores service line picklist values for campaign wizard screen. --></help>
+        <label><!-- Service Line --></label>
+        <name>CRM_ServiceLine__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores service line and sub service line concatenated value . --></help>
+        <label><!-- Service-Sub Service Line --></label>
+        <name>CRM_ServiceSubServiceLine__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores Sub Service line picklist values . --></help>
+        <label><!-- Sub Service Line --></label>
+        <name>CRM_SubServiceLine__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores vendor name picklist value. --></help>
+        <label><!-- Vendor Name --></label>
+        <name>CRM_VendorName__c</name>
+    </fields>
+    <layouts>
+        <layout>Call To Action</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Campaign Wizard Reference Data Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Channel Values</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Service Line</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sub Service Line</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Vendor Name</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Call To Action --></label>
+        <name>Call_To_Action</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Channel Values --></label>
+        <name>ChannelValues</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Service Line --></label>
+        <name>Service_Line</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Sub Service Line --></label>
+        <name>Sub_Service_Line</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Vendor Name --></label>
+        <name>Vendor_Name</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Record Type Change is not allowed --></errorMessage>
+        <name>RecordTypeChange</name>
+    </validationRules>
+</CustomObjectTranslation>

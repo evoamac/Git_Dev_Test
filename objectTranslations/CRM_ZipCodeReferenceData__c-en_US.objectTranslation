@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Ref Data - Zip Code</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Ref Data - Zip Codes</value>
+    </caseValues>
+    <fields>
+        <help><!-- Check the box to active /inactive the record --></help>
+        <label><!-- Active --></label>
+        <name>CRM_IsActive__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the Latitute and Longitude values --></help>
+        <label><!-- Location --></label>
+        <name>CRM_Location__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the ZipCode for the Hospital --></help>
+        <label><!-- ZIP Code --></label>
+        <name>CRM_ZipCode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zip&apos;s CBSA ID --></label>
+        <lookupFilter>
+            <errorMessage><!-- Value does not exist or does not match CBSA filter criteria. --></errorMessage>
+        </lookupFilter>
+        <name>CRM_ZipsCBSAID__c</name>
+        <relationshipLabel><!-- Ref Data - Zip Codes (Zip&apos;s CBSA ID) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Shows the CBSA name for the selected Zip --></help>
+        <label><!-- Zip&apos;s CBSA Name --></label>
+        <name>CRM_ZipsCBSAName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zip&apos;s County ID --></label>
+        <lookupFilter>
+            <errorMessage><!-- Value does not exist or does not match County filter criteria. --></errorMessage>
+        </lookupFilter>
+        <name>CRM_ZipsCountyID__c</name>
+        <relationshipLabel><!-- Ref Data - Zip Codes (Zip&apos;s County ID) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Shows County Name for the Selected Zip Code --></help>
+        <label><!-- Zip&apos;s County Name --></label>
+        <name>CRM_ZipsCountyName__c</name>
+    </fields>
+    <layouts>
+        <layout>Zip Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Invalid Zip Code --></errorMessage>
+        <name>zip_code_number</name>
+    </validationRules>
+</CustomObjectTranslation>

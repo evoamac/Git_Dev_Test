@@ -1,0 +1,71 @@
+<apex:page standardController="Campaign" extensions="CampaignCriteriaController">
+<!-- starting of defect 802: updated summary tag -->
+<!-- Changes for PP1 Start -->
+<!-- Changes for PP5 Start -->
+<apex:pageMessage severity="Warning" strength="2" title="Warning" summary="{!$Label.CRM_WundermanCriteriaNotSynced}" rendered="{!(wmSyncStatus='Pending' && Campaign.Current_count__c!=null && Campaign.Member_Types__c != 'Upload List')}" />
+<!-- 
+<apex:pageMessage severity="Warning" strength="2" title="Warning" summary="{!$Label.CRM_WundermanCriteriaNotSynced}" rendered="{!AND(objcampaign.Member_Types__c!='Upload List',(wmSyncStatus='Pending' && Campaign.Current_count__c!=null))}" /> 
+<apex:pageMessage severity="Warning" strength="2" title="Warning" summary="{!$Label.CRM_WundermanCriteriaNotSynced}" rendered="{!IF(objcampaign.Member_Types__c=='Upload List' && if(objcampaign.CRM_AudienceUploadJunctions__r.size>0,objcampaign.CRM_UploadAudienceCount__c != objcampaign.Current_count__c,objcampaign.Current_count__c!=null && objcampaign.Current_count__c!=0),true,false)}" />
+ -->
+<!-- Changes for PP5 End -->
+
+<!-- Changes for PP1 End -->
+<!-- ending of defect 802 -->
+<!-- Changes for PP5 Start -->
+
+<apex:pageMessage severity="Error" strength="2" title="Error" summary="{!$Label.CRM_WundermanCriteriaNotSyncing}" rendered="{!wmSyncStatus='Failed'}" />
+<!-- Changes for PP5 End -->
+
+<!-- Changes for PP1 Start -->
+<!--<apex:pageBlock title="Campaign Member Criteria: Inclusions" rendered="{!IF(objcampaign.Member_Types__c!='Upload List', true, false)}">-->
+<apex:pageBlock title="Campaign Member Criteria: Inclusions">
+<!-- Changes for PP1 End -->
+    <apex:repeat value="{!includeCriteriaMap}" var="g">
+        <apex:pageBlockSection title="{!g}" columns="1">
+            <apex:pageBlockTable value="{!includeCriteriaMap[g]}" var="c">
+                <apex:column value="{!c.Field_Id__c}" headerValue="Criteria" style="width:40%;word-break: break-all;"/>
+                <apex:column value="{!c.Value__c}" style="width:50%;word-break: break-all;"/>
+                <apex:column value="{!c.Operator__c}" headerValue="" style="width:10%;"/>
+            </apex:pageBlockTable>
+            <apex:outputPanel rendered="{!g=='Geography'}">
+                <table style="width:100%;background-color:#ffffff;border:1px;">
+                    <tr>
+                    <td style="word-wrap: break-all;padding:2px;width:33%;">{!homeaddress}</td>
+                    <td style="word-wrap: break-all;padding:2px;width:33%;">{!homeaddressSL2}</td>
+                    <td style="word-wrap: break-all;padding:2px;width:33%;">{!homeaddressSL3}</td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+    </apex:repeat>
+    <apex:outputText rendered="{!NOT(hasInclusions)}">No Inclusions have been setup</apex:outputText>
+</apex:pageBlock>
+<!-- Changes for PP1 Start -->
+<!-- <apex:pageBlock title="Campaign Member Criteria: Exclusions" rendered="{!IF(objcampaign.Member_Types__c!='Upload List' , true, false)}"> -->
+<apex:pageBlock title="Campaign Member Criteria: Exclusions">
+<!-- Changes for PP1 End -->
+    <apex:repeat value="{!excludeCriteriaMap}" var="g">
+        <apex:pageBlockSection title="{!g}" columns="1">
+            <apex:pageBlockTable value="{!excludeCriteriaMap[g]}" var="c" >
+                <apex:column value="{!c.Field_Id__c}" headerValue="Criteria" style="width:40%;word-break: break-all;"/>
+                <apex:column value="{!c.Value__c}" style="width:50%;word-break: break-all;"/>
+                <apex:column value="{!c.Operator__c}" headerValue="" style="width:10%;"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:repeat>
+    <apex:outputText rendered="{!NOT(hasExclusions)}">No Exclusions have been setup</apex:outputText>
+</apex:pageBlock>
+<!-- Changes for PP1 Start -->
+<!-- <apex:pageBlock rendered="{!IF(objcampaign.Member_Types__c=='Upload List', true, false)}">
+    <apex:pageBlockSection collapsible="false" title="Audience Upload Criteria"></apex:pageBlockSection>
+        <apex:pageBlockTable value="{!objcampaign.CRM_AudienceUploadJunctions__r}" var="au" >
+       <apex:column headerValue="Name">
+           <apex:outputField value="{!au.recordtype.name}" />
+       </apex:column>
+       <apex:column headerValue="Audience Count">
+           <apex:outputField value="{!objcampaign.CRM_UploadAudienceCount__c}" />
+       </apex:column>
+    </apex:pageBlockTable>
+</apex:pageBlock>-->
+<!-- Changes for PP1 Ends -->
+</apex:page>

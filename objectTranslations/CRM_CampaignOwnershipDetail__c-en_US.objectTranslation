@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Campaign Ownership Detail</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Campaign Ownership Details</value>
+    </caseValues>
+    <fields>
+        <help><!-- Stores the Hospital name for the Campaign --></help>
+        <label><!-- Hospital --></label>
+        <name>CRM_Hospital__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active --></label>
+        <name>CRM_IsActive__c</name>
+    </fields>
+    <fields>
+        <help><!-- stores the Market name for the Campaign --></help>
+        <label><!-- Market --></label>
+        <name>CRM_Market__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores the region name for the campaign --></help>
+        <label><!-- Region --></label>
+        <name>CRM_Region__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign Location Reference Data Mapping --></label>
+        <name>Campaign_Location_Reference_Data_Mapping__c</name>
+        <relationshipLabel><!-- Campaign Ownership Details --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Stores the Campaign related to campaign ownership details --></help>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Campaign Ownership Details --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

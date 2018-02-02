@@ -1,0 +1,106 @@
+<apex:page showHeader="false" controller="AudienceUploadController">
+    <apex:includeScript value="{!$Resource.jquery1_12}"/> 
+    <script src="/soap/ajax/42.0/connection.js" type="text/javascript"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+    <script>
+        $j = jQuery.noConflict();
+        sforce.connection.sessionId = '{!GETSESSIONID()}';
+        var urlString = window.location.href;
+        var url = new URL(urlString);
+        var campaignId = url.searchParams.get('campaignId');
+        var parentUrl;
+        
+        $j(document).ready(function(){
+            $j("#loadStatusSpinner").hide();
+            $j("#loadStatusWarning").hide();
+            $j("#loadStatusConfirm").hide();
+            
+            parentUrl = window.opener.location.href;
+        });
+    
+        window.onunload = function(){
+            if (window.opener && !window.opener.closed)
+            {
+                
+                //window.opener.location.href = '/apex/campaignWizard?Id=' + campaignId + '&stepNo=3';
+                window.opener.location.href = parentUrl;
+            }
+        };
+        
+        var intervalId = setInterval(queryLoadStatus, 1000);
+        var statusMessage = "";
+        
+        function queryLoadStatus()
+        {
+            var thisCamps = sforce.connection.query("SELECT CRM_AudienceUploadCount__c FROM Campaign WHERE Id ='" + campaignId + "'");
+            var thisCampsSize = thisCamps.get("size");
+            
+            if (thisCampsSize == 1)
+            {
+                var audienceCount = thisCamps.get("records").get("CRM_AudienceUploadCount__c");
+                if (audienceCount == -1)
+                {
+                    statusMessage = "{!$Label.CRM_Audience_Upload_Importing}";
+                    $j("#loadStatusSpinner").show();
+                }
+                else if (audienceCount == -2)
+                {
+                    clearInterval(intervalId);
+                    statusMessage = "{!$Label.CRM_Audience_Upload_Invalid_File}";
+                    $j("#loadStatusSpinner").hide();
+                    $j("#loadStatusWarning").show();
+                    var camp = new sforce.SObject("Campaign");
+                    camp.Id = campaignId;
+                    camp.CRM_AudienceUploadCount__c = null;
+                    camp.CRM_AudienceUploadRowCount__c = null;
+                    var result = sforce.connection.update([camp]);
+                }
+                else if (audienceCount == -3)
+                {
+                    clearInterval(intervalId);
+                    //statusMessage = "File cannot contain more than 150,000 records";
+                    statusMessage = "{!$Label.CRM_Audience_Upload_Count_Exceeded}";
+                    $j("#loadStatusSpinner").hide();
+                    $j("#loadStatusWarning").show();
+                    var camp = new sforce.SObject("Campaign");
+                    camp.Id = campaignId;
+                    camp.CRM_AudienceUploadCount__c = null;
+                    camp.CRM_AudienceUploadRowCount__c = null;
+                    var result = sforce.connection.update([camp]);
+                }
+                else if (audienceCount > 0)
+                {
+                    window.close();
+                }
+                
+                document.getElementById("loadStatus").value = statusMessage;
+            }
+        }
+    </script>
+    
+    
+    <apex:form >
+        
+        <apex:pageBlock >
+        
+            <apex:pageMessages />
+            
+            <apex:pageBlockSection >
+                <apex:inputFile value="{!fileBody}" fileName="pp1Upload"/>
+                <apex:commandButton value="Import" action="{!importCsv}" disabled="{!hasExistingUpload}"/>
+            </apex:pageBlockSection>
+            
+            <!--apex:pageBlockSection>
+                <i id="loadStatusField" class="fas fa-cog fa-spin fa-3x"></i>
+            </apex:pageBlockSection-->
+            
+            <apex:pageBlockSection columns="1">
+                <i id="loadStatusSpinner" class="fas fa-cog fa-spin fa-3x"></i>
+                <i id="loadStatusWarning" class="fas fa-exclamation-triangle fa-3x" style="color: orange;"></i>
+                <i id="loadStatusConfirm" class="fas fa-check-circle fa-3x"></i>
+                <output type="text" id="loadStatus"/>
+            </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

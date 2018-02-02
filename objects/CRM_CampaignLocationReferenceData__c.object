@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Stores Reference Data for Region, Market, Hospital and Service Area</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>false</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>false</enableSharing>
+    <enableStreamingApi>false</enableStreamingApi>
+    <fields>
+        <fullName>CRM_HospitalCode__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Stores the Hospital Code</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores the Hospital Code</inlineHelpText>
+        <label>Hospital Code</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_HospitalLocation__c</fullName>
+        <description>Stores the latitude and longitute for Hospital</description>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores the latitude and longitute for Hospital</inlineHelpText>
+        <label>Location</label>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>CRM_HospitalMarket__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_HospitalsMarketID__r.CRM_Market__c &amp; &apos; — &apos; &amp; CRM_Hospital__c</formula>
+        <inlineHelpText>Represents Hospital&apos;s Market</inlineHelpText>
+        <label>Hospital-Market</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_Hospital__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Hospital Name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Hospital Name</inlineHelpText>
+        <label>Hospital</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_HospitalsMarketID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Market record ID of the respective Hospital</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Market mapping of the respective Hospital</inlineHelpText>
+        <label>Hospital&apos;s Market ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>CRM_CampaignLocationReferenceData__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Market</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>CRM_CampaignLocationReferenceData__c</referenceTo>
+        <relationshipName>CRM_HospitalMarketMapping</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_HospitalsMarketName__c</fullName>
+        <description>Market Name of the Hospital Record</description>
+        <externalId>false</externalId>
+        <formula>CRM_HospitalsMarketID__r.CRM_Market__c</formula>
+        <inlineHelpText>Market Name of the Hospital Record</inlineHelpText>
+        <label>Hospital&apos;s Market Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_HospitalsRegionName__c</fullName>
+        <description>Region Name of the Hospital Record</description>
+        <externalId>false</externalId>
+        <formula>CRM_HospitalsMarketID__r.CRM_MarketsRegionName__c</formula>
+        <inlineHelpText>Region Name of the Hospital Record</inlineHelpText>
+        <label>Hospital&apos;s Region Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Reference data field to activate and deactivate picklistvalue</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Activate value for piclkist.</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_MarketCode__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Market Record: Stores Value of the Market Code</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Market Record: Stores Value of the Market Code</inlineHelpText>
+        <label>Market Code</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_MarketRegion__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_MarketsRegionID__r.CRM_Region__c  &amp; &apos; — &apos;  &amp; CRM_Market__c</formula>
+        <inlineHelpText>Market&apos;s Region</inlineHelpText>
+        <label>Market-Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_Market__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Stores Market Name of the Market Record</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores Market Name of the Market Record</inlineHelpText>
+        <label>Market</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_MarketsRegionID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Region record ID f the respective Market record</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Region Name of the respective Market record</inlineHelpText>
+        <label>Market&apos;s Region ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>CRM_CampaignLocationReferenceData__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Region</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>CRM_CampaignLocationReferenceData__c</referenceTo>
+        <relationshipName>CRM_MarketRegionMapping</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_MarketsRegionName__c</fullName>
+        <description>Value of the Region Name on the Market Record</description>
+        <externalId>false</externalId>
+        <formula>CRM_MarketsRegionID__r.CRM_Region__c</formula>
+        <inlineHelpText>Value of the Region Name on the Market Record</inlineHelpText>
+        <label>Market&apos;s Region Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_RegionCode__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Code of the respective Region Record</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Code of the respective Region Record</inlineHelpText>
+        <label>Region Code</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_Region__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Stores Region Name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores Region Name</inlineHelpText>
+        <label>Region</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ServiceAreaCode__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>Service Area Code</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ServiceAreaSortOrder__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Area Sort Order</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ServiceArea__c</fullName>
+        <description>Stores Service Area Value</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the Service Area</inlineHelpText>
+        <label>Service Area</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Ref Data - Location</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CRM_IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Hospital</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Hospital__c</columns>
+        <columns>CRM_HospitalsMarketID__c</columns>
+        <columns>CRM_HospitalsMarketName__c</columns>
+        <columns>CRM_HospitalCode__c</columns>
+        <columns>CRM_HospitalMarket__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignLocationReferenceData__c.Hospital</value>
+        </filters>
+        <label>Hospital</label>
+    </listViews>
+    <listViews>
+        <fullName>Market</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Market__c</columns>
+        <columns>CRM_MarketsRegionID__c</columns>
+        <columns>CRM_MarketsRegionName__c</columns>
+        <columns>CRM_MarketCode__c</columns>
+        <columns>CRM_MarketRegion__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignLocationReferenceData__c.Market</value>
+        </filters>
+        <label>Market</label>
+    </listViews>
+    <listViews>
+        <fullName>Region</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Region__c</columns>
+        <columns>CRM_RegionCode__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignLocationReferenceData__c.Region</value>
+        </filters>
+        <label>Region</label>
+    </listViews>
+    <listViews>
+        <fullName>Service_Area</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_IsActive__c</columns>
+        <columns>CRM_ServiceArea__c</columns>
+        <columns>CRM_ServiceAreaCode__c</columns>
+        <columns>CRM_ServiceAreaSortOrder__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignLocationReferenceData__c.ServiceArea</value>
+        </filters>
+        <label>Service Area</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CLRD-{0000000}</displayFormat>
+        <label>Locations Reference Data ID</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Ref Data - Locations</pluralLabel>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Hospital</fullName>
+        <active>true</active>
+        <description>Record Type for Hospital</description>
+        <label>Hospital</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Market</fullName>
+        <active>true</active>
+        <description>Record Type for Market</description>
+        <label>Market</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Region</fullName>
+        <active>true</active>
+        <description>Record Type for Region</description>
+        <label>Region</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ServiceArea</fullName>
+        <active>true</active>
+        <description>Record Type for Service Area</description>
+        <label>Service Area</label>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_IsActive__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>CRM_Region__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_Market__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_Hospital__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_ServiceArea__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_RegionCode__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_MarketCode__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_HospitalCode__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_IsActive__c</lookupDialogsAdditionalFields>
+        <lookupFilterFields>CRM_Region__c</lookupFilterFields>
+        <lookupFilterFields>CRM_Market__c</lookupFilterFields>
+        <lookupFilterFields>CRM_Hospital__c</lookupFilterFields>
+        <lookupFilterFields>CRM_ServiceArea__c</lookupFilterFields>
+        <searchResultsAdditionalFields>CRM_Hospital__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CRM_Market__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CRM_Region__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CRM_RegionCode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CRM_MarketCode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CRM_HospitalCode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CRM_ServiceArea__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Hospital_Codes_cannot_be_changed</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND ( 
+ISCHANGED(  CRM_HospitalCode__c  ) , $Profile.Name!=&apos;System Adminstrator&apos; 
+)</errorConditionFormula>
+        <errorDisplayField>CRM_HospitalCode__c</errorDisplayField>
+        <errorMessage>Hospital Code cannot be changed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Market_Codes_cannot_be_changed</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND ( 
+ISCHANGED( CRM_MarketCode__c  ) , $Profile.Name!=&apos;System Adminstrator&apos; 
+)</errorConditionFormula>
+        <errorDisplayField>CRM_MarketCode__c</errorDisplayField>
+        <errorMessage>Market Code cannot be changed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>RecordTypeChange</fullName>
+        <active>true</active>
+        <description>Restrict Record Type Change</description>
+        <errorConditionFormula>AND ( 
+ISCHANGED( RecordTypeId ) , $Profile.Name!=&apos;System Adminstrator&apos; 
+)</errorConditionFormula>
+        <errorMessage>Record Type Change is not allowed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Region_Codes_cannot_be_changed</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND ( 
+ISCHANGED(  CRM_RegionCode__c  ) , $Profile.Name!=&apos;System Adminstrator&apos; 
+)</errorConditionFormula>
+        <errorDisplayField>CRM_RegionCode__c</errorDisplayField>
+        <errorMessage>Region code cannot be chnaged</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Ailments</fullName>
+        <default>false</default>
+        <label>Ailments</label>
+    </customValue>
+    <customValue>
+        <fullName>Demographics</fullName>
+        <default>false</default>
+        <label>Demographics</label>
+    </customValue>
+    <customValue>
+        <fullName>Encounter Aggregates</fullName>
+        <default>false</default>
+        <label>Encounter Aggregates</label>
+    </customValue>
+    <customValue>
+        <fullName>Encounter Codes</fullName>
+        <default>false</default>
+        <label>Encounter Codes</label>
+    </customValue>
+    <customValue>
+        <fullName>Encounters</fullName>
+        <default>false</default>
+        <label>Encounters</label>
+    </customValue>
+    <customValue>
+        <fullName>Geography</fullName>
+        <default>false</default>
+        <label>Geography</label>
+    </customValue>
+    <customValue>
+        <fullName>Health Indices</fullName>
+        <default>false</default>
+        <label>Health Indices</label>
+    </customValue>
+    <customValue>
+        <fullName>Health Insurance</fullName>
+        <default>false</default>
+        <label>Health Insurance</label>
+    </customValue>
+    <customValue>
+        <fullName>HRAs</fullName>
+        <default>false</default>
+        <label>HRAs</label>
+    </customValue>
+    <customValue>
+        <fullName>Interests</fullName>
+        <default>false</default>
+        <label>Interests</label>
+    </customValue>
+    <customValue>
+        <fullName>Models</fullName>
+        <default>false</default>
+        <label>Models</label>
+    </customValue>
+    <customValue>
+        <fullName>Physicians</fullName>
+        <default>false</default>
+        <label>Physicians</label>
+    </customValue>
+    <customValue>
+        <fullName>Survey Responses</fullName>
+        <default>false</default>
+        <label>Survey Responses</label>
+    </customValue>
+    <customValue>
+        <fullName>Living Well</fullName>
+        <default>false</default>
+        <label>Living Well</label>
+    </customValue>
+    <customValue>
+        <fullName>Service Line</fullName>
+        <default>false</default>
+        <label>Service Line</label>
+    </customValue>
+    <masterLabel>Criteria Groups</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

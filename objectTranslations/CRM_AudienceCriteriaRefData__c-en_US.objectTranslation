@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Ref Data - Audience Criteria</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Ref Data - Audience Criteria</value>
+    </caseValues>
+    <fields>
+        <help><!-- Service Line Lookup --></help>
+        <label><!-- Clinical Service Line ID --></label>
+        <name>CRM_ClinicalServiceLineID__c</name>
+        <relationshipLabel><!-- Ref Data - Audience Criteria --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This data will be synced with Wunderman --></help>
+        <label><!-- Clinical Service Line Sync Data --></label>
+        <name>CRM_ClinicalServiceLineSyncData__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores service line picklist values for Audience Selection screen. --></help>
+        <label><!-- Clinical Service Line --></label>
+        <name>CRM_ClinicalServiceLine__c</name>
+    </fields>
+    <fields>
+        <help><!-- This data will be synced with Wunderman --></help>
+        <label><!-- Clinical Sub Service Line Sync Data --></label>
+        <name>CRM_ClinicalSubServiceLineSyncData__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores Sub Service line picklist values for Audience Selection screen. --></help>
+        <label><!-- Clinical Sub Service Line --></label>
+        <name>CRM_ClinicalSubServiceLine__c</name>
+    </fields>
+    <fields>
+        <help><!-- Reference data field to activate and deactivate picklist value --></help>
+        <label><!-- Active --></label>
+        <name>CRM_IsActive__c</name>
+    </fields>
+    <fields>
+        <help><!-- Parent Service Line Name --></help>
+        <label><!-- Parent Clinical Service Line Name --></label>
+        <name>CRM_ParentClinServLnNm__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores service line and sub service line concatenated value --></help>
+        <label><!-- Service-Sub Service Line --></label>
+        <name>CRM_ServiceSubServiceLine__c</name>
+    </fields>
+    <layouts>
+        <layout>Audience Criteria Reference Data Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Service Line</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sub Service Line</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Clinical Service Line --></label>
+        <name>ClinicalServiceLine</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Clinical Sub Service Line --></label>
+        <name>ClinicalSubServiceLine</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Record Type Change is not allowed --></errorMessage>
+        <name>RecordTypeChange</name>
+    </validationRules>
+</CustomObjectTranslation>

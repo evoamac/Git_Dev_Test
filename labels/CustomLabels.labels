@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CRM_ActivatedTheCampaign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activated the Campaign.</shortDescription>
+        <value>Successfully activated the Campaign.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_AudienceSelectionHasBeenLocked</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Audience Selection has been locked</shortDescription>
+        <value>Audience Selection has been locked because the Final Count calculation process is in progress. If you need to make changes to the Audience Selection then please wait until this process is completed.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_AudienceSelectionhasBeenLockedAndProcessCompleted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Audience Selection has been locked 2</shortDescription>
+        <value>Audience Selection has been locked because the Final Count calculation process has already been completed. However, if you need to make changes to the Audience Selection then you can click &apos;Unlock&apos; below and then redo the Final Count Calculation process again.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_AudienceUploadAlreadyHasUpload</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload Already Has Upload</shortDescription>
+        <value>There is an existing file upload associated with this campaign. Please delete the file before upload a new file</value>
+    </labels>
+    <labels>
+        <fullName>CRM_AudienceUploadNoCampaignIdFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload No Campaign Id Found</shortDescription>
+        <value>Campaign ID not found in the query string</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Audience_Upload_Change_Member_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload Change Member Type</shortDescription>
+        <value>This action will delete loaded Records (If Any) for this campaign</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Audience_Upload_Change_Member_Type2</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload Change Member Type2</shortDescription>
+        <value>This action will delete all existing campaign audience criteria and selected audience (If Any)</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Audience_Upload_Complete</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload Complete</shortDescription>
+        <value>Audience Upload Complete</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Audience_Upload_Count_Exceeded</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload Count Exceeded</shortDescription>
+        <value>The number of records to upload is greater than 150,000. Please close this window and upload a new file that contains less than 150,000 records.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Audience_Upload_Importing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload Importing</shortDescription>
+        <value>Importing Records. This window will be closed automatically upon load completion</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Audience_Upload_Invalid_File</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload Invalid File</shortDescription>
+        <value>File contains non-Wunderman ID characters, please close this window, correct the file and try again.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Audience_Upload_No_Campaign_Id_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Audience Upload No Campaign Id Found</shortDescription>
+        <value>Campaign ID not found in the query string</value>
+    </labels>
+    <labels>
+        <fullName>CRM_AutomatedProcessIsNotRunning</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Automated Process is not running</shortDescription>
+        <value>Automated Process is not running. Please contact CRM support</value>
+    </labels>
+    <labels>
+        <fullName>CRM_CalculatingFinalCount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Calculating Final Count</shortDescription>
+        <value>Calculating Final Count</value>
+    </labels>
+    <labels>
+        <fullName>CRM_CloneValidationMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Clone Validation Messages</shortDescription>
+        <value>This campaign cannot be used for this operation as following options have been inactivated:</value>
+    </labels>
+    <labels>
+        <fullName>CRM_CreatingAudienceReport</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Creating Audience Report</shortDescription>
+        <value>Creating Audience Report</value>
+    </labels>
+    <labels>
+        <fullName>CRM_DeleteAudienceUploadMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Audience Upload Message</shortDescription>
+        <value>Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>CRM_DeleteCampaignMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Campaign Message</shortDescription>
+        <value>Are you sure want to delete the campaign?</value>
+    </labels>
+    <labels>
+        <fullName>CRM_DeleteSegmentMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Segment Message</shortDescription>
+        <value>Are you sure want to delete the Segment?</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Deployment_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Deployment Date</shortDescription>
+        <value>2017-10-26</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ErrorInProcessingAudienceReport</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error In Processing Audience Report</shortDescription>
+        <value>Problem processing Audience Report. Please contact your system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_FinalCountErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Final Count Error Message</shortDescription>
+        <value>There was some problem in processing the final count. Error:</value>
+    </labels>
+    <labels>
+        <fullName>CRM_FinalCountLimitExceeded</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Final count limit exceeded</shortDescription>
+        <value>The Final Count is over 150,000 records. Please add parameters to narrow the results and try again.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_FinalCountWarningMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM_FinalCountWarningMessage</shortDescription>
+        <value>This campaign can not be activated as Final count is 0.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Criteria_Clone</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Home Address Criteria Clone</shortDescription>
+        <value>The following values are now inactive. You must update to an active value before you perform Clone, Add Child Campaign, Quick or Final Count on the campaign:&lt;br/&gt;If you edit the campaign without updating the value(s), the field(s) may be updated to “None”.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Distance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Home Address Distance</shortDescription>
+        <value>Please enter distance</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Distance_Hospital</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Home Address Distance Hospital</shortDescription>
+        <value>Please select a hospital</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Exception_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Home Address Exception Message</shortDescription>
+        <value>Please enter a valid number.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Exclude</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM_Home_Address_Exclude</shortDescription>
+        <value>Excluded ZIP Codes cannot be specified without first specifying a Geography and/or Included ZIP Code list</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Include</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM_Home_Address_Include</shortDescription>
+        <value>Please select Geography</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Home Address Validation</shortDescription>
+        <value>Please select at least one from each available options</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Validation_CBSA</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Home Address Validation CBSA</shortDescription>
+        <value>Please select at least one CBSA</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Validation_County</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Home Address Validation County</shortDescription>
+        <value>Please select at least one county</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Home_Address_Validation_State</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Home Address Validation State</shortDescription>
+        <value>Please select at least one state</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Ignore_Supresession_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ignore Supresession Label</shortDescription>
+        <value>Please unlock all Segments before making Suppression changes</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Invalid_Campaign_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Invalid Campaign ID</shortDescription>
+        <value>Invalid Campaign ID</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Invalid_File_Upload</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Invalid File Upload</shortDescription>
+        <value>Invalid file upload. File contains non-Wunderman ID characters</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Invalid_Zip_Codes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM_Invalid_Zip_Codes</shortDescription>
+        <value>Invalid ZIP Codes :</value>
+    </labels>
+    <labels>
+        <fullName>CRM_MembertypeUnlockMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Member type Unlock Message</shortDescription>
+        <value>You must delete all of this campaign’s segments before you can change it to a non-segmented campaign</value>
+    </labels>
+    <labels>
+        <fullName>CRM_NotEnoughCampaignMembersToBeMarked</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Not Enough Campaign Members To Be Marked</shortDescription>
+        <value>Not enough Campaign Members to be marked as Control Group.Please contact CRM Support</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Picklist_Size_Limit_A</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Picklist Size Limit A</shortDescription>
+        <value>Only 1000 options of</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Picklist_Size_Limit_B</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Picklist Size Limit B</shortDescription>
+        <value>can be shown in the picklist. Please narrow down the search criteria.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ProcessingDuplicateWundermanIds</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Processing Duplicate Wunderman Ids</shortDescription>
+        <value>Processing Duplicate Wunderman IDs</value>
+    </labels>
+    <labels>
+        <fullName>CRM_QuickCountErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quick Count Error Message</shortDescription>
+        <value>There was some problem with a quick count. Error:</value>
+    </labels>
+    <labels>
+        <fullName>CRM_RefreshCountErrorMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Refresh Count Error Message</shortDescription>
+        <value>There was some problem in the final count. Error:</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ReportNonSegmentedAnalysisByPreferredHospitalId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Non Segmented Analysis By Preferred Hospital Report Id</shortDescription>
+        <value>00O0U000000FBsA</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ReportNonSegmentedAnalysisByZipcodeId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Non Segmented AnalysisByZipcode Report</shortDescription>
+        <value>00O0U000000FBsF</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ReportNonSegmentedAnalysisTotalsOnlyId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Non Segmented AnalysisTotalsOnly id</shortDescription>
+        <value>00O0U000000FBsU</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ReportSegmentedAnalysisByPreferredHospitalId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Segmented Analysis By Preferred Hospital Report Id</shortDescription>
+        <value>00O0U000000FBrv</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ReportSegmentedAnalysisByZipcodeId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Segmented Analysis By Zipcode Report Id</shortDescription>
+        <value>00O0U000000FBs0</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ReportSegmentedAnalysisTotalsOnlyId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Segmented AnalysisTotalsOnly report id</shortDescription>
+        <value>00O0U000000FCPT</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Resetting_Segment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Resetting Segment</shortDescription>
+        <value>Wunderman ID De-Duping is being reset for fresh final count at Segmented Campaign. Thank you for your patience</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Search_Result_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Search Result Message</shortDescription>
+        <value>This search criteria does not contain any ZIP codes. Please try another combination.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_SegmentCampaignActivationMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Segment Campaign Activation Message</shortDescription>
+        <value>Cannot activate campaign - no associated segment found</value>
+    </labels>
+    <labels>
+        <fullName>CRM_SegmentChannelChangeLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Segment Channel Change Label</shortDescription>
+        <value>Please delete all Segments to change Channel to Non-Targeted.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_SegmentFinalCountMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Segment Final Count Message</shortDescription>
+        <value>Total Audience Count of all segments is greater than 150000, please add criteria to narrow down the count</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Segment_Final_Count_Warning</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Segment Final Count Warning</shortDescription>
+        <value>Please obtain the Final Count on every Segment before requesting the Campaign&apos;s Final Count.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_SegmentchildNet_count_Label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Segment child Net count Label</shortDescription>
+        <value>Please obtain the latest Final Count before Activating campaign.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_ServiceSubServiceLineAudienceCriteriaClone</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Service-Sub Service Line Audience Criteria Clone</shortDescription>
+        <value>This campaign can not be cloned as following Service-Sub Service Line have been inactivated:</value>
+    </labels>
+    <labels>
+        <fullName>CRM_SuccessfullyCalculatedFinalCount</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Successfully Calculated Final Count</shortDescription>
+        <value>Successfully Calculated Final Count</value>
+    </labels>
+    <labels>
+        <fullName>CRM_TooManyMarkedForSuppression</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Too Many Marked For Suppression</shortDescription>
+        <value>Too many members were marked for suppression for the campaign to be activated.The audience may contain no more than 50,000 suppressed members.Please adjust the audience selection to contain fewer suppressed members.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_UnableToDoRefreshCountFromWunderman</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UnableToDoRefreshCountFromWunderman</shortDescription>
+        <value>Unable to do the Quick/Final count from Wunderman.Read timed out. Please try again.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Update_Channel_Locked_Campaign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM_Update_Channel_Locked_Campaign</shortDescription>
+        <value>Please unlock all segments before making channel changes</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Update_Locked_Campaign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Update Locked Campaign</shortDescription>
+        <value>Please unlock this campaign before making changes</value>
+    </labels>
+    <labels>
+        <fullName>CRM_WundermanCriteriaNotSynced</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wunderman Criteria Not Synced</shortDescription>
+        <value>The criteria have been modified since the last &apos;Quick Count&apos; was performed. The current &apos;Audience Count&apos; may not be correct. Please, click &apos;Quick Count&apos; to update the &apos;Audience Count&apos;.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_WundermanCriteriaNotSyncing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wunderman Criteria Not Syncing</shortDescription>
+        <value>There was a problem with setting up the criteria. Please click &apos;Quick Count&apos; once again to try resolving this problem. If it doesn&apos;t get resolved even after that, then please contact your system administrator.</value>
+    </labels>
+    <labels>
+        <fullName>CRM_Zip_Code_Threshold_Limit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CRM Zip Code Threshold Limit</shortDescription>
+        <value>This search criteria has more than allowed limit of 9000 ZIP codes. Please try other combination</value>
+    </labels>
+    <labels>
+        <fullName>Campaign_Activation_Request_Failed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Campaign Activation Request Failed</shortDescription>
+        <value>There is some issue. Please contact your System Admin.</value>
+    </labels>
+    <labels>
+        <fullName>Campaign_Activation_Request_In_Progress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Campaign Activation Request In Progress</shortDescription>
+        <value>members have been added.</value>
+    </labels>
+    <labels>
+        <fullName>Campaign_Activation_Request_In_Queue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Campaign Activation Request In Queue</shortDescription>
+        <value>Your request is in queue.</value>
+    </labels>
+    <labels>
+        <fullName>Campiagn_Name_Convention</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Campiagn Name Convention</shortDescription>
+        <value>The campaign cannot be saved because the Campaign Name exceeds the 80 character limit.</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Campaign HRA</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Campaign HRA</value>
+    </caseValues>
+    <fields>
+        <label><!-- Asthma Risk Category --></label>
+        <name>Asthma_Risk_Category__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- BMI Category --></label>
+        <name>BMI_Category__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Back Neck Impairement --></label>
+        <name>Back_Neck_Impairement__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Breast Cancer 5 Year --></label>
+        <name>Breast_Cancer_5_Year__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Breast Cancer Lifetime Risk --></label>
+        <name>Breast_Cancer_Lifetime_Risk__c</name>
+        <picklistValues>
+            <masterLabel>none</masterLabel>
+            <translation><!-- none --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Campaign HRA --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Diabetes Risk --></label>
+        <name>Diabetes_Risk__c</name>
+        <picklistValues>
+            <masterLabel>none</masterLabel>
+            <translation><!-- none --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Incontinence Symptoms --></label>
+        <name>Incontinence_Symptoms__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Interest Bariatric --></label>
+        <name>Interest_Baria__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Cardiology --></label>
+        <name>Interest_Cardiology__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Emergency --></label>
+        <name>Interest_Emergency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Obstetrics --></label>
+        <name>Interest_Obstetrics__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Orthopedics --></label>
+        <name>Interest_Orthopedics__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interest Pediatrics --></label>
+        <name>Interest_Pediatrics__c</name>
+    </fields>
+    <fields>
+        <label><!-- Joint Assessment --></label>
+        <name>Joint_Assessment__c</name>
+        <picklistValues>
+            <masterLabel>none</masterLabel>
+            <translation><!-- none --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Joint BMI Category --></label>
+        <name>Joint_BMI_Category__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Joint --></label>
+        <name>Joint__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lead Role --></label>
+        <name>Lead_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lifetime Risk Category --></label>
+        <name>Lifetime_Risk_Category__c</name>
+        <picklistValues>
+            <masterLabel>none</masterLabel>
+            <translation><!-- none --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Lung Screening --></label>
+        <name>Lung_Screening__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- OrthoOsteoarthritis Joint Disease --></label>
+        <name>OrthoOsteoarthritis_Joint_Disease__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ortho Pain Type --></label>
+        <name>Ortho_Pain_Type__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Pad Risk Category --></label>
+        <name>Pad_Risk_Category__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Prostate Risk Category --></label>
+        <name>Prostate_Risk_Category__c</name>
+        <picklistValues>
+            <masterLabel>none</masterLabel>
+            <translation><!-- none --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Risk Category 30 Years --></label>
+        <name>Risk_Category_30_Years__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Risk Category --></label>
+        <name>Risk_Category__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Seminar Date --></label>
+        <name>Seminar_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stroke Risk Category --></label>
+        <name>Stroke_Risk_Category__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Weight Loss Rec --></label>
+        <name>Weight_Loss_Rec__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Weight Loss Surgery Rec --></label>
+        <name>Weight_Loss_Surgery_Rec__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- qoL Impact --></label>
+        <name>qoL_Impact__c</name>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Error Log</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Error Logs</value>
+    </caseValues>
+    <fields>
+        <label><!-- Error Description --></label>
+        <name>Error_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Line Number --></label>
+        <name>Error_Line_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Number --></label>
+        <name>Error_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Source --></label>
+        <name>Error_Source__c</name>
+        <picklistValues>
+            <masterLabel>Name Match</masterLabel>
+            <translation><!-- Name Match --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Query API Builder</masterLabel>
+            <translation><!-- Query API Builder --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Error Type --></label>
+        <name>Error_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Error Logs --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Opened Date/Time --></label>
+        <name>Opened_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stack Trace --></label>
+        <name>Stack_Trace__c</name>
+    </fields>
+    <layouts>
+        <layout>Error Log Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

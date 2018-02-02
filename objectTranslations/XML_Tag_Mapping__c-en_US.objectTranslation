@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>XML Tag Mapping</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>XML Tags Mapping</value>
+    </caseValues>
+    <fields>
+        <label><!-- XML Tag Value --></label>
+        <name>XML_Tag_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- XML Tag --></label>
+        <name>XML_Tag__c</name>
+    </fields>
+    <fields>
+        <label><!-- XML Type --></label>
+        <name>XML_Type__c</name>
+        <picklistValues>
+            <masterLabel>Request</masterLabel>
+            <translation><!-- Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Response</masterLabel>
+            <translation><!-- Response --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>XML Tag Mapping Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

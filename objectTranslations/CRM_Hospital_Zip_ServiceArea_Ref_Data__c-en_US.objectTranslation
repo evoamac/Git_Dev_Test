@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Ref Data - Hospital Zip Service Mapping</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Ref Data - Hospital Zip Service Mapping</value>
+    </caseValues>
+    <fields>
+        <help><!-- Hospital record ID for the respective Hospital_Zip_searvice Area relationship record --></help>
+        <label><!-- HZSA&apos;s Hospital ID --></label>
+        <lookupFilter>
+            <errorMessage><!-- Value does not exist or does not match Hospital filter criteria. --></errorMessage>
+        </lookupFilter>
+        <name>CRM_HZSAsHospitalID__c</name>
+        <relationshipLabel><!-- Ref Data - Hospital Zip Service Mapping (HZSA&apos;s Hospital ID) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- HZSA&apos;s Hospital Name --></label>
+        <name>CRM_HZSAsHospitalName__c</name>
+    </fields>
+    <fields>
+        <label><!-- HZSA&apos;s Market --></label>
+        <name>CRM_HZSAsMarketID__c</name>
+    </fields>
+    <fields>
+        <label><!-- HZSA&apos;s Region --></label>
+        <name>CRM_HZSAsRegionID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Service Area record ID for  the respective Hospital_Zip_ServiceArea relationship record --></help>
+        <label><!-- HZSA&apos;s ServiceArea ID --></label>
+        <lookupFilter>
+            <errorMessage><!-- Value does not exist or does not match Service Area filter criteria. --></errorMessage>
+        </lookupFilter>
+        <name>CRM_HZSAsServiceAreaID__c</name>
+        <relationshipLabel><!-- Ref Data - Hospital Zip Service Mapping (HZSA&apos;s ServiceArea ID) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- HZSA&apos;s ServiceArea Name --></label>
+        <name>CRM_HZSAsServiceAreaName__c</name>
+    </fields>
+    <fields>
+        <label><!-- HZSA&apos;s Zip Code --></label>
+        <name>CRM_HZSAsZipCode__c</name>
+    </fields>
+    <fields>
+        <help><!-- Zip record ID for the respective Hospital_Zip_ServiceArea relationship record --></help>
+        <label><!-- HZSA&apos;s Zip ID --></label>
+        <name>CRM_HZSAsZipID__c</name>
+        <relationshipLabel><!-- Ref Data - Hospital Zip Service Mapping --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Used to active/Inactive the record --></help>
+        <label><!-- Active --></label>
+        <name>CRM_IsActive__c</name>
+    </fields>
+    <layouts>
+        <layout>Hospital Zip ServiceArea Reference Data Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,60 @@
+<apex:page standardController="Campaign" extensions="CampaignCriteria_GeographiesController" title="Campaign Auidence Selection | Add Geographics" sidebar="false">
+<apex:sectionHeader title="Campaign Audience Selection: Add Geographies"/>
+<style>
+        .wizard-panel td:nth-child(odd){ font-weight:bold; text-align:right; }
+        .steps { height: 30px; border:1px solid #ddd; border-radius: 4px; }        
+        .steps td div { font-weight:block; font-size: 18px; text-align:center; padding: 10px 0; color: #777; 
+        background-color: #eee; border-radius: 5px; 
+        }
+        .steps .active{ background-color: #42A5F5; color: #000; }
+        .overlay { position:fixed; top:0; left:0; height:100%; width:100%; background-color:#fff; opacity:0.7; z-index: 998; }
+        #loadingimage{ padding: 100px; text-align:center; position:absolute; left:49%;top:0; z-index: 999; }
+    </style>
+<apex:form >
+<!-- defect#966 -->
+<apex:pageMessage severity="INFO" strength="2" summary="Please use Geography button to apply Geography Criteria. Other options are depreciated." />
+<!-- defect#966 -->
+<apex:pageBlock >
+    <apex:pageBlockButtons location="top">
+        <apex:commandButton value="Back to Campaign" action="{!backToCampaign}"/>
+    </apex:pageBlockButtons>
+    <apex:pageBlockSection columns="1" >
+        <apex:commandButton value="Geography by Service Area" style="margin-left:146px;" action="{!addServiceAreas}" disabled="true"/><!-- disabled="{!AND(hasGeoSetup,NOT(hasServiceAreas))}" -->
+        <apex:commandButton value="Geography by Boundary" style="margin-left:146px;"  action="{!addBoundaries}" disabled="true" /> <!-- {!AND(hasGeoSetup,NOT(hasBoundaries))} -->                   
+        <apex:commandButton value="Geography by Distance" style="margin-left:146px;" action="{!addDistances}" disabled="true" /> <!-- {!AND(hasGeoSetup,NOT(hasDistances))} -->
+        <!-- defect#966 -->
+        <apex:commandButton value="Geography" style="margin-left:146px;" action="{!AddHomeAddress}" />
+        <!-- defect#966 -->
+    </apex:pageBlockSection>
+</apex:pageBlock>
+<apex:actionFunction name="deleteAllGeoServiceArea" action="{!deleteAllGeoServiceArea}" reRender="GeoServiceArea" status="loadingstatus" />
+<apex:actionFunction name="deleteAllGeoBoundaryDistance" action="{!deleteAllGeoBoundaryDistance}" reRender="Geography_By_Boun_Dis" status="loadingstatus" />      
+</apex:form>
+
+ <apex:actionStatus id="loadingstatus" >       
+                    <apex:facet name="start">
+                        <div id="loadingimage">
+                            <img src="/img/loading32.gif"/>
+                        </div>
+                        <div id="overlay" class="overlay"></div>
+                    </apex:facet>
+                </apex:actionStatus>
+
+  <apex:relatedList list="Campaign_Location__r"  id="GeoServiceArea" >
+            <apex:facet name="header" >
+                <apex:outputText >
+                    <div style="float:left;" class="pbHeader"><span style="font-weight:Bold;font-size:13px;color:#000;">Geography By Service Area</span></div>
+                    <div style="float:left;padding-left:10px;"><apex:outputLink style="float:left;padding-left:10px;" id="theLink" onclick="deleteAllGeoServiceArea();return false;">Delete All</apex:outputLink></div>
+                </apex:outputText>
+            </apex:facet>
+        </apex:relatedList>
+   
+        <apex:relatedList list="Geographic_Info_Informations__r" id="Geography_By_Boun_Dis">
+            <apex:facet name="header" >
+                <apex:outputText >
+                    <div style="float:left;" class="pbHeader"><span style="font-weight:Bold;font-size:13px;color:#000;">Geography By Boundary or Distance</span></div>
+                    <div style="float:left;padding-left:10px;"><apex:outputLink style="float:left;padding-left:10px;" id="theLink_1" onclick="deleteAllGeoBoundaryDistance();return false;">Delete All</apex:outputLink></div>
+                </apex:outputText>
+           </apex:facet>
+        </apex:relatedList>
+</apex:page>

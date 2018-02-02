@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>CRM_SelectedPreferedHospitalCodes__c</fullName>
+        <externalId>false</externalId>
+        <label>Selected Prefered Hospital Codes</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Campaign__c</fullName>
+        <externalId>false</externalId>
+        <label>Campaign</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Encounter aggregates</relationshipLabel>
+        <relationshipName>Encounter_aggregates</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Last_Discharge_Date_Criteria_Element_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Discharge Date Criteria Element Id</label>
+        <length>125</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Discharge_Date_From_UI__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Discharge Date From</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Last_Discharge_Date_Ranges__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Discharge Date Ranges</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Discharge_Date_To_UI__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Discharge Date To</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Most_Recent_Primary_Payor_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Most Recent Primary Payor Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CHARITY</fullName>
+                    <default>false</default>
+                    <label>CHARITY</label>
+                </value>
+                <value>
+                    <fullName>MANAGED CARE</fullName>
+                    <default>false</default>
+                    <label>MANAGED CARE</label>
+                </value>
+                <value>
+                    <fullName>MANAGED EXCHANGE</fullName>
+                    <default>false</default>
+                    <label>MANAGED EXCHANGE</label>
+                </value>
+                <value>
+                    <fullName>MEDICAID</fullName>
+                    <default>false</default>
+                    <label>MEDICAID</label>
+                </value>
+                <value>
+                    <fullName>MEDICAID MANAGED CARE</fullName>
+                    <default>false</default>
+                    <label>MEDICAID MANAGED CARE</label>
+                </value>
+                <value>
+                    <fullName>MEDICARE</fullName>
+                    <default>false</default>
+                    <label>MEDICARE</label>
+                </value>
+                <value>
+                    <fullName>MEDICARE MANAGED CARE</fullName>
+                    <default>false</default>
+                    <label>MEDICARE MANAGED CARE</label>
+                </value>
+                <value>
+                    <fullName>OTHER</fullName>
+                    <default>false</default>
+                    <label>OTHER</label>
+                </value>
+                <value>
+                    <fullName>SELF PAY/UNINSURED</fullName>
+                    <default>false</default>
+                    <label>SELF PAY/UNINSURED</label>
+                </value>
+                <value>
+                    <fullName>UNKNOWN</fullName>
+                    <default>false</default>
+                    <label>UNKNOWN</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>No_of_ER_Encounters_ranges__c</fullName>
+        <externalId>false</externalId>
+        <label>No of ER Encounters ranges</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_ER_Encounters_To__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of ER Encounters To</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_ER_Encounters__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of ER Encounters</label>
+        <length>10</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Preffered_Hospital__c</fullName>
+        <externalId>false</externalId>
+        <label>Preferred Hospital</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>test</fullName>
+                    <default>false</default>
+                    <label>test</label>
+                </value>
+                <value>
+                    <fullName>Centennial Medical Center</fullName>
+                    <default>false</default>
+                    <label>Baylor/Tenet JV Region - Baylor Scott &amp; White Medical Center - Centennial</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Wunderman_Preferred_Hospitals__c</fullName>
+        <externalId>false</externalId>
+        <label>Wunderman Preferred Hospitals</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>Encounter aggregates</label>
+    <nameField>
+        <displayFormat>EA-{0000}</displayFormat>
+        <label>Encounter aggregates Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Encounter aggregates</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

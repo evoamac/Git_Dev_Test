@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>CRM_IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Active</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_IsExternalUpload__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If checked then external upload options on audience selection screen will be enabled</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked then external upload options on audience selection screen will be enabled</inlineHelpText>
+        <label>Is External Upload</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_IsParentCampaign__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Parent Campaign</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_Is_EncounterEnabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox enables encounter buttons to will be enable for audience selection criteria</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checkbox which enables encounter buttons to will be enable for audience selection criteria</inlineHelpText>
+        <label>Is Encounter Enabled</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Member Type Reference Data</label>
+    <visibility>Public</visibility>
+</CustomObject>

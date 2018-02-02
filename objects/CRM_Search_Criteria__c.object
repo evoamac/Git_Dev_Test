@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>CRM_AdditionalZipCodes__c</fullName>
+        <externalId>false</externalId>
+        <label>Additional ZIP codes</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CRM_Campaign__c</fullName>
+        <externalId>false</externalId>
+        <label>Campaign</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Search Criterias</relationshipLabel>
+        <relationshipName>Search_Criterias_del</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>CRM_ExcludedZipCodes__c</fullName>
+        <externalId>false</externalId>
+        <label>Excluded ZIP Codes</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CRM_Search_Criteria_Level_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Search Criteria Level 1</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>By Region</fullName>
+                    <default>false</default>
+                    <label>By Region</label>
+                </value>
+                <value>
+                    <fullName>By Market</fullName>
+                    <default>false</default>
+                    <label>By Market</label>
+                </value>
+                <value>
+                    <fullName>By Hospital</fullName>
+                    <default>false</default>
+                    <label>By Hospital</label>
+                </value>
+                <value>
+                    <fullName>By State</fullName>
+                    <default>false</default>
+                    <label>By State</label>
+                </value>
+                <value>
+                    <fullName>By County</fullName>
+                    <default>false</default>
+                    <label>By County</label>
+                </value>
+                <value>
+                    <fullName>By CBSA</fullName>
+                    <default>false</default>
+                    <label>By CBSA</label>
+                </value>
+                <value>
+                    <fullName>By Distance</fullName>
+                    <default>false</default>
+                    <label>By Distance</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CRM_Search_Criteria_Level_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Search Criteria Level 2</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CRM_Search_Criteria_Level_3__c</fullName>
+        <externalId>false</externalId>
+        <label>Search Criteria Level 3</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <label>Search Criteria</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Search_Criteria_Level_1__c</columns>
+        <columns>CRM_Search_Criteria_Level_2__c</columns>
+        <columns>CRM_Search_Criteria_Level_3__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CRM_AdditionalZipCodes__c</columns>
+        <columns>CRM_ExcludedZipCodes__c</columns>
+        <columns>CRM_Campaign__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>CBSA</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Search_Criteria_Level_1__c</columns>
+        <columns>CRM_Search_Criteria_Level_3__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CRM_Search_Criteria_Level_1__c</field>
+            <operation>equals</operation>
+            <value>By CBSA</value>
+        </filters>
+        <label>CBSA</label>
+    </listViews>
+    <listViews>
+        <fullName>County</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Search_Criteria_Level_1__c</columns>
+        <columns>CRM_Search_Criteria_Level_3__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CRM_Search_Criteria_Level_1__c</field>
+            <operation>equals</operation>
+            <value>By County</value>
+        </filters>
+        <label>County</label>
+    </listViews>
+    <listViews>
+        <fullName>Distance</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Search_Criteria_Level_1__c</columns>
+        <columns>CRM_Search_Criteria_Level_3__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CRM_Search_Criteria_Level_1__c</field>
+            <operation>equals</operation>
+            <value>By Distance</value>
+        </filters>
+        <label>Distance</label>
+    </listViews>
+    <listViews>
+        <fullName>Market</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Search_Criteria_Level_1__c</columns>
+        <columns>CRM_Search_Criteria_Level_2__c</columns>
+        <columns>CRM_Search_Criteria_Level_3__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CRM_Search_Criteria_Level_1__c</field>
+            <operation>equals</operation>
+            <value>By Market</value>
+        </filters>
+        <label>Market</label>
+    </listViews>
+    <listViews>
+        <fullName>Region</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Search_Criteria_Level_1__c</columns>
+        <columns>CRM_Search_Criteria_Level_2__c</columns>
+        <columns>CRM_Search_Criteria_Level_3__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CRM_Search_Criteria_Level_1__c</field>
+            <operation>equals</operation>
+            <value>By Region</value>
+        </filters>
+        <label>Region</label>
+    </listViews>
+    <listViews>
+        <fullName>Service_Area</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Search_Criteria_Level_1__c</columns>
+        <columns>CRM_Search_Criteria_Level_2__c</columns>
+        <columns>CRM_Search_Criteria_Level_3__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CRM_Search_Criteria_Level_1__c</field>
+            <operation>equals</operation>
+            <value>By Service Area</value>
+        </filters>
+        <label>Service Area</label>
+    </listViews>
+    <listViews>
+        <fullName>State</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Search_Criteria_Level_1__c</columns>
+        <columns>CRM_Search_Criteria_Level_3__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CRM_Search_Criteria_Level_1__c</field>
+            <operation>equals</operation>
+            <value>By State</value>
+        </filters>
+        <label>State</label>
+    </listViews>
+    <nameField>
+        <displayFormat>SC-{0}</displayFormat>
+        <label>Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Search Criterias</pluralLabel>
+    <recordTypes>
+        <fullName>Region</fullName>
+        <active>true</active>
+        <label>Region</label>
+        <picklistValues>
+            <picklist>CRM_Search_Criteria_Level_1__c</picklist>
+            <values>
+                <fullName>By CBSA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>By County</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>By Distance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>By Hospital</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>By Market</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>By Region</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>By State</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>OBJECT_ID</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_Campaign__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>CRM_Campaign__c</searchFilterFields>
+        <searchFilterFields>OBJECT_ID</searchFilterFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchResultsAdditionalFields>OBJECT_ID</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

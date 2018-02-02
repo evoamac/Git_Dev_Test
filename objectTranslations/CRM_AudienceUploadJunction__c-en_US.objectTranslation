@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Audience Upload Junction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Audience Upload Junctions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Audience Count --></label>
+        <name>CRM_AudienceCount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Batch Counter --></label>
+        <name>CRM_BatchCounter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>CRM_Campaign__c</name>
+        <relationshipLabel><!-- Audience Upload Junctions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- To Delete --></label>
+        <name>CRM_ToDelete__c</name>
+    </fields>
+    <layouts>
+        <layout>Audience Report Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Audience Upload Junction Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Audience Upload Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Audience Report --></label>
+        <name>Audience_Report</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Audience Upload --></label>
+        <name>Audience_Upload</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

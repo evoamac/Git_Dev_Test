@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>CRM_CallToAction__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Reference data field which stores Call To Action picklist values.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Stores Call To Action picklist values.</inlineHelpText>
+        <label>Call To Action</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_Channel__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Reference data field which stores Channel picklist values.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Stores Channel picklist values.</inlineHelpText>
+        <label>Channel</label>
+        <length>60</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_DemoEmail__c</fullName>
+        <description>Reference data field which stores default Email value for Demographics criteria according to the channel value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores default Email value for Demographics criteria.</inlineHelpText>
+        <label>Demographics Email</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Doesn’t have an email address</fullName>
+                    <default>false</default>
+                    <label>Doesn’t have an email address</label>
+                </value>
+                <value>
+                    <fullName>Everyone</fullName>
+                    <default>false</default>
+                    <label>Everyone</label>
+                </value>
+                <value>
+                    <fullName>Has an email address</fullName>
+                    <default>false</default>
+                    <label>Has an email address</label>
+                </value>
+                <value>
+                    <fullName>Doesn&apos;t have an email address</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Doesn&apos;t have an email address</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CRM_DemoMailingAddress__c</fullName>
+        <description>Reference data field which stores default Mailing Address value for Demographics criteria according to the channel value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores default Mailing Address value for Demographics criteria.</inlineHelpText>
+        <label>Demographics Mailing Address</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Doesn’t have a valid or foreign mailing address</fullName>
+                    <default>false</default>
+                    <label>Doesn’t have a valid or foreign mailing address</label>
+                </value>
+                <value>
+                    <fullName>Everyone</fullName>
+                    <default>false</default>
+                    <label>Everyone</label>
+                </value>
+                <value>
+                    <fullName>Has a valid or foreign mailing address</fullName>
+                    <default>false</default>
+                    <label>Has a valid or foreign mailing address</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CRM_IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Reference data field to activate and deactivate picklistvalue .</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Activate value for piclkist .</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_IsCallToActionEnabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Reference data field which enables call to action picklist for channel value.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enable call to action picklist for channel value.</inlineHelpText>
+        <label>Is Call To Action Enabled</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_IsTargeted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checkbox to mark channel as targeted or non targeted .</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checkbox to mark channel as targeted or non targeted .</inlineHelpText>
+        <label>Is Targeted</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_ParentServiceLineID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>field to maintain mapping between service line and sub service line records.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Mapping for service line and sub service line records.</inlineHelpText>
+        <label>Parent Service Line ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>CRM_CampaignWizardReferenceData__c.RecordType.DeveloperName</field>
+                <operation>equals</operation>
+                <value>Service_Line</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>CRM_CampaignWizardReferenceData__c</referenceTo>
+        <relationshipName>Campaign_Wizard_Reference_Data</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_ParentServiceLine__c</fullName>
+        <description>Field to store name of Parent Service Line.</description>
+        <externalId>false</externalId>
+        <formula>CRM_ParentServiceLineID__r.CRM_ServiceLine__c</formula>
+        <inlineHelpText>Field to store name of Parent Service Line.</inlineHelpText>
+        <label>Parent Service Line</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ServiceLine__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Reference data field to store Service line picklist values for campaign wizard screen.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Stores service line picklist values for campaign wizard screen.</inlineHelpText>
+        <label>Service Line</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ServiceSubServiceLine__c</fullName>
+        <description>Reference data field to store service lien and sub service line concatenated value .</description>
+        <externalId>false</externalId>
+        <formula>CRM_ParentServiceLineID__r.CRM_ServiceLine__c + &apos; - &apos;+ CRM_SubServiceLine__c</formula>
+        <inlineHelpText>Stores service line and sub service line concatenated value .</inlineHelpText>
+        <label>Service-Sub Service Line</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_SubServiceLine__c</fullName>
+        <description>Reference data field to store Sub Service line picklist values.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Stores Sub Service line picklist values .</inlineHelpText>
+        <label>Sub Service Line</label>
+        <length>225</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_VendorName__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Reference data field to store vendor name picklist value .</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Stores vendor name picklist value.</inlineHelpText>
+        <label>Vendor Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>Ref Data - Campaign Wizard</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_ServiceLine__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignWizardReferenceData__c.Service_Line</value>
+        </filters>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Call_To_Action</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_CallToAction__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignWizardReferenceData__c.Call_To_Action</value>
+        </filters>
+        <label>Call To Action</label>
+    </listViews>
+    <listViews>
+        <fullName>Channels</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_Channel__c</columns>
+        <columns>CRM_IsTargeted__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <columns>CRM_IsCallToActionEnabled__c</columns>
+        <columns>CRM_DemoEmail__c</columns>
+        <columns>CRM_DemoMailingAddress__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignWizardReferenceData__c.ChannelValues</value>
+        </filters>
+        <label>Channels</label>
+    </listViews>
+    <listViews>
+        <fullName>Service_Line</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_ServiceLine__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignWizardReferenceData__c.Service_Line</value>
+        </filters>
+        <label>Service Line</label>
+    </listViews>
+    <listViews>
+        <fullName>Sub_Service_Line</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_ParentServiceLineID__c</columns>
+        <columns>CRM_SubServiceLine__c</columns>
+        <columns>CRM_ParentServiceLine__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignWizardReferenceData__c.Sub_Service_Line</value>
+        </filters>
+        <label>Sub Service Line</label>
+    </listViews>
+    <listViews>
+        <fullName>Vendor_Names</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_VendorName__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_CampaignWizardReferenceData__c.Vendor_Name</value>
+        </filters>
+        <label>Vendor Names</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CWRD-{0000000}</displayFormat>
+        <label>Campaign Reference Data ID</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Ref Data - Campaign Wizard</pluralLabel>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Call_To_Action</fullName>
+        <active>true</active>
+        <description>This record type records will be used to maintain Call To Action picklist on campaign wizard screen and it will only be available when channel value is Inbound</description>
+        <label>Call To Action</label>
+        <picklistValues>
+            <picklist>CRM_DemoEmail__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have an email address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has an email address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CRM_DemoMailingAddress__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ChannelValues</fullName>
+        <active>true</active>
+        <description>This record type records will be used to maintain Channel picklist and other dependent values on campaign wizard screen.</description>
+        <label>Channel Values</label>
+        <picklistValues>
+            <picklist>CRM_DemoEmail__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have an email address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has an email address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CRM_DemoMailingAddress__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Service_Line</fullName>
+        <active>true</active>
+        <description>This record type records will be used to maintain Service Line picklist on campaign wizard screen.</description>
+        <label>Service Line</label>
+        <picklistValues>
+            <picklist>CRM_DemoEmail__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have an email address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has an email address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CRM_DemoMailingAddress__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Sub_Service_Line</fullName>
+        <active>true</active>
+        <description>This record type records will be used to maintain Sub Service Line picklist on campaign wizard screen which is dependent on service line values.</description>
+        <label>Sub Service Line</label>
+        <picklistValues>
+            <picklist>CRM_DemoEmail__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have an email address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has an email address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CRM_DemoMailingAddress__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Vendor_Name</fullName>
+        <active>true</active>
+        <description>This record type records will be used to maintain Vendor Name picklist on campaign wizard screen.</description>
+        <label>Vendor Name</label>
+        <picklistValues>
+            <picklist>CRM_DemoEmail__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have an email address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has an email address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>CRM_DemoMailingAddress__c</picklist>
+            <values>
+                <fullName>Doesn%E2%80%99t have a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Everyone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Has a valid or foreign mailing address</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_IsActive__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>CRM_ServiceLine__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CRM_ServiceLine__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>OBJECT_ID</searchFilterFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>CRM_ServiceLine__c</searchFilterFields>
+        <searchFilterFields>CRM_IsActive__c</searchFilterFields>
+        <searchResultsAdditionalFields>CRM_ServiceLine__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>RecordTypeChange</fullName>
+        <active>true</active>
+        <description>Restrict Record Type Change</description>
+        <errorConditionFormula>AND ( 
+ISCHANGED( RecordTypeId ) , $Profile.Name!=&apos;System Adminstrator&apos; 
+)</errorConditionFormula>
+        <errorMessage>Record Type Change is not allowed</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

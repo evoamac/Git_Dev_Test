@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Campaign Member Search Critera</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Campaign Member Search Critera</value>
+    </caseValues>
+    <fields>
+        <label><!-- Inner Operator --></label>
+        <name>Inner_Operator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Outer Operator --></label>
+        <name>Outer_Operator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Requires SubGroup --></label>
+        <name>Requires_SubGroup__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

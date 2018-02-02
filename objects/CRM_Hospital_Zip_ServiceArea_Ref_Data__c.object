@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Stores Relationship between Hospital, Service Area and Zip</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>CRM_HZSAsHospitalID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Hospital record ID for the respective Hospital_Zip_searvice Area relationship record</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Hospital record ID for the respective Hospital_Zip_searvice Area relationship record</inlineHelpText>
+        <label>HZSA&apos;s Hospital ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Value does not exist or does not match Hospital filter criteria.</errorMessage>
+            <filterItems>
+                <field>CRM_CampaignLocationReferenceData__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Hospital</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>CRM_CampaignLocationReferenceData__c</referenceTo>
+        <relationshipName>CRM_HZSAHospitalMapping</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_HZSAsHospitalName__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_HZSAsHospitalID__r.CRM_Hospital__c</formula>
+        <label>HZSA&apos;s Hospital Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_HZSAsMarketID__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_HZSAsHospitalID__r.CRM_HospitalsMarketName__c</formula>
+        <label>HZSA&apos;s Market</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_HZSAsRegionID__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_HZSAsHospitalID__r.CRM_HospitalsRegionName__c</formula>
+        <label>HZSA&apos;s Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_HZSAsServiceAreaID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Service Area record ID for  the respective Hospital_Zip_ServiceArea relationship record</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Service Area record ID for  the respective Hospital_Zip_ServiceArea relationship record</inlineHelpText>
+        <label>HZSA&apos;s ServiceArea ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Value does not exist or does not match Service Area filter criteria.</errorMessage>
+            <filterItems>
+                <field>CRM_CampaignLocationReferenceData__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Service Area</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>CRM_CampaignLocationReferenceData__c</referenceTo>
+        <relationshipName>CRM_HZSAServiceAreaMapping</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_HZSAsServiceAreaName__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_HZSAsServiceAreaID__r.CRM_ServiceArea__c</formula>
+        <label>HZSA&apos;s ServiceArea Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_HZSAsZipCode__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_HZSAsZipID__r.CRM_ZipCode__c</formula>
+        <label>HZSA&apos;s Zip Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_HZSAsZipID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Zip record ID for the respective Hospital_Zip_ServiceArea relationship record</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Zip record ID for the respective Hospital_Zip_ServiceArea relationship record</inlineHelpText>
+        <label>HZSA&apos;s Zip ID</label>
+        <referenceTo>CRM_ZipCodeReferenceData__c</referenceTo>
+        <relationshipName>CRM_HZSAZipMapping</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Checks whether the record is Active or Inactive</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Used to active/Inactive the record</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Ref Data - Hospital Zip Service Mapping</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_HZSAsHospitalName__c</columns>
+        <columns>CRM_HZSAsMarketID__c</columns>
+        <columns>CRM_HZSAsRegionID__c</columns>
+        <columns>CRM_HZSAsServiceAreaName__c</columns>
+        <columns>CRM_HZSAsZipCode__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <columns>CRM_HZSAsHospitalID__c</columns>
+        <columns>CRM_HZSAsServiceAreaID__c</columns>
+        <columns>CRM_HZSAsZipID__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>HZSA-{0000}</displayFormat>
+        <label>HZSA Reference Data ID</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Ref Data - Hospital Zip Service Mapping</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>CRM_HZSAsHospitalName__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_HZSAsMarketID__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_HZSAsRegionID__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_HZSAsServiceAreaName__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_HZSAsZipCode__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_IsActive__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_HZSAsHospitalID__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_HZSAsServiceAreaID__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_HZSAsZipID__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

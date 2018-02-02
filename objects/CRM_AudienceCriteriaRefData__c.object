@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to store Reference Data Explicitly for Audience Criteria</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>CRM_ClinicalServiceLineID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Sub Service Line related Service Line</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Service Line Lookup</inlineHelpText>
+        <label>Clinical Service Line ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>CRM_AudienceCriteriaRefData__c.RecordType.Name</field>
+                <operation>equals</operation>
+                <value>Clinical Service Line</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>CRM_AudienceCriteriaRefData__c</referenceTo>
+        <relationshipName>CRM_ClinicalServiceLineID</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_ClinicalServiceLineSyncData__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This data will be synced with Wunderman</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This data will be synced with Wunderman</inlineHelpText>
+        <label>Clinical Service Line Sync Data</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ClinicalServiceLine__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Reference data field to store Clinical Service line</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Stores service line picklist values for Audience Selection screen.</inlineHelpText>
+        <label>Clinical Service Line</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ClinicalSubServiceLineSyncData__c</fullName>
+        <description>This data will be synced with Wunderman</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This data will be synced with Wunderman</inlineHelpText>
+        <label>Clinical Sub Service Line Sync Data</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ClinicalSubServiceLine__c</fullName>
+        <description>Reference data field to store Clinical Sub Service line picklist values.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Stores Sub Service line picklist values for Audience Selection screen.</inlineHelpText>
+        <label>Clinical Sub Service Line</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Reference data field to activate and deactivate picklist value</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Reference data field to activate and deactivate picklist value</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_ParentClinServLnNm__c</fullName>
+        <description>Parent Service Line Name</description>
+        <externalId>false</externalId>
+        <formula>CRM_ClinicalServiceLineID__r.CRM_ClinicalServiceLine__c</formula>
+        <inlineHelpText>Parent Service Line Name</inlineHelpText>
+        <label>Parent Clinical Service Line Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ServiceSubServiceLine__c</fullName>
+        <description>Reference data field to store service lien and sub service line concatenated value .</description>
+        <externalId>false</externalId>
+        <formula>CRM_ClinicalServiceLineID__r.CRM_ClinicalServiceLine__c + &apos; - &apos;+  CRM_ClinicalSubServiceLine__c</formula>
+        <inlineHelpText>Stores service line and sub service line concatenated value</inlineHelpText>
+        <label>Service-Sub Service Line</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Ref Data - Audience Criteria</label>
+    <listViews>
+        <fullName>Service_Line</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_ClinicalServiceLine__c</columns>
+        <columns>CRM_ClinicalServiceLineSyncData__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_AudienceCriteriaRefData__c.ClinicalServiceLine</value>
+        </filters>
+        <label>Clinical Service Line</label>
+    </listViews>
+    <listViews>
+        <fullName>Sub_Service_Line</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_ClinicalSubServiceLine__c</columns>
+        <columns>CRM_ClinicalSubServiceLineSyncData__c</columns>
+        <columns>CRM_ServiceSubServiceLine__c</columns>
+        <columns>CRM_IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>CRM_AudienceCriteriaRefData__c.ClinicalSubServiceLine</value>
+        </filters>
+        <label>Clinical Sub Service Line</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CARD-{0000000}</displayFormat>
+        <label>Audience Reference Data ID</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Ref Data - Audience Criteria</pluralLabel>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>ClinicalServiceLine</fullName>
+        <active>true</active>
+        <description>Record Type for Clinical Service Line</description>
+        <label>Clinical Service Line</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ClinicalSubServiceLine</fullName>
+        <active>true</active>
+        <description>Record Type for Clinical Sub Service Line</description>
+        <label>Clinical Sub Service Line</label>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_IsActive__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>CRM_ClinicalServiceLineSyncData__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_ClinicalSubServiceLine__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>RecordTypeChange</fullName>
+        <active>true</active>
+        <description>Restrict Record Type Change</description>
+        <errorConditionFormula>AND (
+ISCHANGED( RecordTypeId ) , $Profile.Name!=&apos;System Adminstrator&apos;
+)</errorConditionFormula>
+        <errorMessage>Record Type Change is not allowed</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

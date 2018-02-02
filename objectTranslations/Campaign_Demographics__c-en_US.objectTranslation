@@ -1,0 +1,2697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Campaign Demographics</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Campaign Demographics</value>
+    </caseValues>
+    <fields>
+        <label><!-- Mailing Address --></label>
+        <name>Address_Deliverable__c</name>
+        <picklistValues>
+            <masterLabel>Doesn’t have a valid or foreign mailing address</masterLabel>
+            <translation><!-- Doesn’t have a valid or foreign mailing address --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Everyone</masterLabel>
+            <translation><!-- Everyone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Has a valid or foreign mailing address</masterLabel>
+            <translation><!-- Has a valid or foreign mailing address --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Age From --></label>
+        <name>AgeFrom_UI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Age To --></label>
+        <name>AgeTo_UI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Age --></label>
+        <name>Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assimilation --></label>
+        <name>Assimilation__c</name>
+        <picklistValues>
+            <masterLabel>Assimilated</masterLabel>
+            <translation><!-- Assimilated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bilingual English</masterLabel>
+            <translation><!-- Bilingual English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bilingual Native Tongue</masterLabel>
+            <translation><!-- Bilingual Native Tongue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unassimilated</masterLabel>
+            <translation><!-- Unassimilated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Birthdate Ranges --></label>
+        <name>Birthdate_Ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Birth date --></label>
+        <name>Birthdate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Birth Month --></label>
+        <name>CRM_Birth_Month__c</name>
+        <picklistValues>
+            <masterLabel>Any</masterLabel>
+            <translation><!-- Any --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>April</masterLabel>
+            <translation><!-- April --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>August</masterLabel>
+            <translation><!-- August --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Current Month</masterLabel>
+            <translation><!-- Current Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>December</masterLabel>
+            <translation><!-- December --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>February</masterLabel>
+            <translation><!-- February --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>January</masterLabel>
+            <translation><!-- January --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>July</masterLabel>
+            <translation><!-- July --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>June</masterLabel>
+            <translation><!-- June --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>March</masterLabel>
+            <translation><!-- March --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>May</masterLabel>
+            <translation><!-- May --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Next Month</masterLabel>
+            <translation><!-- Next Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>November</masterLabel>
+            <translation><!-- November --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>October</masterLabel>
+            <translation><!-- October --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>September</masterLabel>
+            <translation><!-- September --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Campaign Demographics --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Birthdate From --></label>
+        <name>DOBFrom_UI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Birthdate To --></label>
+        <name>DOBTo_UI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Birthdate --></label>
+        <name>DOB__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discretionary Income Percent ranges --></label>
+        <name>Discretionary_Income_Percent_ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dwelling Type --></label>
+        <name>Dwelling_Type__c</name>
+        <picklistValues>
+            <masterLabel>Business Address</masterLabel>
+            <translation><!-- Business Address --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Condominium</masterLabel>
+            <translation><!-- Condominium --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mobile Home Park</masterLabel>
+            <translation><!-- Mobile Home Park --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multi Family Dwelling/Apartment</masterLabel>
+            <translation><!-- Multi Family Dwelling/Apartment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nursing Home</masterLabel>
+            <translation><!-- Nursing Home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PO Box</masterLabel>
+            <translation><!-- PO Box --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Private Mail Box</masterLabel>
+            <translation><!-- Private Mail Box --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single Family</masterLabel>
+            <translation><!-- Single Family --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slip or Marina</masterLabel>
+            <translation><!-- Slip or Marina --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Discretionary Income Percent --></label>
+        <name>Est_Discretionary_Income_Percent__c</name>
+        <picklistValues>
+            <masterLabel>00</masterLabel>
+            <translation><!-- 00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>01</masterLabel>
+            <translation><!-- 01 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>02</masterLabel>
+            <translation><!-- 02 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>03</masterLabel>
+            <translation><!-- 03 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>04</masterLabel>
+            <translation><!-- 04 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05</masterLabel>
+            <translation><!-- 05 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06</masterLabel>
+            <translation><!-- 06 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07</masterLabel>
+            <translation><!-- 07 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08</masterLabel>
+            <translation><!-- 08 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09</masterLabel>
+            <translation><!-- 09 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11</masterLabel>
+            <translation><!-- 11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12</masterLabel>
+            <translation><!-- 12 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13</masterLabel>
+            <translation><!-- 13 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14</masterLabel>
+            <translation><!-- 14 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15</masterLabel>
+            <translation><!-- 15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16</masterLabel>
+            <translation><!-- 16 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17</masterLabel>
+            <translation><!-- 17 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18</masterLabel>
+            <translation><!-- 18 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19</masterLabel>
+            <translation><!-- 19 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20</masterLabel>
+            <translation><!-- 20 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21</masterLabel>
+            <translation><!-- 21 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>22</masterLabel>
+            <translation><!-- 22 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>23</masterLabel>
+            <translation><!-- 23 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>24</masterLabel>
+            <translation><!-- 24 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>25</masterLabel>
+            <translation><!-- 25 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>26</masterLabel>
+            <translation><!-- 26 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>27</masterLabel>
+            <translation><!-- 27 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>28</masterLabel>
+            <translation><!-- 28 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>29</masterLabel>
+            <translation><!-- 29 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>30</masterLabel>
+            <translation><!-- 30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>31</masterLabel>
+            <translation><!-- 31 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>32</masterLabel>
+            <translation><!-- 32 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>33</masterLabel>
+            <translation><!-- 33 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>34</masterLabel>
+            <translation><!-- 34 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>35</masterLabel>
+            <translation><!-- 35 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>36</masterLabel>
+            <translation><!-- 36 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>37</masterLabel>
+            <translation><!-- 37 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>38</masterLabel>
+            <translation><!-- 38 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>39</masterLabel>
+            <translation><!-- 39 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>40</masterLabel>
+            <translation><!-- 40 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>41</masterLabel>
+            <translation><!-- 41 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>42</masterLabel>
+            <translation><!-- 42 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>43</masterLabel>
+            <translation><!-- 43 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>44</masterLabel>
+            <translation><!-- 44 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>45</masterLabel>
+            <translation><!-- 45 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>46</masterLabel>
+            <translation><!-- 46 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>47</masterLabel>
+            <translation><!-- 47 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>48</masterLabel>
+            <translation><!-- 48 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>49</masterLabel>
+            <translation><!-- 49 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>50</masterLabel>
+            <translation><!-- 50 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>51</masterLabel>
+            <translation><!-- 51 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>52</masterLabel>
+            <translation><!-- 52 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>53</masterLabel>
+            <translation><!-- 53 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>54</masterLabel>
+            <translation><!-- 54 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>55</masterLabel>
+            <translation><!-- 55 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>56</masterLabel>
+            <translation><!-- 56 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>57</masterLabel>
+            <translation><!-- 57 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>58</masterLabel>
+            <translation><!-- 58 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>59</masterLabel>
+            <translation><!-- 59 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>60</masterLabel>
+            <translation><!-- 60 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>61</masterLabel>
+            <translation><!-- 61 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>62</masterLabel>
+            <translation><!-- 62 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>63</masterLabel>
+            <translation><!-- 63 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>64</masterLabel>
+            <translation><!-- 64 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>65</masterLabel>
+            <translation><!-- 65 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>66</masterLabel>
+            <translation><!-- 66 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>67</masterLabel>
+            <translation><!-- 67 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>68</masterLabel>
+            <translation><!-- 68 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>69</masterLabel>
+            <translation><!-- 69 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>70</masterLabel>
+            <translation><!-- 70 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>71</masterLabel>
+            <translation><!-- 71 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>72</masterLabel>
+            <translation><!-- 72 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>73</masterLabel>
+            <translation><!-- 73 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>74</masterLabel>
+            <translation><!-- 74 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>75</masterLabel>
+            <translation><!-- 75 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>76</masterLabel>
+            <translation><!-- 76 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>77</masterLabel>
+            <translation><!-- 77 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>78</masterLabel>
+            <translation><!-- 78 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>79</masterLabel>
+            <translation><!-- 79 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>80</masterLabel>
+            <translation><!-- 80 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>81</masterLabel>
+            <translation><!-- 81 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>82</masterLabel>
+            <translation><!-- 82 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>83</masterLabel>
+            <translation><!-- 83 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>84</masterLabel>
+            <translation><!-- 84 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>85</masterLabel>
+            <translation><!-- 85 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>86</masterLabel>
+            <translation><!-- 86 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>87</masterLabel>
+            <translation><!-- 87 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>88</masterLabel>
+            <translation><!-- 88 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>89</masterLabel>
+            <translation><!-- 89 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>90</masterLabel>
+            <translation><!-- 90 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>91</masterLabel>
+            <translation><!-- 91 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>92</masterLabel>
+            <translation><!-- 92 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>93</masterLabel>
+            <translation><!-- 93 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>94</masterLabel>
+            <translation><!-- 94 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>95</masterLabel>
+            <translation><!-- 95 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>96</masterLabel>
+            <translation><!-- 96 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>97</masterLabel>
+            <translation><!-- 97 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>98</masterLabel>
+            <translation><!-- 98 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>99</masterLabel>
+            <translation><!-- 99 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- to --></label>
+        <name>Est_Discretionary_Income_Percent_to__c</name>
+        <picklistValues>
+            <masterLabel>00</masterLabel>
+            <translation><!-- 00 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>01</masterLabel>
+            <translation><!-- 01 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>02</masterLabel>
+            <translation><!-- 02 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>03</masterLabel>
+            <translation><!-- 03 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>04</masterLabel>
+            <translation><!-- 04 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05</masterLabel>
+            <translation><!-- 05 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06</masterLabel>
+            <translation><!-- 06 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07</masterLabel>
+            <translation><!-- 07 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08</masterLabel>
+            <translation><!-- 08 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09</masterLabel>
+            <translation><!-- 09 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11</masterLabel>
+            <translation><!-- 11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12</masterLabel>
+            <translation><!-- 12 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13</masterLabel>
+            <translation><!-- 13 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14</masterLabel>
+            <translation><!-- 14 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15</masterLabel>
+            <translation><!-- 15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16</masterLabel>
+            <translation><!-- 16 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17</masterLabel>
+            <translation><!-- 17 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18</masterLabel>
+            <translation><!-- 18 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19</masterLabel>
+            <translation><!-- 19 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20</masterLabel>
+            <translation><!-- 20 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21</masterLabel>
+            <translation><!-- 21 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>22</masterLabel>
+            <translation><!-- 22 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>23</masterLabel>
+            <translation><!-- 23 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>24</masterLabel>
+            <translation><!-- 24 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>25</masterLabel>
+            <translation><!-- 25 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>26</masterLabel>
+            <translation><!-- 26 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>27</masterLabel>
+            <translation><!-- 27 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>28</masterLabel>
+            <translation><!-- 28 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>29</masterLabel>
+            <translation><!-- 29 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>30</masterLabel>
+            <translation><!-- 30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>31</masterLabel>
+            <translation><!-- 31 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>32</masterLabel>
+            <translation><!-- 32 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>33</masterLabel>
+            <translation><!-- 33 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>34</masterLabel>
+            <translation><!-- 34 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>35</masterLabel>
+            <translation><!-- 35 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>36</masterLabel>
+            <translation><!-- 36 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>37</masterLabel>
+            <translation><!-- 37 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>38</masterLabel>
+            <translation><!-- 38 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>39</masterLabel>
+            <translation><!-- 39 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>40</masterLabel>
+            <translation><!-- 40 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>41</masterLabel>
+            <translation><!-- 41 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>42</masterLabel>
+            <translation><!-- 42 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>43</masterLabel>
+            <translation><!-- 43 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>44</masterLabel>
+            <translation><!-- 44 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>45</masterLabel>
+            <translation><!-- 45 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>46</masterLabel>
+            <translation><!-- 46 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>47</masterLabel>
+            <translation><!-- 47 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>48</masterLabel>
+            <translation><!-- 48 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>49</masterLabel>
+            <translation><!-- 49 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>50</masterLabel>
+            <translation><!-- 50 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>51</masterLabel>
+            <translation><!-- 51 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>52</masterLabel>
+            <translation><!-- 52 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>53</masterLabel>
+            <translation><!-- 53 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>54</masterLabel>
+            <translation><!-- 54 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>55</masterLabel>
+            <translation><!-- 55 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>56</masterLabel>
+            <translation><!-- 56 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>57</masterLabel>
+            <translation><!-- 57 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>58</masterLabel>
+            <translation><!-- 58 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>59</masterLabel>
+            <translation><!-- 59 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>60</masterLabel>
+            <translation><!-- 60 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>61</masterLabel>
+            <translation><!-- 61 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>62</masterLabel>
+            <translation><!-- 62 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>63</masterLabel>
+            <translation><!-- 63 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>64</masterLabel>
+            <translation><!-- 64 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>65</masterLabel>
+            <translation><!-- 65 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>66</masterLabel>
+            <translation><!-- 66 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>67</masterLabel>
+            <translation><!-- 67 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>68</masterLabel>
+            <translation><!-- 68 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>69</masterLabel>
+            <translation><!-- 69 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>70</masterLabel>
+            <translation><!-- 70 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>71</masterLabel>
+            <translation><!-- 71 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>72</masterLabel>
+            <translation><!-- 72 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>73</masterLabel>
+            <translation><!-- 73 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>74</masterLabel>
+            <translation><!-- 74 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>75</masterLabel>
+            <translation><!-- 75 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>76</masterLabel>
+            <translation><!-- 76 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>77</masterLabel>
+            <translation><!-- 77 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>78</masterLabel>
+            <translation><!-- 78 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>79</masterLabel>
+            <translation><!-- 79 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>80</masterLabel>
+            <translation><!-- 80 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>81</masterLabel>
+            <translation><!-- 81 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>82</masterLabel>
+            <translation><!-- 82 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>83</masterLabel>
+            <translation><!-- 83 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>84</masterLabel>
+            <translation><!-- 84 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>85</masterLabel>
+            <translation><!-- 85 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>86</masterLabel>
+            <translation><!-- 86 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>87</masterLabel>
+            <translation><!-- 87 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>88</masterLabel>
+            <translation><!-- 88 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>89</masterLabel>
+            <translation><!-- 89 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>90</masterLabel>
+            <translation><!-- 90 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>91</masterLabel>
+            <translation><!-- 91 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>92</masterLabel>
+            <translation><!-- 92 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>93</masterLabel>
+            <translation><!-- 93 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>94</masterLabel>
+            <translation><!-- 94 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>95</masterLabel>
+            <translation><!-- 95 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>96</masterLabel>
+            <translation><!-- 96 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>97</masterLabel>
+            <translation><!-- 97 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>98</masterLabel>
+            <translation><!-- 98 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>99</masterLabel>
+            <translation><!-- 99 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Est Household Debt Level --></label>
+        <name>Est_Household_Debt_Level__c</name>
+        <picklistValues>
+            <masterLabel>A = $0</masterLabel>
+            <translation><!-- A = $0 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B = $1 - $1,499</masterLabel>
+            <translation><!-- B = $1 - $1,499 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C = $1,500 - $3,499</masterLabel>
+            <translation><!-- C = $1,500 - $3,499 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D = $3,500 - $7,499</masterLabel>
+            <translation><!-- D = $3,500 - $7,499 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E = $7,500 - $14,999</masterLabel>
+            <translation><!-- E = $7,500 - $14,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>F = $15,000 - $24,999</masterLabel>
+            <translation><!-- F = $15,000 - $24,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>G = $25,000 - $39,999</masterLabel>
+            <translation><!-- G = $25,000 - $39,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>H = $40,000 - $74,999</masterLabel>
+            <translation><!-- H = $40,000 - $74,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I = $75,000+</masterLabel>
+            <translation><!-- I = $75,000+ --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Household Income --></label>
+        <name>Est_Household_Income_3_0__c</name>
+        <picklistValues>
+            <masterLabel>$100,000-$124,999</masterLabel>
+            <translation><!-- $100,000-$124,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$125,000-$149,999</masterLabel>
+            <translation><!-- $125,000-$149,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$15,000-$19,999</masterLabel>
+            <translation><!-- $15,000-$19,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$150,000-$199,999</masterLabel>
+            <translation><!-- $150,000-$199,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$20,000-$29,999</masterLabel>
+            <translation><!-- $20,000-$29,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$200,000-$249,999</masterLabel>
+            <translation><!-- $200,000-$249,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$250,000-$399,999</masterLabel>
+            <translation><!-- $250,000-$399,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$30,000-$39,999</masterLabel>
+            <translation><!-- $30,000-$39,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$40,000-$49,999</masterLabel>
+            <translation><!-- $40,000-$49,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$400,000-$499,999</masterLabel>
+            <translation><!-- $400,000-$499,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$50,000-$59,999</masterLabel>
+            <translation><!-- $50,000-$59,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$500,000+</masterLabel>
+            <translation><!-- $500,000+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$60,000-$74,999</masterLabel>
+            <translation><!-- $60,000-$74,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$75,000-$99,999</masterLabel>
+            <translation><!-- $75,000-$99,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Less than $15,000</masterLabel>
+            <translation><!-- Less than $15,000 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Ethcinity Criteria Element --></label>
+        <name>Ethcinity_Criteria_Element__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ethnicity --></label>
+        <name>Ethcinity__c</name>
+        <picklistValues>
+            <masterLabel>Afghan</masterLabel>
+            <translation><!-- Afghan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>African American</masterLabel>
+            <translation><!-- African American --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>African Continental</masterLabel>
+            <translation><!-- African Continental --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Albanian</masterLabel>
+            <translation><!-- Albanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aleut</masterLabel>
+            <translation><!-- Aleut --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Algerian</masterLabel>
+            <translation><!-- Algerian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Angolan</masterLabel>
+            <translation><!-- Angolan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arab</masterLabel>
+            <translation><!-- Arab --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Armenian</masterLabel>
+            <translation><!-- Armenian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ashanti</masterLabel>
+            <translation><!-- Ashanti --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Austrian</masterLabel>
+            <translation><!-- Austrian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Azerbaijani</masterLabel>
+            <translation><!-- Azerbaijani --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bahraini</masterLabel>
+            <translation><!-- Bahraini --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bangladeshi</masterLabel>
+            <translation><!-- Bangladeshi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Batswana (Botswana)</masterLabel>
+            <translation><!-- Batswana (Botswana) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Belgian</masterLabel>
+            <translation><!-- Belgian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Beninese</masterLabel>
+            <translation><!-- Beninese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bhutanese</masterLabel>
+            <translation><!-- Bhutanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bosniak</masterLabel>
+            <translation><!-- Bosniak --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Brazilian</masterLabel>
+            <translation><!-- Brazilian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bulgarian</masterLabel>
+            <translation><!-- Bulgarian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Burkinabe (Burkina Faso)</masterLabel>
+            <translation><!-- Burkinabe (Burkina Faso) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Burmese (Myanmar)</masterLabel>
+            <translation><!-- Burmese (Myanmar) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Burundi</masterLabel>
+            <translation><!-- Burundi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Byelorussian</masterLabel>
+            <translation><!-- Byelorussian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cameroonian</masterLabel>
+            <translation><!-- Cameroonian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Central African (Central African Republic)</masterLabel>
+            <translation><!-- Central African (Central African Republic) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chadian</masterLabel>
+            <translation><!-- Chadian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chechen</masterLabel>
+            <translation><!-- Chechen --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chinese</masterLabel>
+            <translation><!-- Chinese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Comoran</masterLabel>
+            <translation><!-- Comoran --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Congolese</masterLabel>
+            <translation><!-- Congolese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Croatian</masterLabel>
+            <translation><!-- Croatian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Czech</masterLabel>
+            <translation><!-- Czech --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Danish</masterLabel>
+            <translation><!-- Danish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Djiboutian</masterLabel>
+            <translation><!-- Djiboutian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dutch</masterLabel>
+            <translation><!-- Dutch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Egyptian</masterLabel>
+            <translation><!-- Egyptian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English</masterLabel>
+            <translation><!-- English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Equatorial Guinean</masterLabel>
+            <translation><!-- Equatorial Guinean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Estonian</masterLabel>
+            <translation><!-- Estonian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ethiopian</masterLabel>
+            <translation><!-- Ethiopian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fijian</masterLabel>
+            <translation><!-- Fijian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Filipino</masterLabel>
+            <translation><!-- Filipino --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finnish</masterLabel>
+            <translation><!-- Finnish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French</masterLabel>
+            <translation><!-- French --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Gabonese</masterLabel>
+            <translation><!-- Gabonese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Gambian</masterLabel>
+            <translation><!-- Gambian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Georgian</masterLabel>
+            <translation><!-- Georgian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German</masterLabel>
+            <translation><!-- German --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ghanaian</masterLabel>
+            <translation><!-- Ghanaian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Greek</masterLabel>
+            <translation><!-- Greek --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Guinean (Guinea-Bissau)</masterLabel>
+            <translation><!-- Guinean (Guinea-Bissau) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Guyanese</masterLabel>
+            <translation><!-- Guyanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Haitian</masterLabel>
+            <translation><!-- Haitian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hausa</masterLabel>
+            <translation><!-- Hausa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hawaiian</masterLabel>
+            <translation><!-- Hawaiian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hebrew</masterLabel>
+            <translation><!-- Hebrew --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hispanic</masterLabel>
+            <translation><!-- Hispanic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hmong</masterLabel>
+            <translation><!-- Hmong --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hungarian</masterLabel>
+            <translation><!-- Hungarian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Icelandic</masterLabel>
+            <translation><!-- Icelandic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Igbo</masterLabel>
+            <translation><!-- Igbo --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indian</masterLabel>
+            <translation><!-- Indian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indonesian</masterLabel>
+            <translation><!-- Indonesian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inuit</masterLabel>
+            <translation><!-- Inuit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Iraqi</masterLabel>
+            <translation><!-- Iraqi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Irish</masterLabel>
+            <translation><!-- Irish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Italian</masterLabel>
+            <translation><!-- Italian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ivorian (Ivory Coast)</masterLabel>
+            <translation><!-- Ivorian (Ivory Coast) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jamaican</masterLabel>
+            <translation><!-- Jamaican --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Japanese</masterLabel>
+            <translation><!-- Japanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jewish</masterLabel>
+            <translation><!-- Jewish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kazakh</masterLabel>
+            <translation><!-- Kazakh --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kenyan</masterLabel>
+            <translation><!-- Kenyan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Khmer</masterLabel>
+            <translation><!-- Khmer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kirghiz</masterLabel>
+            <translation><!-- Kirghiz --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Korean</masterLabel>
+            <translation><!-- Korean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kurdish</masterLabel>
+            <translation><!-- Kurdish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kuwaiti</masterLabel>
+            <translation><!-- Kuwaiti --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Laotian</masterLabel>
+            <translation><!-- Laotian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Latvian</masterLabel>
+            <translation><!-- Latvian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Liberian</masterLabel>
+            <translation><!-- Liberian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Libyan</masterLabel>
+            <translation><!-- Libyan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lithuanian</masterLabel>
+            <translation><!-- Lithuanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Macedonian</masterLabel>
+            <translation><!-- Macedonian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Malagasy (Madagascar)</masterLabel>
+            <translation><!-- Malagasy (Madagascar) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Malawian</masterLabel>
+            <translation><!-- Malawian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Malay</masterLabel>
+            <translation><!-- Malay --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Malian</masterLabel>
+            <translation><!-- Malian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manx</masterLabel>
+            <translation><!-- Manx --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mauritanian</masterLabel>
+            <translation><!-- Mauritanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moldovan</masterLabel>
+            <translation><!-- Moldovan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mongolian</masterLabel>
+            <translation><!-- Mongolian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moroccan</masterLabel>
+            <translation><!-- Moroccan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mozambican (Mozambique)</masterLabel>
+            <translation><!-- Mozambican (Mozambique) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multi Ethnic</masterLabel>
+            <translation><!-- Multi Ethnic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Namibia</masterLabel>
+            <translation><!-- Namibia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Native American</masterLabel>
+            <translation><!-- Native American --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nepalese</masterLabel>
+            <translation><!-- Nepalese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nigerian (Nigeria)</masterLabel>
+            <translation><!-- Nigerian (Nigeria) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nigerien (Niger)</masterLabel>
+            <translation><!-- Nigerien (Niger) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Norwegian</masterLabel>
+            <translation><!-- Norwegian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pakistani</masterLabel>
+            <translation><!-- Pakistani --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Papua New Guinean</masterLabel>
+            <translation><!-- Papua New Guinean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Persian</masterLabel>
+            <translation><!-- Persian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Polish</masterLabel>
+            <translation><!-- Polish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portuguese</masterLabel>
+            <translation><!-- Portuguese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Qatari</masterLabel>
+            <translation><!-- Qatari --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Romanian</masterLabel>
+            <translation><!-- Romanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Russian</masterLabel>
+            <translation><!-- Russian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rwandan</masterLabel>
+            <translation><!-- Rwandan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Samoan</masterLabel>
+            <translation><!-- Samoan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Saudi</masterLabel>
+            <translation><!-- Saudi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Scottish</masterLabel>
+            <translation><!-- Scottish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Senegalese</masterLabel>
+            <translation><!-- Senegalese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Serbian</masterLabel>
+            <translation><!-- Serbian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sierra Leonean</masterLabel>
+            <translation><!-- Sierra Leonean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slovak</masterLabel>
+            <translation><!-- Slovak --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slovenian</masterLabel>
+            <translation><!-- Slovenian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Somali</masterLabel>
+            <translation><!-- Somali --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sotho (Lesotho)</masterLabel>
+            <translation><!-- Sotho (Lesotho) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>South African</masterLabel>
+            <translation><!-- South African --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Southern African</masterLabel>
+            <translation><!-- Southern African --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sri Lankan</masterLabel>
+            <translation><!-- Sri Lankan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sudanese</masterLabel>
+            <translation><!-- Sudanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surinamese</masterLabel>
+            <translation><!-- Surinamese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Swahili</masterLabel>
+            <translation><!-- Swahili --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Swazi</masterLabel>
+            <translation><!-- Swazi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Swedish</masterLabel>
+            <translation><!-- Swedish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Swiss</masterLabel>
+            <translation><!-- Swiss --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Syrian</masterLabel>
+            <translation><!-- Syrian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Taiwanese</masterLabel>
+            <translation><!-- Taiwanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tajik</masterLabel>
+            <translation><!-- Tajik --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tanzanian</masterLabel>
+            <translation><!-- Tanzanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Telugu</masterLabel>
+            <translation><!-- Telugu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thai</masterLabel>
+            <translation><!-- Thai --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tibetan</masterLabel>
+            <translation><!-- Tibetan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Togolese</masterLabel>
+            <translation><!-- Togolese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tongan</masterLabel>
+            <translation><!-- Tongan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tunisian</masterLabel>
+            <translation><!-- Tunisian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Turkish</masterLabel>
+            <translation><!-- Turkish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Turkmen</masterLabel>
+            <translation><!-- Turkmen --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ugandan</masterLabel>
+            <translation><!-- Ugandan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ukrainian</masterLabel>
+            <translation><!-- Ukrainian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uncodable Records</masterLabel>
+            <translation><!-- Uncodable Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uncoded</masterLabel>
+            <translation><!-- Uncoded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uzbek</masterLabel>
+            <translation><!-- Uzbek --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vietnamese</masterLabel>
+            <translation><!-- Vietnamese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Welsh</masterLabel>
+            <translation><!-- Welsh --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Xhosa</masterLabel>
+            <translation><!-- Xhosa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yemeni</masterLabel>
+            <translation><!-- Yemeni --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yoruba</masterLabel>
+            <translation><!-- Yoruba --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zambian</masterLabel>
+            <translation><!-- Zambian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zimbabwean</masterLabel>
+            <translation><!-- Zimbabwean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zulu</masterLabel>
+            <translation><!-- Zulu --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Ethnic Group --></label>
+        <name>Ethnic_Group__c</name>
+        <picklistValues>
+            <masterLabel>African American</masterLabel>
+            <translation><!-- African American --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Caribbean Non-Hispanic</masterLabel>
+            <translation><!-- Caribbean Non-Hispanic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Central Asian</masterLabel>
+            <translation><!-- Central Asian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>East Asian</masterLabel>
+            <translation><!-- East Asian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Eastern European</masterLabel>
+            <translation><!-- Eastern European --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hispanic</masterLabel>
+            <translation><!-- Hispanic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jewish</masterLabel>
+            <translation><!-- Jewish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mediterranean</masterLabel>
+            <translation><!-- Mediterranean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Middle Eastern</masterLabel>
+            <translation><!-- Middle Eastern --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Native American</masterLabel>
+            <translation><!-- Native American --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Polynesian</masterLabel>
+            <translation><!-- Polynesian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Scandinavian</masterLabel>
+            <translation><!-- Scandinavian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>South Asian</masterLabel>
+            <translation><!-- South Asian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Southeast Asian</masterLabel>
+            <translation><!-- Southeast Asian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uncoded</masterLabel>
+            <translation><!-- Uncoded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Western European</masterLabel>
+            <translation><!-- Western European --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Gender Criteria Element --></label>
+        <name>Gender_Criteria_Element__c</name>
+    </fields>
+    <fields>
+        <label><!-- Gender --></label>
+        <name>Gender__c</name>
+        <picklistValues>
+            <masterLabel>Female</masterLabel>
+            <translation><!-- Female --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Male</masterLabel>
+            <translation><!-- Male --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Generations 2.0 --></label>
+        <name>Generations_2_0__c</name>
+        <picklistValues>
+            <masterLabel>Age Defying Techies</masterLabel>
+            <translation><!-- Age Defying Techies --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Boomerang Kids</masterLabel>
+            <translation><!-- Boomerang Kids --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Budget-Conscious Seniors</masterLabel>
+            <translation><!-- Budget-Conscious Seniors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Caring for Mom &amp; Dad</masterLabel>
+            <translation><!-- Caring for Mom &amp; Dad --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Conditions &amp; Connections</masterLabel>
+            <translation><!-- Conditions &amp; Connections --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Country Traditionalists</masterLabel>
+            <translation><!-- Country Traditionalists --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Established Family Life</masterLabel>
+            <translation><!-- Established Family Life --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Financing The Basics</masterLabel>
+            <translation><!-- Financing The Basics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Footloose on Little</masterLabel>
+            <translation><!-- Footloose on Little --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandfamilies Sharing the Load</masterLabel>
+            <translation><!-- Grandfamilies Sharing the Load --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hard-working Renters</masterLabel>
+            <translation><!-- Hard-working Renters --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Healthy, Wealthy, &amp; Urbanized</masterLabel>
+            <translation><!-- Healthy, Wealthy, &amp; Urbanized --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Late to the Party Parents</masterLabel>
+            <translation><!-- Late to the Party Parents --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Living Paycheck to Paycheck</masterLabel>
+            <translation><!-- Living Paycheck to Paycheck --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Loving the Outdoor Life</masterLabel>
+            <translation><!-- Loving the Outdoor Life --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mainstream Metros</masterLabel>
+            <translation><!-- Mainstream Metros --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>May December Families</masterLabel>
+            <translation><!-- May December Families --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multigenerational Togetherness</masterLabel>
+            <translation><!-- Multigenerational Togetherness --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Rest for the Weary</masterLabel>
+            <translation><!-- No Rest for the Weary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Off-The-Grid Seniors</masterLabel>
+            <translation><!-- Off-The-Grid Seniors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Old Fashioned Success</masterLabel>
+            <translation><!-- Old Fashioned Success --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Online Fashionistas</masterLabel>
+            <translation><!-- Online Fashionistas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reaping Their Benefits</masterLabel>
+            <translation><!-- Reaping Their Benefits --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rural Techies Making Do</masterLabel>
+            <translation><!-- Rural Techies Making Do --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rustic Outsiders</masterLabel>
+            <translation><!-- Rustic Outsiders --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Shopaholics in the Country</masterLabel>
+            <translation><!-- Shopaholics in the Country --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Singles in a Bind</masterLabel>
+            <translation><!-- Singles in a Bind --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sitting Pretty in the City</masterLabel>
+            <translation><!-- Sitting Pretty in the City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Strapped Metros</masterLabel>
+            <translation><!-- Strapped Metros --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Strapped Seniors in Small Towns</masterLabel>
+            <translation><!-- Strapped Seniors in Small Towns --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Struggling Families in Suburbia</masterLabel>
+            <translation><!-- Struggling Families in Suburbia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Struggling to Get Started</masterLabel>
+            <translation><!-- Struggling to Get Started --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Success in the City</masterLabel>
+            <translation><!-- Success in the City --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tech-Savvy Empty Nesters</masterLabel>
+            <translation><!-- Tech-Savvy Empty Nesters --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Techies Living with Mom &amp; Dad</masterLabel>
+            <translation><!-- Techies Living with Mom &amp; Dad --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Urban Upper Crust</masterLabel>
+            <translation><!-- Urban Upper Crust --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Household size ranges --></label>
+        <name>Household_size_ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Language --></label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>Afrikaans</masterLabel>
+            <translation><!-- Afrikaans --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Albanian</masterLabel>
+            <translation><!-- Albanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Amharic</masterLabel>
+            <translation><!-- Amharic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arabic</masterLabel>
+            <translation><!-- Arabic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Armenian</masterLabel>
+            <translation><!-- Armenian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Azeri</masterLabel>
+            <translation><!-- Azeri --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bahasa Indonesia</masterLabel>
+            <translation><!-- Bahasa Indonesia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bahasa Melayu</masterLabel>
+            <translation><!-- Bahasa Melayu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bantu</masterLabel>
+            <translation><!-- Bantu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bengali/Bangla</masterLabel>
+            <translation><!-- Bengali/Bangla --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bulgarian</masterLabel>
+            <translation><!-- Bulgarian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Burmese</masterLabel>
+            <translation><!-- Burmese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cantonese</masterLabel>
+            <translation><!-- Cantonese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chechen</masterLabel>
+            <translation><!-- Chechen --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Comorian/Shikomoro</masterLabel>
+            <translation><!-- Comorian/Shikomoro --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Czech</masterLabel>
+            <translation><!-- Czech --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Danish</masterLabel>
+            <translation><!-- Danish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dutch</masterLabel>
+            <translation><!-- Dutch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dzongkha</masterLabel>
+            <translation><!-- Dzongkha --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English</masterLabel>
+            <translation><!-- English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Estonian</masterLabel>
+            <translation><!-- Estonian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Farsi</masterLabel>
+            <translation><!-- Farsi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finnish</masterLabel>
+            <translation><!-- Finnish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Flemish/Walloon</masterLabel>
+            <translation><!-- Flemish/Walloon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French</masterLabel>
+            <translation><!-- French --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Georgian</masterLabel>
+            <translation><!-- Georgian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German</masterLabel>
+            <translation><!-- German --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Greek</masterLabel>
+            <translation><!-- Greek --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hausa</masterLabel>
+            <translation><!-- Hausa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hebrew</masterLabel>
+            <translation><!-- Hebrew --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hindi</masterLabel>
+            <translation><!-- Hindi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hmong</masterLabel>
+            <translation><!-- Hmong --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hungarian</masterLabel>
+            <translation><!-- Hungarian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Icelandic</masterLabel>
+            <translation><!-- Icelandic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Igbo</masterLabel>
+            <translation><!-- Igbo --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inuktitut</masterLabel>
+            <translation><!-- Inuktitut --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Italian</masterLabel>
+            <translation><!-- Italian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Japanese</masterLabel>
+            <translation><!-- Japanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kazakh</masterLabel>
+            <translation><!-- Kazakh --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Khmer</masterLabel>
+            <translation><!-- Khmer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kirghiz</masterLabel>
+            <translation><!-- Kirghiz --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Korean</masterLabel>
+            <translation><!-- Korean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kurdish</masterLabel>
+            <translation><!-- Kurdish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lao</masterLabel>
+            <translation><!-- Lao --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Latvian</masterLabel>
+            <translation><!-- Latvian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lithuanian</masterLabel>
+            <translation><!-- Lithuanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Macedonian</masterLabel>
+            <translation><!-- Macedonian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Malagasy</masterLabel>
+            <translation><!-- Malagasy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mandarin</masterLabel>
+            <translation><!-- Mandarin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moldovan</masterLabel>
+            <translation><!-- Moldovan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mongolian</masterLabel>
+            <translation><!-- Mongolian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nepali</masterLabel>
+            <translation><!-- Nepali --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Norwegian</masterLabel>
+            <translation><!-- Norwegian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pashtu/Pashto</masterLabel>
+            <translation><!-- Pashtu/Pashto --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Polish</masterLabel>
+            <translation><!-- Polish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portuguese</masterLabel>
+            <translation><!-- Portuguese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Romanian</masterLabel>
+            <translation><!-- Romanian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Russian</masterLabel>
+            <translation><!-- Russian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Samoan</masterLabel>
+            <translation><!-- Samoan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Serbo-Croatian</masterLabel>
+            <translation><!-- Serbo-Croatian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sinhala</masterLabel>
+            <translation><!-- Sinhala --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Siswati</masterLabel>
+            <translation><!-- Siswati --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slovak</masterLabel>
+            <translation><!-- Slovak --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Slovenian</masterLabel>
+            <translation><!-- Slovenian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Somali</masterLabel>
+            <translation><!-- Somali --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sotho</masterLabel>
+            <translation><!-- Sotho --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish</masterLabel>
+            <translation><!-- Spanish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Swahili</masterLabel>
+            <translation><!-- Swahili --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Swedish</masterLabel>
+            <translation><!-- Swedish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tagalog</masterLabel>
+            <translation><!-- Tagalog --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Telugu</masterLabel>
+            <translation><!-- Telugu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thai</masterLabel>
+            <translation><!-- Thai --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tibetan</masterLabel>
+            <translation><!-- Tibetan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tok Pisin</masterLabel>
+            <translation><!-- Tok Pisin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tongan</masterLabel>
+            <translation><!-- Tongan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Turkish</masterLabel>
+            <translation><!-- Turkish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Turkmen</masterLabel>
+            <translation><!-- Turkmen --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Twi (Of Ashanti Ethnicity)</masterLabel>
+            <translation><!-- Twi (Of Ashanti Ethnicity) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Urdu</masterLabel>
+            <translation><!-- Urdu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uzbek</masterLabel>
+            <translation><!-- Uzbek --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vietnamese</masterLabel>
+            <translation><!-- Vietnamese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Xhosa</masterLabel>
+            <translation><!-- Xhosa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yoruba</masterLabel>
+            <translation><!-- Yoruba --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Zulu</masterLabel>
+            <translation><!-- Zulu --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Move Activity Criteria Element --></label>
+        <name>Move_Activity_Criteria_Element__c</name>
+    </fields>
+    <fields>
+        <label><!-- Move Activity in Months --></label>
+        <name>Move_Activity_in_Months__c</name>
+        <picklistValues>
+            <masterLabel>01</masterLabel>
+            <translation><!-- 01 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>02</masterLabel>
+            <translation><!-- 02 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>03</masterLabel>
+            <translation><!-- 03 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>04</masterLabel>
+            <translation><!-- 04 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05</masterLabel>
+            <translation><!-- 05 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06</masterLabel>
+            <translation><!-- 06 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07</masterLabel>
+            <translation><!-- 07 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08</masterLabel>
+            <translation><!-- 08 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09</masterLabel>
+            <translation><!-- 09 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11</masterLabel>
+            <translation><!-- 11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12</masterLabel>
+            <translation><!-- 12 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Net Worth --></label>
+        <name>Net_Worth_3_0__c</name>
+        <picklistValues>
+            <masterLabel>$0 or Less</masterLabel>
+            <translation><!-- $0 or Less --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$1 - $4,999</masterLabel>
+            <translation><!-- $1 - $4,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$1,000,000 +</masterLabel>
+            <translation><!-- $1,000,000 + --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$100,000 - $149,999</masterLabel>
+            <translation><!-- $100,000 - $149,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$150,000 - $249,999</masterLabel>
+            <translation><!-- $150,000 - $249,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$25,000 - $49,999</masterLabel>
+            <translation><!-- $25,000 - $49,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$250,000 - $374,999</masterLabel>
+            <translation><!-- $250,000 - $374,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$375,000 - $499,999</masterLabel>
+            <translation><!-- $375,000 - $499,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$5,000 - $24,999</masterLabel>
+            <translation><!-- $5,000 - $24,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$50,000 - $74,999</masterLabel>
+            <translation><!-- $50,000 - $74,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$500,000 - $749,999</masterLabel>
+            <translation><!-- $500,000 - $749,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$75,000 - $99,999</masterLabel>
+            <translation><!-- $75,000 - $99,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$750,000 - $999,999</masterLabel>
+            <translation><!-- $750,000 - $999,999 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- New Movers Range --></label>
+        <name>New_Movers_Range__c</name>
+    </fields>
+    <fields>
+        <label><!-- New movers --></label>
+        <name>New_movers__c</name>
+        <picklistValues>
+            <masterLabel>01</masterLabel>
+            <translation><!-- 01 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>02</masterLabel>
+            <translation><!-- 02 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>03</masterLabel>
+            <translation><!-- 03 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>04</masterLabel>
+            <translation><!-- 04 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>05</masterLabel>
+            <translation><!-- 05 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>06</masterLabel>
+            <translation><!-- 06 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>07</masterLabel>
+            <translation><!-- 07 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>08</masterLabel>
+            <translation><!-- 08 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>09</masterLabel>
+            <translation><!-- 09 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11</masterLabel>
+            <translation><!-- 11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12</masterLabel>
+            <translation><!-- 12 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Number of Adults in HH --></label>
+        <name>Number_of_Adults_in_HH__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Adults in hh ranges --></label>
+        <name>Number_of_Adults_in_hh_ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Children --></label>
+        <name>Number_of_Children__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Children ranges --></label>
+        <name>Number_of_Children_ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Household Size --></label>
+        <name>Number_of_Persons_in_HH__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preferred Contact Criteria Element --></label>
+        <name>Preferred_Contact_Criteria_Element__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preferred Contact Method --></label>
+        <name>Preferred_Contact_Method__c</name>
+        <picklistValues>
+            <masterLabel>Cell</masterLabel>
+            <translation><!-- Cell --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mail</masterLabel>
+            <translation><!-- Mail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Text</masterLabel>
+            <translation><!-- Text --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Web</masterLabel>
+            <translation><!-- Web --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Presence of Children --></label>
+        <name>Presence_of_Children__c</name>
+    </fields>
+    <fields>
+        <label><!-- Presence of Donor --></label>
+        <name>Presence_of_Donor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Presence of Elderly Parents --></label>
+        <name>Presence_of_Elderly_Parents__c</name>
+    </fields>
+    <fields>
+        <label><!-- Race --></label>
+        <name>Race__c</name>
+        <picklistValues>
+            <masterLabel>African American</masterLabel>
+            <translation><!-- African American --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>American Indian</masterLabel>
+            <translation><!-- American Indian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Asian</masterLabel>
+            <translation><!-- Asian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Caucasian</masterLabel>
+            <translation><!-- Caucasian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chinese</masterLabel>
+            <translation><!-- Chinese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hispanic</masterLabel>
+            <translation><!-- Hispanic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Japanese</masterLabel>
+            <translation><!-- Japanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jewish</masterLabel>
+            <translation><!-- Jewish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oriental</masterLabel>
+            <translation><!-- Oriental --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portuguese</masterLabel>
+            <translation><!-- Portuguese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uncoded</masterLabel>
+            <translation><!-- Uncoded --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Religion Criteria Element --></label>
+        <name>Religion_Criteria_Element__c</name>
+    </fields>
+    <fields>
+        <label><!-- Religion --></label>
+        <name>Religion__c</name>
+        <picklistValues>
+            <masterLabel>Buddhist</masterLabel>
+            <translation><!-- Buddhist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Catholic</masterLabel>
+            <translation><!-- Catholic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Eastern Orthodox</masterLabel>
+            <translation><!-- Eastern Orthodox --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ethiopian Orthodox</masterLabel>
+            <translation><!-- Ethiopian Orthodox --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hindu</masterLabel>
+            <translation><!-- Hindu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Islamic</masterLabel>
+            <translation><!-- Islamic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jewish</masterLabel>
+            <translation><!-- Jewish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lutheran</masterLabel>
+            <translation><!-- Lutheran --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mormon</masterLabel>
+            <translation><!-- Mormon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Protestant</masterLabel>
+            <translation><!-- Protestant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Shinto</masterLabel>
+            <translation><!-- Shinto --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sikh</masterLabel>
+            <translation><!-- Sikh --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Suppression_Non_emailable__c</name>
+        <picklistValues>
+            <masterLabel>Doesn’t have an email address</masterLabel>
+            <translation><!-- Doesn’t have an email address --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Everyone</masterLabel>
+            <translation><!-- Everyone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Has an email address</masterLabel>
+            <translation><!-- Has an email address --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- to --></label>
+        <name>to_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- to_Number of Adults in HH --></label>
+        <name>to_Number_of_Adults_in_HH__c</name>
+    </fields>
+    <fields>
+        <label><!-- to_Number of Children --></label>
+        <name>to_Number_of_Children__c</name>
+    </fields>
+    <fields>
+        <label><!-- to_Number of Persons in HH --></label>
+        <name>to_Number_of_Persons_in_HH__c</name>
+    </fields>
+    <fields>
+        <label><!-- to_age --></label>
+        <name>to_age__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

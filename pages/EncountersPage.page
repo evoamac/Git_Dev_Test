@@ -1,0 +1,1543 @@
+<apex:page standardController="Campaign" sideBar="false" extensions="EncounterPageController,GeographicController" title="Audience Selection" id="page">
+
+ <apex:includeScript value="{!$Resource.jquery1_12}"/> 
+
+    
+    <script type="text/javascript" value="https://github.com/aFarkas/html5shiv/blob/master/dist/html5shiv.min.js">
+       </script>
+       <style>
+       .overlay { position:fixed; top:0; left:0; height:100%; width:100%; background-color:#fff; opacity:0.7; z-index: 998; }
+        #loadingimage{ padding: 100px; text-align:center; position:absolute; left:49%;top:0; z-index: 999; }
+       </style>
+    
+    <apex:sectionHeader title="Encounters" rendered="{!button==1}" />
+             <apex:sectionHeader title="Lifestyle" rendered="{!button==2}" />
+             <apex:sectionHeader title="Demographics" rendered="{!button==3}" />
+             <apex:sectionHeader title="Model" rendered="{!button==5}" />
+             <!--                Part of R2
+             <apex:sectionHeader title="HRA" rendered="{!button==4}" /> 
+             <apex:sectionHeader title="Interaction" rendered="{!button==6}"/>
+             -->
+    <script>
+	    var previousOnload = window.onload;
+	    window.onload = function() {
+	        if (previousOnload) {
+	            previousOnload();
+	        }
+	        document.getElementById('btn_div').style.display='';
+	    }
+	</script>
+
+    
+  <apex:form id="pageform">        
+          <apex:actionStatus id="loadingstatus" >       
+            <apex:facet name="start">
+                <div id="loadingimage">
+                    <img src="/img/loading32.gif"/>
+                </div>
+                <div id="overlay" class="overlay"></div>
+            </apex:facet>
+        </apex:actionStatus>
+     
+     <apex:pageBlock id="pg-form">
+
+       
+         
+         
+         <apex:pageMessages />
+         
+         <apex:pageBlockButtons id="top_button" location="top">
+          <div id="btn_div" style="display:none;">   
+	          <apex:commandButton id="edit"  action="{!EditCriteria}" rendered="{!DetailPage==true}" Value="Edit" style="width:84px;margin-left:85px;line-height:1.3;" />
+	          <apex:commandButton value="Back To Campaign" id="backToCamp" action="{!enc_back}" style="font-weight:600;line-height:1.3;" rendered="{!DetailPage== true}" />   
+	     
+	     	  <!--      <apex:commandButton Value="Cancel" action="{!CancelEditCriteria}" rendered="{!DetailPage !=true}" style="width:60px;margin-left:189px;" /> -->
+          </div> 
+          </apex:pageBlockButtons>
+              
+            <apex:outputPanel rendered="{!button==1  && DetailPage == true}">  
+            <apex:commandButton value="Save" action="{!SaveEncounterCriteria}" rendered="{!DetailPage!= true}"  style="margin-left:598px;width:60px;"/>         
+            <apex:commandButton Value="Cancel" action="{!cancelencountercriteria}" rendered="{!DetailPage !=true}" style="width:60px" />    
+           
+            <apex:pageBlockSection columns="2" title="Attributes">
+                <apex:outputField value="{!enc.Include_Physician_NPIs__c}"/>
+                <apex:outputField value="{!enc.Include_Facility_ID__c}"/> 
+                <apex:outputField value="{!enc.Exclude_Physician_NPIs__c}" />
+                <apex:outputField value="{!enc.Exclude_Facility_IDs__c}"/>
+           
+             
+                <apex:outputField value="{!enc.Patient__c}" />
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value=" Discharge Date"/>
+                    <apex:panelGrid columns="4" >     
+                        <apex:outputField value="{!enc.Discharge_Date_encounter__c}" id="Discharge_Date_encounter__c"/>
+                        <apex:outputLabel value="to" for="To_discharge_date_encounter__c" style="font-weight:bold;color:#4a4a56;"/>
+                        <apex:outputField value="{!enc.To_discharge_date_encounter__c}" id="To_discharge_date_encounter__c"/>
+                    </apex:panelGrid>
+                </apex:pageBlockSectionItem>
+                <apex:outputField value="{!enc.ED_Flag__c}"/>
+                <apex:outputField value="{!enc.Labor_and_Delivery_Flag__c}"/>
+                <apex:outputField value="{!enc.Normal_Newborn_Flag__c}"/>
+                <apex:outputField value="{!enc.Surgery_Flag__c}"/>
+                <apex:outputField value="{!enc.Hospital_Names__c}" />
+                <apex:outputLabel />
+                <!-- start of Service line and sub service  line change -->
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Service Lines" />
+                    <apex:outputPanel >
+                        <apex:variable var="count" value="{!1}"   />
+                        <apex:repeat value="{!SelectedserviceLineMap}" var="SL">
+                           {!if(SelectedserviceLineMap[SL].CRM_ClinicalServiceLine__c!=null,SelectedserviceLineMap[SL].CRM_ClinicalServiceLine__c+',',SelectedserviceLineMap[SL].CRM_ClinicalServiceLine__c)}
+                            <apex:variable value="{!count+1}" var="count"/>  <!--increment-->
+                        </apex:repeat>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Sub Service Lines" />
+                    <apex:outputPanel >
+                        <apex:variable var="count1" value="{!1}"   />
+                        <apex:repeat value="{!SelectedserviceLineMap}" var="SSL">
+                            {!if(SelectedserviceLineMap[SSL].CRM_ClinicalSubServiceLine__c!=null,SelectedserviceLineMap[SSL].CRM_ClinicalSubServiceLine__c+',',SelectedserviceLineMap[SSL].CRM_ClinicalSubServiceLine__c)}
+                            <apex:variable value="{!count1+1}" var="count1"/>  <!--increment-->
+                        </apex:repeat>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                <!-- end of Service line and sub service  line change -->
+            </apex:pageBlockSection>
+         
+         <apex:pageBlockSection columns="2">                                            
+            <apex:commandButton value="Include Diagnoses" action="{!AddIcd}" style="margin-left: 107px; "/> 
+                    <apex:commandButton value="Exclude Diagnoses"  action="{!ExcludeIcd}" style="margin-left: 107px; "  /> 
+                    <apex:commandButton value="Include Procedures" action="{!IncludeProcedure}" style="margin-left: 107px; "/>
+                    <apex:commandButton value="Exclude Procedures" action="{!ExcludeProcedure}"  style="margin-left: 107px; " />
+                     <apex:commandButton value="Include DRGs" action="{!AddDRG}" style="margin-left: 107px;"/> 
+                    <apex:commandButton value="Exclude DRGs" action="{!ExcludeDRG}"  style="margin-left: 107px;" /> 
+         </apex:pageBlockSection> <br/>
+          
+            <div align="center" draggable="false">
+                <apex:commandButton value="Save" action="{!SaveEncounterCriteria}" rendered="{!DetailPage!= true}"  style="margin-left:37px;width:60px;"/>
+                <apex:commandButton Value="Cancel" action="{!cancelencountercriteria}" rendered="{!DetailPage !=true}" style="width:60px" /> 
+                         
+               </div>
+         
+       </apex:outputPanel>
+      <style>
+          span.dateInput span.dateFormat{
+        display:none;
+    }
+    </style>
+         <!-- Encounter -->
+              <apex:outputPanel rendered="{!button==1 && DetailPage != true}" >    
+              <apex:commandButton value="Save" action="{!SaveEncounterCriteria}"  rendered="{!DetailPage!= true}" style="margin-left:598px;width:60px;"/>       
+             <apex:commandButton Value="Cancel" action="{!cancelencountercriteria}" rendered="{!DetailPage !=true}" style="width:60px" />    
+            
+            <apex:pageBlockSection columns="2" title="Attributes" id="encounter">
+                <apex:inputField value="{!enc.Include_Physician_NPIs__c}"/>
+                 <apex:inputField value="{!enc.Include_Facility_ID__c}"/> 
+                 <apex:inputField value="{!enc.Exclude_Physician_NPIs__c}" /> 
+                  <apex:inputField value="{!enc.Exclude_Facility_IDs__c}"/> 
+                
+            <apex:inputField value="{!enc.Patient__c}" id="patienttype"/>
+             <apex:pageBlockSectionItem >
+                <apex:outputLabel value=" Discharge Date"/>
+                <apex:panelGrid columns="4" >     
+                     <apex:inputField value="{!enc.Discharge_Date_encounter__c}" id="Discharge_Date__c"/>
+                     <apex:outputLabel value="to" for="To_discharge_date_encounter__c" style="font-weight:bold;color:#4a4a56;"/>
+                     <apex:inputField value="{!enc.To_discharge_date_encounter__c}" id="To_discharge_date_encounter__c"/>
+                </apex:panelGrid> 
+                </apex:pageBlockSectionItem>                
+                <apex:inputField value="{!enc.ED_Flag__c}"/>
+                <apex:inputField value="{!enc.Labor_and_Delivery_Flag__c}"/>
+                <apex:inputField value="{!enc.Normal_Newborn_Flag__c}"/>
+                <apex:inputField value="{!enc.Surgery_Flag__c}"/> 
+            </apex:pageBlockSection>
+         <!--    <apex:pageBlockSection columns="1"> 
+                <apex:pageBlockSectionItem >
+                
+                    <apex:outputLabel value="Include Hospitals"/>
+                    <c:MultiSelectPicklist leftLabel="Available"
+                                                   leftSelectOptions="{!HospitalList}"
+                                                   rightLabel="Chosen"
+                                                   rightSelectOptions="{!selectedHospitalList}"
+                                                   size="6"
+                                                  width="480px"/>   --> 
+                  
+                <apex:pageBlockSection >
+                <!-- encounter hospital change -->
+                 <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first">
+                             <apex:outputLabel value="Include Hospitals"/>
+                             <apex:outputPanel id="hospital_sub" layout="block" style="overflow:auto; height: 120px;background-color:#ffffff;">
+                                 <apex:selectCheckboxes value="{!selectedHospitalCriteria}" layout="pageDirection">
+                                     <apex:selectOptions value="{!ownershiptype}" />
+                                     <apex:actionSupport event="onchange" action="{!fetchOwnershipNames}" reRender="selectedOwner" status="loadingstatus" />
+                                 </apex:selectCheckboxes>
+                             </apex:outputPanel>
+                        </apex:pageBlockSectionItem> 
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel />
+                            <apex:outputPanel id="selectedOwner">
+                           
+                                <apex:outputPanel rendered="{!selectedHospitalCriteria!=null && selectedHospitalCriteria.size>0}" layout="block" style="padding:10px;overflow: auto; height: 120px;background-color:#ffffff;">
+                                    <apex:repeat value="{!selectedHospitalCriteria}" var="CO">
+                                     {!showSelectedhospital[CO].CRM_HospitalMarket__c}<br/><br/>
+                                    </apex:repeat>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                     </apex:pageBlockSectionItem>
+                            </apex:pageBlockSection>
+                            <!-- end of encounter hospital change-->
+           <apex:actionStatus id="ac" >       
+                    <apex:facet name="start">
+                        <div id="loadingimage">
+                            <img src="/img/loading32.gif"/>
+                        </div>
+                        <div id="overlay" class="overlay"></div>
+                    </apex:facet>
+                </apex:actionStatus> 
+            
+              <apex:pageBlockSection >    
+              <!-- start of Service line and sub service  line change -->
+                <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first">  
+                    <apex:outputLabel value="Service Lines"/>
+                    <apex:outputPanel layout="block"  style="overflow:auto; height: 120px;background-color:#ffffff;">
+                        <apex:selectCheckboxes value="{!selectedValSL}" layout="pageDirection">
+                            <apex:selectOptions value="{!lstServiceLinevalues}"/>
+                                <apex:actionSupport event="onchange" action="{!refreshSubServiceLines}"  status="ac"  reRender="selectedSL,ownership_subserviceline,selectedSSL2"/>
+                        </apex:selectCheckboxes>    
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel />
+                    <apex:outputPanel id="selectedSL">
+                        <apex:outputPanel rendered="{!selectedValSL.size>0}" layout="block" style="padding:10px;overflow: auto; height: 120px;background-color:#ffffff;">
+                            <apex:repeat value="{!selectedValSL}" var="SL">
+                                {!serviceLineMap[SL].CRM_ClinicalServiceLine__c}<br/><br/>
+                            </apex:repeat>                      
+                        </apex:outputPanel>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="subServiceLine_Row" labelStyleClass="labelCol vfLabelColTextWrap  first">  
+                    <apex:outputLabel value="Sub Service Lines" id="subServiceLine_label"/>
+                    <apex:outputPanel id="ownership_subserviceline">
+                        <apex:outputPanel rendered="{!subserviceline.size>0}" layout="block" style="overflow: auto; height:120px;background-color:#ffffff;">
+                            <apex:selectCheckboxes value="{!selectedValSSL}" layout="pageDirection">
+                                <apex:selectOptions value="{!subserviceline}"/>
+                                    <apex:actionSupport event="onchange" action="{!fetchSubServiceLineNames}" status="ac"  reRender="selectedSSL2"/>
+                            </apex:selectCheckboxes>    
+                        </apex:outputPanel>
+                        <apex:selectList size="1" rendered="{!subserviceline.size<1}" disabled="true">
+                            <apex:selectOption itemValue="--None--" itemLabel="--None--"/>
+                        </apex:selectList>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel />
+                    <apex:outputPanel id="selectedSSL2">
+                        <apex:outputPanel rendered="{!subserviceline.size>0}" layout="block" style="padding:10px;overflow:auto;height:120px;background-color:#ffffff;">
+                            <apex:repeat value="{!selectedValSSL}" var="SSL">
+                                {!showSelectedSubService[SSL].CRM_ServiceSubServiceLine__c}<br/><br/>
+                            </apex:repeat>                      
+                        </apex:outputPanel>
+                     </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <!-- end of Service line and sub service  line change  -->
+              </apex:pageBlockSection>
+            <br/>
+                <div align="center" draggable="false">
+                <apex:commandButton value="Save" action="{!SaveEncounterCriteria}"  rendered="{!DetailPage!= true}" style="margin-left:37px;width:60px;"/>
+                 <apex:commandButton Value="Cancel" action="{!cancelencountercriteria}" rendered="{!DetailPage !=true}" style="width:60px" /> 
+                 </div>               
+            <script>
+            var selectname = document.getElementById("page:pageform:pg-form:encounter:patienttype")
+                       if(selectname){
+                        for (i=0;i<selectname.length;  i++) {
+                        if (selectname.options[i].value=='') {
+                        selectname.remove(i);
+                        }
+                        }
+                        }
+             </script>
+         
+       </apex:outputPanel>
+         
+          <!-- Encounter Aggregates-->
+          <apex:outputPanel rendered="{!button==8  && DetailPage == true}">  
+           <apex:commandButton value="Save" action="{!SaveEncounterAggregatesCriteria}" rendered="{!DetailPage!= true}"  style="margin-left:598px;width:60px;"/>         
+             <apex:commandButton Value="Cancel" action="{!cancelencounteraggregatescriteria}" rendered="{!DetailPage !=true}" style="width:60px" />    
+           
+              
+            <apex:pageBlockSection columns="2" title="Aggregates">
+                  
+              <apex:panelGrid columns="4" >     
+             <apex:outputLabel value="Last Discharge Date From" for="Last_Discharge_Date_From_UI__c" style="margin-left:59px;font-size:11px;font-weight:bold;color:#4a4a56;"/>
+            <apex:outputField value="{!encagg.Last_Discharge_Date_From_UI__c}" id="Last_Discharge_Date_From_UI__c"/>
+             <apex:outputLabel value="to" for="Last_Discharge_Date_To_UI__c" style="font-weight:bold;color:#4a4a56;"/>
+            <apex:outputField value="{!encagg.Last_Discharge_Date_To_UI__c}" id="Last_Discharge_Date_To_UI__c"/>
+                  </apex:panelGrid>
+               
+                     
+                        
+                  <apex:outputField value="{!encagg.Most_Recent_Primary_Payor_Type__c}" /><br/>
+               
+                  <apex:outputField value="{!encagg.Preffered_Hospital__c}" />
+                          
+                          
+                 <apex:panelGrid columns="4" >     
+             <apex:outputLabel value="Number of ER Encounters" for="Number_of_ER_Encounters__c" style="margin-left:59px;font-size:11px;font-weight:bold;color:#4a4a56;"/>
+            <apex:outputField value="{!encagg.Number_of_ER_Encounters__c}" id="Number_of_ER_Encounters__c"/>
+             <apex:outputLabel value="to" for="Number_of_ER_Encounters_To__c" style="font-weight:bold;color:#4a4a56;"/>
+            <apex:outputField value="{!encagg.Number_of_ER_Encounters_To__c}" id="Number_of_ER_Encounters_To__c"/>
+                  </apex:panelGrid>
+               
+                
+              </apex:pageBlockSection>
+          
+            <div align="center" draggable="false">
+                <apex:commandButton value="Save" action="{!SaveEncounterAggregatesCriteria}"  rendered="{!DetailPage!= true}"  style="margin-left:37px;width:60px;"/>
+                <apex:commandButton Value="Cancel" action="{!cancelencounteraggregatescriteria}" rendered="{!DetailPage !=true}" style="width:60px" /> 
+                         
+               </div>
+         
+       </apex:outputPanel>
+           <!-- Encounter Aggregates-->
+         <apex:outputPanel rendered="{!button==8 && DetailPage != true}" >    
+              <apex:commandButton value="Save" action="{!SaveEncounterAggregatesCriteria}" rendered="{!DetailPage!= true}" style="margin-left:598px;width:60px;"/>       
+             <apex:commandButton Value="Cancel" action="{!cancelencounteraggregatescriteria}" rendered="{!DetailPage !=true}" style="width:60px" />    
+              
+            <apex:pageBlockSection columns="2" title="Aggregates">
+                
+              <apex:panelGrid columns="4" >     
+             <apex:outputLabel value="Last Discharge Date From" for="Last_Discharge_Date_From_UI__c" style="margin-left:89px;font-size:11px;font-weight:bold;color:#4a4a56;"/>
+            <apex:inputField value="{!encagg.Last_Discharge_Date_From_UI__c}" id="Last_Discharge_Date_From_UI__c"/>
+             <apex:outputLabel value="to" for="Last_Discharge_Date_To_UI__c" style="font-weight:bold;color:#4a4a56;"/>
+            <apex:inputField value="{!encagg.Last_Discharge_Date_To_UI__c}" id="Last_Discharge_Date_To_UI__c"/>
+                  </apex:panelGrid>
+               
+                     
+                        
+                  <apex:inputField value="{!encagg.Most_Recent_Primary_Payor_Type__c}" />
+                  
+                 </apex:pageBlockSection>   
+               <apex:pageblocksection >  
+               <!-- hospital change for encounter aggregates -->
+                   <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first">
+                             <apex:outputLabel value="Preferred Hospitals"/>
+                             <apex:outputPanel id="pref_hospital_sub" layout="block" style="overflow:auto; height: 120px;background-color:#ffffff;">
+                                 <apex:selectCheckboxes value="{!selectedPrefferedHospitalCriteria}" layout="pageDirection">
+                                     <apex:selectOptions value="{!ownershiptype}" />
+                                     <apex:actionSupport event="onchange" action="{!fetchpreferedOwnershipNames}" reRender="selectedpreferedOwner" status="loadingstatus" />
+                                 </apex:selectCheckboxes>
+                             </apex:outputPanel>
+                        </apex:pageBlockSectionItem> 
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel />
+                            <apex:outputPanel id="selectedpreferedOwner">
+                           
+                                <apex:outputPanel rendered="{!selectedPrefferedHospitalCriteria!=null && selectedPrefferedHospitalCriteria.size>0}" layout="block" style="padding:10px;overflow: auto; height: 120px;background-color:#ffffff;">
+                                    <apex:repeat value="{!selectedPrefferedHospitalCriteria}" var="HO">
+                                     {!showPreferedSelectedhospital[HO].CRM_HospitalMarket__c}<br/><br/>
+                                    </apex:repeat>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                     </apex:pageBlockSectionItem>
+                     </apex:pageblocksection> <br/>  
+                          <!-- end of hospital chnage for encounter aggregates -->
+                        <apex:pageBlockSection columns="1">   
+                        
+                 <apex:panelGrid columns="4" >     
+             <apex:outputLabel value="Number of ER Encounters" for="Number_of_ER_Encounters__c" style="margin-left:87px;font-size:11px;font-weight:bold;color:#4a4a56;"/>
+            <apex:inputField value="{!encagg.Number_of_ER_Encounters__c}" id="Number_of_ER_Encounters__c"/>
+             <apex:outputLabel value="to" for="Number_of_ER_Encounters_To__c" style="font-weight:bold;color:#4a4a56;"/>
+            <apex:inputField value="{!encagg.Number_of_ER_Encounters_To__c}" id="Number_of_ER_Encounters_To__c"/>
+                  </apex:panelGrid>
+              </apex:pageBlockSection>
+              
+                <div align="center" draggable="false">
+                <apex:commandButton value="Save"  action="{!SaveEncounterAggregatesCriteria}" rendered="{!DetailPage!= true}" style="margin-left:37px;width:60px;"/>
+                 <apex:commandButton Value="Cancel" action="{!cancelencounteraggregatescriteria}" rendered="{!DetailPage !=true}" style="width:60px" /> 
+                
+                  </div>               
+            
+         
+       </apex:outputPanel>
+         
+           <!-- Lifestyle-->
+           <apex:outputPanel rendered="{!button==2 && DetailPage == true}">   
+            <apex:commandButton value="Save" action="{!LifeStyleSave}" rendered="{!DetailPage!= true}" style="margin-left:624px;width:60px;"/>
+            <apex:commandButton Value="Cancel" action="{!cancellifestylecriteria}" rendered="{!DetailPage !=true}" style="width:60px" />     
+         <apex:pageBlockSection columns="2" title="Ailments"> 
+                 <apex:outputField value="{!lf.Cholesterol_and_Blood_Pressure_AGBLOOD__c}"/>
+                 <apex:outputField value="{!lf.Cancer_AGCANCER__c}"/>
+                 <apex:outputField value="{!lf.Diabetes_AGDIAB__c}"/>
+                 <apex:outputField value="{!lf.Digestive_AGDIG__c}"/>
+                 <apex:outputField value="{!lf.Female_Conditions_AGFEM__c}"/>
+                 <apex:outputField value="{!lf.Foot_AGFOOT__c}"/>
+                 <apex:outputField value="{!lf.Mobility_Problems_and_Assistance_AGAST__c}"/>
+                 <apex:outputField value="{!lf.Heart_Condition_AGHEART__c}"/>
+                 <apex:outputField value="{!lf.Joint_Spine_AGJOINT__c}"/>
+                 <apex:outputField value="{!lf.Male_Conditions_AGMALE__c}"/>
+                 <apex:outputField value="{!lf.Mouth_and_Teeth_AGMOUTH__c}"/>
+                 <apex:outputField value="{!lf.Allergies_and_Sinuses_AGNOSE__c}"/>
+                 <apex:outputField value="{!lf.Aches_and_Pain_AGPAIN__c}"/>
+                 <apex:outputField value="{!lf.Progressive_Conditions_AGPROG__c}"/>
+                 <apex:outputField value="{!lf.Psychological_Behavioral_AGPSYCO__c}"/>
+                 <apex:outputField value="{!lf.Respiratory_AGRESP__c}"/>
+                 <apex:outputField value="{!lf.Skin_AGSKIN__c}"/>
+                 <apex:outputField value="{!lf.Urinary_Bowel_AGURINAR__c}"/>
+                 <apex:outputField value="{!lf.Vision_AGVSN__c}"/>
+                 <apex:outputField value="{!lf.Weight_AGWEIGHT__c}"/>
+                 
+             
+             
+                     
+          </apex:pageBlockSection>  
+           
+           <apex:pageBlockSection columns="2" title="Survey Responses">
+                 <apex:outputField value="{!lf.Do_It_Yourself__c}"/>
+                 <apex:outputField value="{!lf.Fine_Arts__c}"/>
+                 <apex:outputField value="{!lf.Home_Life__c}"/>
+                 <apex:outputField value="{!lf.Luxury_Life__c}"/>
+                 <apex:outputField value="{!lf.Outdoor_Enthusiasts__c}"/>
+                 <apex:outputField value="{!lf.Physically_Active__c}"/>
+                 <apex:outputField value="{!lf.Sports_Enthusiasts__c}"/>
+                 <apex:outputField value="{!lf.Techies__c}"/>
+                 <apex:outputField value="{!lf.Up_Town__c}"/>              
+           </apex:pageBlockSection>
+           
+              <!-- Added for Audience Selection criteria story -->
+           <apex:pageBlockSection columns="1" title="Living Well">
+                 <apex:outputField value="{!lf.CRM_Living_Well__c}"/>              
+           </apex:pageBlockSection>
+           <!-- Added for Audience Selection criteria story -->
+           
+        
+           
+           <apex:pageBlockSection columns="2" title="Health Indices">
+                 
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+                <apex:outputLabel value="Manage Illness or Condition" for="Health_Index_Manage_Illness_Condition_Fr__c" style="margin-left:69px;font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Index_Manage_Illness_Condition_Fr__c}" id="Health_Index_Manage_Illness_Condition_Fr__c"/>
+            <apex:outputLabel value="to" for="Health_Index_Illness_or_Condition_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Index_Illness_or_Condition_To__c}" id="Health_Index_Illness_or_Condition_To__c"/>
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+             <apex:outputLabel value="Manage Bus of Health" for="Health_Index_Manage_Bus_of_Health__c  " style="margin-left:104px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Index_Manage_Bus_of_Health__c}" id="Health_Index_Manage_Bus_of_Health__c"/>
+            <apex:outputLabel value="to" for="Health_Index_Manage_Bus_of_Health_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Index_Manage_Bus_of_Health_To__c}" id="Health_Index_Manage_Bus_of_Health_To__c"/>
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+            <apex:outputLabel value="Manage Health" for="Health_Index_Manage_Health_From__c" style="margin-left:138px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Index_Manage_Health_From__c}" id="Health_Index_Manage_Health_From__c"/>
+            <apex:outputLabel value="to" for="Health_Index_Manage_Health_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Index_Manage_Health_To__c}" id="Health_Index_Manage_Health_To__c"/>
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+            <apex:outputLabel value="Use Wear Dev to Manage Health" for="Health_Index_Wear_Dev_to_Manage_Health__c" style="margin-left:53px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Index_Wear_Dev_to_Manage_Health__c}" id="Health_Index_Wear_Dev_to_Manage_Health__c"/>
+            <apex:outputLabel value="to" for="Health_Index_Wear_Dev_to_Manage_Health_T__c   "  style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Index_Wear_Dev_to_Manage_Health_T__c}" id="Health_Index_Wear_Dev_to_Manage_Health_T__c"/>
+                
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+           </apex:pageBlockSection>
+            <apex:pageBlockSection columns="2" title="Health Insurance">   
+                      
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+             <apex:outputLabel value="Direct Pay Index" for="Health_Ins_Direct_Pay_Index_From__c" style="margin-left:129px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Ins_Direct_Pay_Index_From__c}" id="Health_Ins_Direct_Pay_Index_From__c"/>
+            <apex:outputLabel value="to" for="Health_Ins_Direct_Pay_Index_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Ins_Direct_Pay_Index_To__c}" id="Health_Ins_Direct_Pay_Index_To__c"/>
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+             <apex:outputLabel value="Engagement Index" for="Health_Ins_Engagement_Index_From__c" style="margin-left:121px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Ins_Engagement_Index_From__c}" id="Health_Ins_Engagement_Index_From__c"/>
+            <apex:outputLabel value="to" for="Health_Ins_Engagement_Index_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Ins_Engagement_Index_To__c}" id="Health_Ins_Engagement_Index_To__c"/>
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+            <apex:outputLabel value="Influence Index" for="Health_Ins_Influence_Index_From__c" style="margin-left:132px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Ins_Influence_Index_From__c}" id="Health_Ins_Influence_Index_From__c"/>
+            <apex:outputLabel value="to" for="Health_Ins_Influence_Index_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:outputField value="{!lf.Health_Ins_Influence_Index_To__c}" id="Health_Ins_Influence_Index_To__c"/>
+                 
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+        
+                                 <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Prem Tolerance Index" for="Health_Ins_Prem_Tolerance_Index__c" style="margin-left:106px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+                      <apex:outputField value="{!lf.Health_Ins_Prem_Tolerance_Index__c}" id="Health_Ins_Prem_Tolerance_Index__c"/>
+                      <apex:outputLabel value="to" for="Health_Ins_Prem_Tolerance_Index_to__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:outputField value="{!lf.Health_Ins_Prem_Tolerance_Index_to__c}" id="Health_Ins_Prem_Tolerance_Index_to__c"/>
+                      
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+       
+              
+          <apex:outputField value="{!lf.Health_Ins_Subsidy_Ind__c}"  id="field" style="font-margin:20px;"/>      
+                   
+                
+                 <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Medicare Supplement Ins Responder Index" for="Medicare_Supplement_Ins_Rspnder_Idx_from__c" style="margin-left:-7px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+                      <apex:outputField value="{!lf.Medicare_Supplement_Ins_Rspnder_Idx_from__c}" id="Medicare_Supplement_Ins_Rspnder_Idx_from__c"/>
+                      <apex:outputLabel value="to" for="Medicare_Supplement_Ins_Rspnder_Idx_to__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:outputField value="{!lf.Medicare_Supplement_Ins_Rspnder_Idx_to__c}" id="Medicare_Supplement_Ins_Rspnder_Idx_to__c"/>
+                      
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Uninsured Index " for="Uninsured_Index__c" style="margin-left:118px;font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:outputField value="{!lf.Uninsured_Index__c}" id="Uninsured_Index__c"/>
+                      <apex:outputLabel value="to" for="Uninsured_Index_to__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:outputField value="{!lf.Uninsured_Index_to__c}" id="Uninsured_Index_to__c"/>
+                      
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+                
+              
+         
+              <apex:outputField value="{!lf.Healthcare_Treatment_Pref__c}" />  
+              
+    
+                
+                
+        
+           </apex:pageBlockSection>
+           
+           <div align="center" draggable="false">
+          
+           
+                <apex:commandButton value="Save" action="{!LifeStyleSave}" rendered="{!DetailPage!= true}" style="margin-left:71px;width:60px;"/>
+                <apex:commandButton Value="Cancel" action="{!cancellifestylecriteria}" rendered="{!DetailPage !=true}" style="width:60px" /> 
+                     
+           </div>
+           
+       </apex:outputPanel>
+      
+ <!-- Lifestyle-->
+  
+      <apex:outputPanel rendered="{!button==2 && DetailPage != true}">  
+      <apex:commandButton value="Save" action="{!LifeStyleSave}" rendered="{!DetailPage!= true}" style="margin-left:624px;width:60px;"/>
+                <apex:commandButton Value="Cancel" action="{!cancellifestylecriteria}" rendered="{!DetailPage !=true}" style="width:60px" />      
+         <apex:pageBlockSection columns="2" title="Ailments"> 
+                 <apex:inputField value="{!lf.Cholesterol_and_Blood_Pressure_AGBLOOD__c}"/>
+                 <apex:inputField value="{!lf.Cancer_AGCANCER__c}"/>
+                 <apex:inputField value="{!lf.Diabetes_AGDIAB__c}"/>
+                 <apex:inputField value="{!lf.Digestive_AGDIG__c}"/>
+                 <apex:inputField value="{!lf.Female_Conditions_AGFEM__c}"/>
+                 <apex:inputField value="{!lf.Foot_AGFOOT__c}"/>
+                 <apex:inputField value="{!lf.Mobility_Problems_and_Assistance_AGAST__c}"/>
+                 <apex:inputField value="{!lf.Heart_Condition_AGHEART__c}"/>
+                 <apex:inputField value="{!lf.Joint_Spine_AGJOINT__c}"/>
+                 <apex:inputField value="{!lf.Male_Conditions_AGMALE__c}"/>
+                 <apex:inputField value="{!lf.Mouth_and_Teeth_AGMOUTH__c}"/>
+                 <apex:inputField value="{!lf.Allergies_and_Sinuses_AGNOSE__c}"/>
+                 <apex:inputField value="{!lf.Aches_and_Pain_AGPAIN__c}"/>
+                 <apex:inputField value="{!lf.Progressive_Conditions_AGPROG__c}"/>
+                 <apex:inputField value="{!lf.Psychological_Behavioral_AGPSYCO__c}"/>
+                 <apex:inputField value="{!lf.Respiratory_AGRESP__c}"/>
+                 <apex:inputField value="{!lf.Skin_AGSKIN__c}"/>
+                 <apex:inputField value="{!lf.Urinary_Bowel_AGURINAR__c}"/>
+                 <apex:inputField value="{!lf.Vision_AGVSN__c}"/>
+                 <apex:inputField value="{!lf.Weight_AGWEIGHT__c}"/>
+                
+             
+             
+                     
+          </apex:pageBlockSection>  
+          
+           <apex:pageBlockSection columns="2" title="Survey Responses">
+                 <apex:inputField value="{!lf.Do_It_Yourself__c}"/>
+                 <apex:inputField value="{!lf.Fine_Arts__c}"/>
+                 <apex:inputField value="{!lf.Home_Life__c}"/>
+                 <apex:inputField value="{!lf.Luxury_Life__c}"/>
+                 <apex:inputField value="{!lf.Outdoor_Enthusiasts__c}"/>
+                 <apex:inputField value="{!lf.Physically_Active__c}"/>
+                 <apex:inputField value="{!lf.Sports_Enthusiasts__c}"/>
+                 <apex:inputField value="{!lf.Techies__c}"/>
+                 <apex:inputField value="{!lf.Up_Town__c}"/>              
+           </apex:pageBlockSection>
+              <!-- Added for Audience Selection criteria story -->
+           <apex:pageBlockSection columns="1" title="Living Well">
+                 <apex:inputField value="{!lf.CRM_Living_Well__c}"/>              
+           </apex:pageBlockSection>
+           <!-- Added for Audience Selection criteria story -->
+           
+        
+           <apex:pageBlockSection columns="2" title="Health Indices">
+                 
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+                <apex:outputLabel value="Manage Illness Condition" for="Health_Index_Manage_Illness_Condition_Fr__c" style="font-weight:600;font-size:90%;color:#4a4a56;margin-left:97px"/>
+            <apex:inputfield value="{!lf.Health_Index_Manage_Illness_Condition_Fr__c}" id="Health_Index_Manage_Illness_Condition_Fr__c"/>
+            <apex:outputLabel value="to" for="Health_Index_Illness_or_Condition_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:inputfield value="{!lf.Health_Index_Illness_or_Condition_To__c}" id="Health_Index_Illness_or_Condition_To__c"/>
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+             <apex:outputLabel value="Manage Bus of Health" for="Health_Index_Manage_Bus_of_Health__c  " style="margin-left:183px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!lf.Health_Index_Manage_Bus_of_Health__c}" id="Health_Index_Manage_Bus_of_Health__c"/>
+            <apex:outputLabel value="to" for="Health_Index_Manage_Bus_of_Health_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:inputfield value="{!lf.Health_Index_Manage_Bus_of_Health_To__c}" id="Health_Index_Manage_Bus_of_Health_To__c"/>
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+            <apex:outputLabel value="Manage Health" for="Health_Index_Manage_Health_From__c" style="margin-left:152px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!lf.Health_Index_Manage_Health_From__c}" id="Health_Index_Manage_Health_From__c"/>
+            <apex:outputLabel value="to" for="Health_Index_Manage_Health_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:inputfield value="{!lf.Health_Index_Manage_Health_To__c}" id="Health_Index_Manage_Health_To__c"/>
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+               <apex:pageBlockSectionItem >
+                <apex:panelGrid columns="4">
+            <apex:outputLabel value="Use Wear Dev to Manage Health" for="Health_Index_Wear_Dev_to_Manage_Health__c" style="margin-left:132px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!lf.Health_Index_Wear_Dev_to_Manage_Health__c}" id="Health_Index_Wear_Dev_to_Manage_Health__c"/>
+            <apex:outputLabel value="to" for="Health_Index_Wear_Dev_to_Manage_Health_T__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+            <apex:inputfield value="{!lf.Health_Index_Wear_Dev_to_Manage_Health_T__c}" id="Health_Index_Wear_Dev_to_Manage_Health_T__c"/>
+                
+               </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+           </apex:pageBlockSection>
+          <apex:pageBlockSection columns="2" title="Health Insurance">
+              <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Direct Pay Index" for="Health_Ins_Direct_Pay_Index_From__c" style="margin-left:142px;font-weight:600;font-size:90%;color:#4a4a56;" />
+                      <apex:inputfield value="{!lf.Health_Ins_Direct_Pay_Index_From__c}" id="Health_Ins_Direct_Pay_Index_From__c"/>
+                      <apex:outputLabel value="to" for="Health_Ins_Direct_Pay_Index_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:inputfield value="{!lf.Health_Ins_Direct_Pay_Index_To__c}" id="Health_Ins_Direct_Pay_Index_To__c"/>
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+             
+              <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Engagement Index" for="Health_Ins_Engagement_Index_From__c" style="margin-left:239px;font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:inputfield value="{!lf.Health_Ins_Engagement_Index_From__c}" id="Health_Ins_Engagement_Index_From__c"/>
+                      <apex:outputLabel value="to" for="Health_Ins_Engagement_Index_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:inputfield value="{!lf.Health_Ins_Engagement_Index_To__c}" id="Health_Ins_Engagement_Index_To__c"/>
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+             
+              <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Influence Index" for="Health_Ins_Influence_Index_From__c" style="margin-left:144px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+                      <apex:inputfield value="{!lf.Health_Ins_Influence_Index_From__c}" id="Health_Ins_Influence_Index_From__c"/>
+                      <apex:outputLabel value="to" for="Health_Ins_Influence_Index_To__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:inputfield value="{!lf.Health_Ins_Influence_Index_To__c}" id="Health_Ins_Influence_Index_To__c"/>
+                      
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+              
+                     <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Prem Tolerance Index" for="Health_Ins_Prem_Tolerance_Index__c" style="margin-left:225px;font-size:90%;font-weight:600;color:#4a4a56;"/>
+                      <apex:inputfield value="{!lf.Health_Ins_Prem_Tolerance_Index__c}" id="Health_Ins_Prem_Tolerance_Index__c"/>
+                      <apex:outputLabel value="to" for="Health_Ins_Prem_Tolerance_Index_to__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:inputfield value="{!lf.Health_Ins_Prem_Tolerance_Index_to__c}" id="Health_Ins_Prem_Tolerance_Index_to__c"/>
+                      
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+            </apex:pageblockSection>
+            <apex:pageblocksection columns="1">
+             <apex:inputField value="{!lf.Health_Ins_Subsidy_Ind__c}" /> 
+            
+        </apex:pageblocksection>
+                    <apex:pageblocksection columns="1">
+                     <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Medicare Supplement Ins Responder Index" for="Medicare_Supplement_Ins_Rspnder_Idx_from__c" style="font-weight:600;font-size:90%;color:#4a4a56;margin-left:-3px;"/>
+                      <apex:inputfield value="{!lf.Medicare_Supplement_Ins_Rspnder_Idx_from__c}" id="Medicare_Supplement_Ins_Rspnder_Idx_from__c"/>
+                      <apex:outputLabel value="to" for="Medicare_Supplement_Ins_Rspnder_Idx_to__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:inputfield value="{!lf.Medicare_Supplement_Ins_Rspnder_Idx_to__c}" id="Medicare_Supplement_Ins_Rspnder_Idx_to__c"/>
+                      
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>
+              
+          </apex:pageBlockSection>
+           
+           <apex:pageblocksection columns="1">
+           
+           <apex:pageBlockSectionItem >
+                  <apex:panelGrid columns="4">
+                      <apex:outputLabel value="Uninsured Index" for="Uninsured_Index__c" style="margin-left:135px;font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:inputField value="{!lf.Uninsured_Index__c}" id="Uninsured_Index__c"/>
+                      <apex:outputLabel value="to" for="Uninsured_Index_to__c" style="font-weight:600;font-size:90%;color:#4a4a56;"/>
+                      <apex:inputField value="{!lf.Uninsured_Index_to__c}" id="Uninsured_Index_to__c"/>
+                      
+                  </apex:panelGrid>
+              </apex:pageBlockSectionItem>        
+         
+           </apex:pageblocksection>
+           
+           <apex:pageblocksection columns="1">
+           
+             <apex:inputField value="{!lf.Healthcare_Treatment_Pref__c}" />  
+           
+           </apex:pageblocksection>
+           
+           
+           <div align="center" draggable="false">
+          
+           
+               <apex:commandButton value="Save" action="{!LifeStyleSave}" rendered="{!DetailPage!= true}" style="margin-left:71px;width:60px;"/>
+                <apex:commandButton Value="Cancel" action="{!cancellifestylecriteria}" rendered="{!DetailPage !=true}" style="width:60px" /> 
+                     
+           </div>
+           
+       </apex:outputPanel> 
+      
+      
+       
+          <!-- Demographics-->
+          
+       <apex:outputPanel rendered="{!button==3 && DetailPage == true}" >    
+       <apex:commandButton value="Save" action="{!SaveDemoCount}" rendered="{!DetailPage!= true}" style="margin-left:599px;width:60px;"/>
+        <apex:commandButton Value="Cancel" action="{!canceldemographicscriteria}" rendered="{!DetailPage !=true}" style="width:60px" />              
+
+           <apex:pageBlockSection title="Basics"> 
+                <apex:pageBlockSectionItem >
+                 
+                <apex:outputLabel value="Age" for="first" />
+                     <apex:panelGrid columns="4">
+                        <apex:outputField value="{!demo.AgeFrom_UI__c}" id="first"/>
+                        <apex:outputLabel value="to" for="second" />
+                         <apex:outputField value="{!demo.AgeTo_UI__c}" id="second" />                  
+                    </apex:panelGrid>
+                   
+            </apex:pageBlockSectionItem>
+            
+           <apex:pageBlockSectionItem >
+                 
+                <apex:outputLabel value="Birth date" for="birthfirst" />
+                        <apex:panelGrid columns="3">
+                           
+                     <apex:outputField value="{!demo.DOBFrom_UI__c}" id="birthfirst" />
+                   
+                      <apex:outputLabel value="to" for="birthfirst" style="font-weight:600;color:#4a4a56;"/>
+                    <apex:outputField value="{!demo.DOBTo_UI__c}" id="second"/>
+                        </apex:panelGrid>
+                </apex:pageBlockSectionItem>
+                  <!-- Added for Audience Selection criteria story BirthMonth-->
+                <apex:outputfield value="{!demo.CRM_Birth_Month__c}"/>
+                <!-- end of Added for Audience Selection criteria story BirthMonth-->
+                
+                <apex:outputField value="{!demo.Gender__c}"/>
+           </apex:pageBlockSection>
+           <apex:pageBlockSection title="Household">
+            
+               <apex:pageBlockSectionItem >
+                   
+                   <apex:outputLabel value="Household Size" for="first" />
+                   
+                   <apex:panelGrid columns="3">
+                       <apex:outputField value="{!demo.Number_of_Persons_in_HH__c}" id="first"/>
+                       <apex:outputLabel value="to" for="second" style="font-weight:600;color:#4a4a56;"/>
+                       <apex:outputField value="{!demo.to_Number_of_Persons_in_HH__c}" id="second"/>
+                   </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+               <apex:outputField value="{!demo.Presence_of_Donor__c}"/>
+               
+               <apex:pageBlockSectionItem >
+                   
+                   <apex:outputLabel value="Number of Adults in HH" for="first" />
+                   
+                   <apex:panelGrid columns="3">
+                       <apex:outputField value="{!demo.Number_of_Adults_in_HH__c}" id="first"/>
+                       <apex:outputLabel value="to" for="second" style="font-weight:600;color:#4a4a56;"/>
+                       <apex:outputField value="{!demo.to_Number_of_Adults_in_HH__c}" id="second"/>
+                   </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+                <apex:outputField value="{!demo.Presence_of_Elderly_Parents__c}"/>
+               
+               <apex:pageBlockSectionItem >
+                   
+                   <apex:outputLabel value="Number of Children" for="first" />
+                   
+                   <apex:panelGrid columns="3">
+                       <apex:outputField value="{!demo.Number_of_Children__c}" id="first"/>
+                       <apex:outputLabel value="to" for="second" style="font-weight:600;color:#4a4a56;"/>
+                       <apex:outputField value="{!demo.to_Number_of_Children__c}" id="second"/>
+                   </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+                 <apex:outputField value="{!demo.Presence_of_Children__c}"/>
+              
+               
+               
+               <apex:outputField value="{!demo.Dwelling_Type__c}"/>
+              <apex:outputField value="{!demo.Move_Activity_in_Months__c}"/>
+           </apex:pageBlockSection>
+           <apex:pageBlockSection title="Financial">
+                 
+               
+               <apex:pageBlockSectionItem >
+                    
+                    <apex:outputLabel value="Discretionary Income Percent " for="Est_Discretionary_Income_Percent__c" />
+                    
+                    <apex:panelGrid columns="3">
+                        <apex:outputField value="{!demo.Est_Discretionary_Income_Percent__c}" id="Est_Discretionary_Income_Percent__c"/>
+                        <apex:outputLabel value="to" for="Est_Discretionary_Income_Percent_to__c" style="font-weight:600;color:#4a4a56;"/>
+                        <apex:outputField value="{!demo.Est_Discretionary_Income_Percent_to__c}" id="Est_Discretionary_Income_Percent_to__c"/>
+                    </apex:panelGrid>
+                </apex:pageBlockSectionItem>
+                
+               
+               <apex:outputField value="{!demo.Est_Household_Income_3_0__c}"/>             
+               
+               <apex:outputField value="{!demo.Net_Worth_3_0__c}"/>
+               
+           </apex:pageBlockSection>   
+           <apex:pageBlockSection title="Contact" id="contact">
+               
+               
+               <apex:outputField value="{!demo.Preferred_Contact_Method__c}"/>
+               <apex:outputField value="{!demo.Suppression_Non_emailable__c}" id="email"/>
+               <apex:outputField value="{!demo.Address_Deliverable__c}" id="mailing"/>
+              
+               
+           </apex:pageBlockSection>
+           
+            <apex:pageBlockSection title="Culture">
+                 <apex:outputField value="{!demo.Ethcinity__c}"/>
+                 <apex:outputField value="{!demo.Ethnic_Group__c}"/>
+                 <apex:outputField value="{!demo.Race__c}"/>
+                <apex:outputField value="{!demo.Assimilation__c}"/>
+                 <apex:outputField value="{!demo.Language__c}"/>
+                  <apex:outputField value="{!demo.Generations_2_0__c}"/>
+                <apex:outputField value="{!demo.Religion__c}"/>
+                
+                
+           </apex:pageBlockSection>
+           
+           
+      <!--     <apex:pageBlockSection title="Exclusion">
+               
+              <!--  <apex:outputField value="{!demo.Medicare_Supplement_Ins__c}"/>
+                
+                <apex:outputField value="{!demo.Uninsured_Index__c}"/>-->
+             <!--   <apex:outputField value="{!demo.Ignore_Bad_Debt_Exclusion__c}"/>
+                <apex:outputField value="{!demo.Ignore_Minor_Exclusion__c}"/>
+           </apex:pageBlockSection>  -->
+              
+              
+            
+              
+      <apex:pageBlockSection >              
+          </apex:pageBlockSection>
+           
+           
+          
+               <apex:commandButton value="Save" action="{!SaveDemoCount}" rendered="{!DetailPage!= true}" style="margin-left:597px;width:60px;"/>
+        <apex:commandButton Value="Cancel" action="{!canceldemographicscriteria}" rendered="{!DetailPage !=true}" style="width:60px" />
+           <!--      <apex:commandButton value="Previous"  />
+                 <apex:commandButton value="Next"  />   -->
+              
+       </apex:outputPanel>
+         
+      
+        
+        <!-- Demographics-->
+      
+       <apex:outputPanel rendered="{!button==3 && DetailPage != true}" >   
+       
+        <script type="text/javascript">
+     function allowOnlyNumber(eventInstance) {
+          eventInstance = eventInstance || window.event;
+          key = eventInstance.keyCode || eventInstance.which;
+          if ((47 < key) && (key < 58) || key == 8 || key == 189 || key == 109) {
+              return true;
+          } else {
+              if (eventInstance.preventDefault)
+                  eventInstance.preventDefault();
+              eventInstance.returnValue = false;
+              return false;
+          }
+      }
+    </script>
+        
+        <apex:commandButton value="Save" action="{!SaveDemoCount}" rendered="{!DetailPage!= true}" style="margin-left:599px;width:60px;"/>
+        <apex:commandButton Value="Cancel" action="{!canceldemographicscriteria}" rendered="{!DetailPage !=true}" style="width:60px" />              
+          <apex:pageBlockSection title="Basics" id="basics"> 
+               <apex:pageBlockSectionItem >
+                 
+                <apex:outputLabel value="Age" for="first" id="age"/>
+                     <apex:panelGrid columns="3">
+                    <!--    <apex:inputText value="{!age_from}" id="first">  -->
+                        <apex:inputField value="{!demo.AgeFrom_UI__c}" id="first">
+                         </apex:inputField>
+                        <apex:outputLabel value="to" for="second" style="font-weight:600;color:#4a4a56;"/>
+               <!--         <apex:inputText value="{!age_to}" id="second" >  -->
+                         <apex:inputField value="{!demo.AgeTo_UI__c}" id="second">
+                         </apex:inputField>
+                         </apex:panelGrid>                         
+            </apex:pageBlockSectionItem>
+                      
+            
+               
+                       <apex:pageBlockSectionItem id="birthdate">
+                 
+                <apex:outputLabel value="Birth date" for="birthfirst" />
+                        <apex:panelGrid columns="3">
+                           
+                  <!--    <apex:outputLabel value="to" for="second" style="font-weight:600;color:#4a4a56;" />  -->
+                   <apex:inputfield value="{!demo.DOBFrom_UI__c}" id="birthfirst" >
+                   
+                  <!--   <apex:actionSupport event="onchange" action="{!ageto}" rerender="basics,birthfirst" status="loadingstatus">
+                        </apex:actionSupport> -->
+                       </apex:inputField>
+                       <apex:outputLabel value="to" for="birthfirst" style="font-weight:600;color:#4a4a56;" />
+                        <apex:inputfield value="{!demo.DOBTo_UI__c}" id="second" >
+                   <!--        <apex:actionSupport event="onchange" action="{!agefrom}" rerender="basics,birthfirst"  status="loadingstatus" >
+                        </apex:actionSupport>  -->
+                        </apex:inputField>
+                        </apex:panelGrid>
+                </apex:pageBlockSectionItem>
+                
+                <script>
+                                setTimeout(function(){
+  
+            var startYear=1900; 
+
+            var endYear=2016; 
+            var optionsString='';
+            if(startYear<endYear){
+             for(i=startYear;i<endYear+1;i++){
+
+                    optionsString += "<option value=\""+i+"\">"+i+"</option>";
+                    
+
+                }
+             
+               $('#calYearPicker').html(optionsString);
+
+            }
+                         }, 1000);
+     
+
+    </script> 
+       
+             
+        <style>
+          span.dateInput span.dateFormat{
+        display:none;
+    }
+    </style>
+      
+       <!--Added for Audience Selection criteria story BirthMonth-->
+              <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+              <apex:inputfield value="{!demo.CRM_Birth_Month__c}" id="birthMonth"/>
+              <!-- end of Added for Audience Selection criteria story BirthMonth-->
+               <apex:inputField value="{!demo.Gender__c}"/>
+           </apex:pageBlockSection>
+           <apex:pageBlockSection title="Household"> 
+               
+               
+               <apex:pageBlockSectionItem >
+                   
+                   <apex:outputLabel value="Household Size" for="first" />
+                   
+                   <apex:panelGrid columns="3">
+                       <apex:inputfield value="{!demo.Number_of_Persons_in_HH__c}" id="first"/>
+                       <apex:outputLabel value="to" for="second" style="font-weight:600;color:#4a4a56;"/>
+                       <apex:inputfield value="{!demo.to_Number_of_Persons_in_HH__c}" id="second"/>
+                   </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+                <apex:inputField value="{!demo.Presence_of_Donor__c}"/>
+               
+               <apex:pageBlockSectionItem >
+                   
+                   <apex:outputLabel value="Number of Adults in HH" for="first" />
+                   
+                   <apex:panelGrid columns="3">
+                       <apex:inputfield value="{!demo.Number_of_Adults_in_HH__c}" id="first"/>
+                       <apex:outputLabel value="to" for="second" style="font-weight:600;color:#4a4a56;"/>
+                       <apex:inputfield value="{!demo.to_Number_of_Adults_in_HH__c}" id="second"/>
+                   </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+                  <apex:inputField value="{!demo.Presence_of_Elderly_Parents__c}"/>
+             
+               
+               <apex:pageBlockSectionItem >
+               
+                   <apex:outputLabel value="Number of Children" for="first" />
+                   
+                   <apex:panelGrid columns="3">
+                       <apex:inputfield value="{!demo.Number_of_Children__c}" id="first"/>
+                       <apex:outputLabel value="to" for="second" style="font-weight:600;color:#4a4a56;"/>
+                       <apex:inputfield value="{!demo.to_Number_of_Children__c}" id="second"/>
+                   </apex:panelGrid>
+               </apex:pageBlockSectionItem>
+               
+                <apex:inputField value="{!demo.Presence_of_Children__c}"/>
+               
+                
+               
+               
+              <apex:inputField value="{!demo.Dwelling_Type__c}"/>
+              <apex:inputField value="{!demo.Move_Activity_in_Months__c}" id="nm"/> 
+           </apex:pageBlockSection>
+            <apex:pageBlockSection title="Financial"> 
+                
+                
+               
+                <apex:pageBlockSectionItem >
+                    
+                    <apex:outputLabel value="Discretionary Income Percent" for="Est_Discretionary_Income_Percent__c" />
+                    
+                    <apex:panelGrid columns="3">
+                        <apex:inputfield value="{!demo.Est_Discretionary_Income_Percent__c}" id="Est_Discretionary_Income_Percent__c"/>
+                        <apex:outputLabel value="to" for="Est_Discretionary_Income_Percent_to__c" style="font-weight:600;color:#4a4a56;"/>
+                        <apex:inputfield value="{!demo.Est_Discretionary_Income_Percent_to__c}" id="Est_Discretionary_Income_Percent_to__c"/>
+                    </apex:panelGrid>
+                </apex:pageBlockSectionItem>
+                
+                   <apex:inputField value="{!demo.Est_Household_Income_3_0__c}"/>
+                  <apex:inputField value="{!demo.Net_Worth_3_0__c}"/>
+                
+           </apex:pageBlockSection>
+           <apex:pageBlockSection title="Contact" id="emailsection"> 
+               
+               
+               <apex:inputField value="{!demo.Preferred_Contact_Method__c}"/>
+               <apex:inputField value="{!demo.Suppression_Non_emailable__c}" id="email"/>
+               <apex:inputField value="{!demo.Address_Deliverable__c}" id="mailing"/>
+               
+               
+               
+           </apex:pageBlockSection>
+           <apex:pageBlockSection title="Culture"> 
+               <apex:inputField value="{!demo.Ethcinity__c}"/>
+               <apex:inputField value="{!demo.Ethnic_Group__c}"/>
+               <apex:inputField value="{!demo.Race__c}"/>
+               <apex:inputField value="{!demo.Religion__c}"/>
+               <apex:inputField value="{!demo.Assimilation__c}"/>             
+               <apex:inputField value="{!demo.Language__c}"/>
+               <apex:inputField value="{!demo.Generations_2_0__c}"/>
+              
+           </apex:pageBlockSection>
+           
+          
+           
+          
+               <apex:commandButton value="Save" action="{!SaveDemoCount}" rendered="{!DetailPage!= true}" style="margin-left:597px;width:60px;"/>
+        <apex:commandButton Value="Cancel" action="{!canceldemographicscriteria}" rendered="{!DetailPage !=true}" style="width:60px" />
+           
+          
+       </apex:outputPanel>
+         
+          <script>
+     
+   
+var select=document.getElementById('page:pageform:pg-form:emailsection:email');
+console.log(select);
+for (i=0;i<select.length;  i++) {
+if (select.options[i].value=='') {
+select.remove(i);
+}
+}
+
+
+var selectmailing=document.getElementById('page:pageform:pg-form:emailsection:mailing');
+
+for (i=0;i<selectmailing.length;  i++) {
+if (selectmailing.options[i].value=='') {
+selectmailing.remove(i);
+}
+}
+
+<!--Added for Audience Selection criteria story BirthMonth-->
+var selectBirthMonth=document.getElementById('page:pageform:pg-form:basics:birthMonth');
+
+for (i=0;i<selectBirthMonth.length;  i++) {
+if (selectBirthMonth.options[i].value=='') {
+selectBirthMonth.remove(i);
+}
+}
+<!-- end of Added for Audience Selection criteria story BirthMonth-->
+
+
+ </script>  
+         
+  <!-- HRA-->
+  <!-- Part of R2
+     <apex:outputPanel rendered="{!button==4 && DetailPage == true}"  > 
+     <apex:commandButton value="Save" action="{!SavehraCount}"  rendered="{!DetailPage!= true}" style="margin-left:624px;width:60px;"/>
+      <apex:commandButton Value="Cancel" action="{!cancelhracriteria}" rendered="{!DetailPage !=true}" style="width:60px" />                 
+          <apex:pageBlockSection title="Health Risk Assessments" > 
+            
+                <apex:outputField value="{!hra.Asthma_Risk_Category__c}"/>
+               
+                <apex:outputField value="{!hra.Back_Neck_Impairement__c}"/>
+              
+                <apex:outputField value="{!hra.BMI_Category__c}"/>
+              
+                <apex:outputField value="{!hra.Breast_Cancer_5_Year__c}"/>
+                
+                <apex:outputField value="{!hra.Diabetes_Risk__c}"/>
+                
+               <apex:outputField value="{!hra.Incontinence_Symptoms__c}"/>
+                
+                <apex:outputField value="{!hra.Joint__c}"/>
+                
+              
+                <apex:outputField value="{!hra.Joint_Assessment__c}"/>
+                <apex:outputField value="{!hra.Joint_BMI_Category__c}"/>
+               <apex:outputField value="{!hra.Lifetime_Risk_Category__c}"/>
+                <apex:outputField value="{!hra.Lung_Screening__c}"/>
+                <apex:outputField value="{!hra.Ortho_Pain_Type__c}"/>
+               <apex:outputField value="{!hra.Pad_Risk_Category__c}"/>
+                <apex:outputField value="{!hra.Prostate_Risk_Category__c}"/>
+                <apex:outputField value="{!hra.qoL_Impact__c}"/>
+                <apex:outputField value="{!hra.Risk_Category__c}"/>
+                <apex:outputField value="{!hra.Risk_Category_30_Years__c}"/>
+                <apex:outputField value="{!hra.Stroke_Risk_Category__c}"/>
+                <apex:outputField value="{!hra.Weight_Loss_Rec__c}"/>
+                <apex:outputField value="{!hra.Weight_Loss_Surgery_Rec__c}"/>
+              <apex:outputField value="{!hra.Breast_Cancer_Lifetime_Risk__c}"/>
+              <apex:outputField value="{!hra.OrthoOsteoarthritis_Joint_Disease__c}"/>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection columns="1" title="Interests">
+                 
+                  <apex:outputField value="{!hra.Interest_Baria__c}"/>
+                   <apex:outputField value="{!hra.Interest_Cardiology__c}"/>
+                   <apex:outputField value="{!hra.Interest_Emergency__c}"/>
+                 <apex:outputField value="{!hra.Interest_Obstetrics__c}"/>
+                 <apex:outputField value="{!hra.Interest_Orthopedics__c}"/>
+                 <apex:outputField value="{!hra.Interest_Pediatrics__c}"/>
+          </apex:pageBlockSection>
+             <div align="center" draggable="false">
+                 
+            
+               <apex:commandButton value="Save" action="{!SavehraCount}"  rendered="{!DetailPage!= true}" style="margin-left:71px;width:60px;"/>
+      <apex:commandButton Value="Cancel" action="{!cancelhracriteria}" rendered="{!DetailPage !=true}" style="width:60px" /> 
+                  
+                 </div>
+       </apex:outputPanel>
+         
+         <!-- HRA-->
+       <!--  <apex:outputPanel rendered="{!button==4 && DetailPage != true}" > 
+            <apex:commandButton value="Save" action="{!SavehraCount}"  rendered="{!DetailPage!= true}" style="margin-left:624px;width:60px;"/>
+      <apex:commandButton Value="Cancel" action="{!cancelhracriteria}" rendered="{!DetailPage !=true}" style="width:60px" />                  
+             <apex:pageBlockSection title="HRA" > 
+                 
+                 <apex:inputField value="{!hra.Asthma_Risk_Category__c}"/>
+                 
+                 <apex:inputField value="{!hra.Back_Neck_Impairement__c}"/>
+                 
+                 <apex:inputField value="{!hra.BMI_Category__c}"/>
+                 
+                 <apex:inputField value="{!hra.Breast_Cancer_5_Year__c}"/>
+                 
+                 <apex:inputField value="{!hra.Diabetes_Risk__c}"/>
+                 
+                 <apex:inputField value="{!hra.Incontinence_Symptoms__c}"/>
+                 
+                 <apex:inputField value="{!hra.Joint__c}"/>
+                 
+                 
+                 <apex:inputField value="{!hra.Joint_Assessment__c}"/>
+                 <apex:inputField value="{!hra.Joint_BMI_Category__c}"/>
+                 <apex:inputField value="{!hra.Lifetime_Risk_Category__c}"/>
+                 <apex:inputField value="{!hra.Lung_Screening__c}"/>
+                 <apex:inputField value="{!hra.Ortho_Pain_Type__c}"/>
+                 <apex:inputField value="{!hra.Pad_Risk_Category__c}"/>
+                 <apex:inputField value="{!hra.Prostate_Risk_Category__c}"/>
+                 <apex:inputField value="{!hra.qoL_Impact__c}"/>
+                 <apex:inputField value="{!hra.Risk_Category__c}"/>
+                 <apex:inputField value="{!hra.Risk_Category_30_Years__c}"/>
+                 <apex:inputField value="{!hra.Stroke_Risk_Category__c}"/>
+                 <apex:inputField value="{!hra.Weight_Loss_Rec__c}"/>
+                 <apex:inputField value="{!hra.Weight_Loss_Surgery_Rec__c}"/>
+                 <apex:inputField value="{!hra.Breast_Cancer_Lifetime_Risk__c}"/>
+                 <apex:inputField value="{!hra.OrthoOsteoarthritis_Joint_Disease__c}"/>
+             </apex:pageBlockSection>
+             <apex:pageBlockSection columns="1" title="Interests">
+                 
+                 <apex:inputField value="{!hra.Interest_Baria__c}"/>
+                 <apex:inputField value="{!hra.Interest_Cardiology__c}"/>
+                 <apex:inputField value="{!hra.Interest_Emergency__c}"/>
+                 <apex:inputField value="{!hra.Interest_Obstetrics__c}"/>
+                 <apex:inputField value="{!hra.Interest_Orthopedics__c}"/>
+                 <apex:inputField value="{!hra.Interest_Pediatrics__c}"/>
+             </apex:pageBlockSection>
+             <div align="center" draggable="false">
+                 
+                 
+                <apex:commandButton value="Save" action="{!SavehraCount}"  rendered="{!DetailPage!= true}" style="margin-left:71px;width:60px;"/>
+      <apex:commandButton Value="Cancel" action="{!cancelhracriteria}" rendered="{!DetailPage !=true}" style="width:60px" /> 
+                 
+             </div>
+         </apex:outputPanel> -->
+         
+         <!--Model -->
+          <apex:outputPanel rendered="{!button==5 && DetailPage == true}" >   
+          <apex:commandButton value="Save"   action="{!SaveModel}"  rendered="{!DetailPage!= true}" style="width:60px;margin-left:561px;"/>
+           <apex:commandButton Value="Cancel" action="{!cancelmodelcriteria}" rendered="{!DetailPage !=true}" style="width:60px" />               
+          <apex:pageBlockSection columns="2" > 
+              
+                 <apex:pageBlockSectionItem >
+                 
+        
+        
+        <apex:panelGrid columns="4" >
+            
+            <!-- Added for new Model CRM 270 req. -->
+            <apex:outputLabel value="Bariatric" for="Model_9_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_9_from__c}" id="Model_9_from__c"/>
+            <apex:outputLabel value="to" for="Model_9_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_9_to__c}" id="Model_9_to__c"/>
+            <!-- End of new Model CRM 270 req.-->
+            
+             <!-- Added for new Model fields requirement -->
+            <apex:outputLabel value="Breast - Oncology" for="Model_5_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_5_from__c}" id="Model_5_from__c"/>
+            <apex:outputLabel value="to" for="Model_5_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_5_to__c}" id="Model_5_to__c"/>
+            <!-- End of new moel fields -->
+            
+            <apex:outputLabel value="Cardiology" for="Model_1_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_1_from__c}" id="Model_1_from__c"/>
+            <apex:outputLabel value="to" for="Model_1_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_1_to__c}" id="Model_1_to__c"/>
+            
+            <!-- start of new model fields -->
+             <apex:outputLabel value="Colon - Oncology" for="Model_6_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_6_from__c}" id="Model_6_from__c"/>
+            <apex:outputLabel value="to" for="Model_6_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_6_to__c}" id="Model_6_to__c"/>
+           
+            
+            <apex:outputLabel value="OB Managed Care" for="Model_8_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_8_from__c}" id="Model_8_from__c"/>
+            <apex:outputLabel value="to" for="Model_8_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_8_to__c}" id="Model_8_to__c"/>
+            
+            
+             <apex:outputLabel value="OB Medicaid" for="Model_7_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_7_from__c}" id="Model_7_from__c"/>
+            <apex:outputLabel value="to" for="Model_7_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_7_to__c}" id="Model_7_to__c"/>
+            <!-- End for new Model fields requirement -->
+            
+            <apex:outputLabel value="Orthopedics - Hip" for="Model_3_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_3_from__c}" id="Model_3_from__c"/>
+            <apex:outputLabel value="to" for="Model_3_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_3_to__c}" id="Model_3_to__c"/>
+            
+            <apex:outputLabel value="Orthopedics - Knee" for="Model_2_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_2_from__c}" id="Model_2_from__c"/>
+            <apex:outputLabel value="to" for="Model_2_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_2_to__c}" id="Model_2_to__c"/>
+            
+            
+            <apex:outputLabel value="Orthopedics - Spine" for="Model_4_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_4_from__c}" id="Model_4_from__c"/>
+            <apex:outputLabel value="to" for="Model_4_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:outputField value="{!model.Model_4_to__c}" id="Model_4_to__c"/>
+            
+            
+        </apex:panelGrid>
+    </apex:pageBlockSectionItem>
+              
+               
+          </apex:pageBlockSection>
+             <div align="center">
+               
+              <apex:commandButton value="Save"   action="{!SaveModel}"  rendered="{!DetailPage!= true}" style="width:60px;margin-left:-26px;"/>
+           <apex:commandButton Value="Cancel" action="{!cancelmodelcriteria}" rendered="{!DetailPage !=true}" style="width:60px" />   
+            <!--     <apex:commandButton value="Previous"  />
+                 <apex:commandButton value="Next"  />   -->
+             </div>
+       </apex:outputPanel>
+        
+           <!--Model -->
+         <apex:outputPanel rendered="{!button==5 && DetailPage != true}" >   
+           
+         <apex:commandButton value="Save"   action="{!SaveModel}"  rendered="{!DetailPage!= true}" style="width:60px;margin-left:561px;"/>
+           <apex:commandButton Value="Cancel" action="{!cancelmodelcriteria}" rendered="{!DetailPage !=true}" style="width:60px" />   
+             <div align="left" draggable="false" > 
+                <apex:outputLabel style="color:black ;font-weight: bold;" >
+                   Specify ranges for model score criteria; most likely=0, least likely=9
+                </apex:outputLabel><br/>
+            </div><br/>
+          <apex:pageBlockSection columns="2" > 
+              
+                 <apex:pageBlockSectionItem >
+                 
+        
+        
+        <apex:panelGrid columns="4" >
+             
+
+			<!-- Added for new Model CRM 270 req. -->
+            <apex:outputLabel value="Bariatric" for="Model_9_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_9_from__c}" id="Model_9_from__c"/>
+            <apex:outputLabel value="to" for="Model_9_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_9_to__c}" id="Model_9_to__c"/>
+            <!--End of new Model CRM 270 req. -->
+            
+             <!-- Added for new Model fields requirement -->
+            <apex:outputLabel value="Breast - Oncology" for="Model_5_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_5_from__c}" id="Model_5_from__c"/>
+            <apex:outputLabel value="to" for="Model_5_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_5_to__c}" id="Model_5_to__c"/>
+            
+            <apex:outputLabel value="Cardiology" for="Model_1_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_1_from__c}" id="Model_1_from__c"/>
+            <apex:outputLabel value="to" for="Model_1_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_1_to__c}" id="Model_1_to__c"/>
+            
+             <apex:outputLabel value="Colon - Oncology" for="Model_6_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_6_from__c}" id="Model_6_from__c"/>
+            <apex:outputLabel value="to" for="Model_6_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_6_to__c}" id="Model_6_to__c"/>
+            
+            <apex:outputLabel value="OB Managed Care" for="Model_8_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_8_from__c}" id="Model_8_from__c"/>
+            <apex:outputLabel value="to" for="Model_8_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_8_to__c}" id="Model_8_to__c"/>
+            <!-- End for new Model fields requirement -->
+            
+            <apex:outputLabel value="OB Medicaid" for="Model_7_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_7_from__c}" id="Model_7_from__c"/>
+            <apex:outputLabel value="to" for="Model_7_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_7_to__c}" id="Model_7_to__c"/>
+            
+            
+            <apex:outputLabel value="Orthopedics - Hip" for="Model_3_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_3_from__c}" id="Model_3_from__c"/>
+            <apex:outputLabel value="to" for="Model_3_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_3_to__c}" id="Model_3_to__c"/>
+            <apex:outputLabel value="Orthopedics - Knee" for="Model_2_from__c" style="font-weight:600;color:#4a4a56;"/>
+            
+            <apex:inputfield value="{!model.Model_2_from__c}" id="Model_2_from__c"/>
+            <apex:outputLabel value="to" for="Model_2_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_2_to__c}" id="Model_2_to__c"/>
+            
+            <apex:outputLabel value="Orthopedics - Spine" for="Model_4_from__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_4_from__c}" id="Model_4_from__c"/>
+            <apex:outputLabel value="to" for="Model_4_to__c" style="font-weight:600;color:#4a4a56;"/>
+            <apex:inputfield value="{!model.Model_4_to__c}" id="Model_4_to__c"/>
+            
+              
+            
+        </apex:panelGrid>
+    </apex:pageBlockSectionItem>
+              
+               
+          </apex:pageBlockSection>
+             <div align="center">
+               
+               <apex:commandButton value="Save"   action="{!SaveModel}"  rendered="{!DetailPage!= true}" style="width:60px;margin-left:-26px;"/>
+           <apex:commandButton Value="Cancel" action="{!cancelmodelcriteria}" rendered="{!DetailPage !=true}" style="width:60px" />   
+            <!--     <apex:commandButton value="Previous"  />
+                 <apex:commandButton value="Next"  />   -->
+             </div>
+       </apex:outputPanel>
+       
+          <!--Interaction -->
+     <!--  Part of R2
+     <apex:outputPanel rendered="{!button==6 && DetailPage == true}" title="Interactions">
+       
+    <apex:pageBlockSection columns="2" >
+           
+     <apex:outputField value="{!itr.CampaignID__c}"/>
+     <apex:outputField value="{!itr.FirstName__c}"/>
+     <apex:outputField value="{!itr.LastName__c}"/>
+     <apex:outputField value="{!itr.Hospital__c}"/>
+     <apex:outputField value="{!itr.Address1__c}"/>
+     <apex:outputField value="{!itr.Address_2__c}"/>
+     <apex:outputField value="{!itr.City__c}"/>
+     <apex:outputField value="{!itr.State__c}"/>
+     <apex:outputField value="{!itr.Country__c}"/>
+     <apex:outputField value="{!itr.Zip__c}"/>
+     <apex:outputField value="{!itr.CallType__c}"/>
+     <apex:outputField value="{!itr.Communication_Type__c}"/>
+     <apex:outputField value="{!itr.Email__c}"/>
+     <apex:outputField value="{!itr.eMailOptIn__c}"/>
+     <apex:outputField value="{!itr.eMailOptInDate__c}"/>
+     <apex:outputField value="{!itr.Donotmail__c}"/>
+     <apex:outputField value="{!itr.Mobile__c}"/>
+     <apex:outputField value="{!itr.Phone__c}"/>
+     <apex:outputField value="{!itr.Other_Phone__c}"/>
+     <apex:outputField value="{!itr.CommunicationPreference__c}"/>
+     <apex:outputField value="{!itr.Response_By_Campaign_Member__c}"/>     
+     <apex:outputField value="{!itr.Response_Detail__c}"/>
+     <apex:outputField value="{!itr.Response_For_Campaign__c}"/>             
+   </apex:pageBlockSection>
+            <apex:commandButton value="Save"  action="{!SaveItrCount}" />
+ </apex:outputPanel>
+         
+         <!--Interaction -->
+    <!--     <apex:outputPanel rendered="{!button==6 && DetailPage != true}" >
+    <apex:pageBlockSection columns="2" title="Information">
+           
+     <apex:inputField value="{!itr.CampaignID__c}"/>
+     <apex:inputField value="{!itr.FirstName__c}"/>
+     <apex:inputField value="{!itr.LastName__c}"/>
+     <apex:inputField value="{!itr.Hospital__c}"/>
+     <apex:inputField value="{!itr.Address1__c}"/>
+     <apex:inputField value="{!itr.Address_2__c}"/>
+     <apex:inputField value="{!itr.City__c}"/>
+     <apex:inputField value="{!itr.State__c}"/>
+     <apex:inputField value="{!itr.Country__c}"/>
+     <apex:inputField value="{!itr.Zip__c}"/>
+     <apex:inputField value="{!itr.CallType__c}"/>
+     <apex:inputField value="{!itr.Communication_Type__c}"/>
+     <apex:inputField value="{!itr.Email__c}"/>
+     <apex:inputField value="{!itr.eMailOptIn__c}"/>
+     <apex:inputField value="{!itr.eMailOptInDate__c}"/>
+     <apex:inputField value="{!itr.Donotmail__c}"/>
+     <apex:inputField value="{!itr.Mobile__c}"/>
+     <apex:inputField value="{!itr.Phone__c}"/>
+     <apex:inputField value="{!itr.Other_Phone__c}"/>
+     <apex:inputField value="{!itr.CommunicationPreference__c}"/>
+     <apex:inputField value="{!itr.Response_By_Campaign_Member__c}"/>     
+     <apex:inputField value="{!itr.Response_Detail__c}"/>
+     <apex:inputField value="{!itr.Response_For_Campaign__c}"/>             
+   </apex:pageBlockSection>
+            <apex:commandButton value="Save" action="{!SaveItrCount}"  rendered="{!DetailPage!= true}"/>
+ </apex:outputPanel>
+         
+         -->
+         
+         <apex:outputPanel rendered="{!button==7}" title="Geographic">
+             <apex:pageBlockSection columns="2">
+                 
+                 <apex:outputField value="{!geo.CBSA__c}"/>
+                 <apex:outputField value="{!geo.City__c}"/>
+                 <apex:outputField value="{!geo.County__c}"/>
+                 <apex:outputField value="{!geo.State__c}"/>
+                 <apex:outputField value="{!geo.StateFIPS__c}"/>
+                 
+             
+             </apex:pageBlockSection>
+             
+                 <div aligned="center">
+                     <apex:commandButton value="Search"  status="loadingstatus1" />
+             </div>
+                    
+                    <!--    <apex:commandButton value="Clear records" action="{!clear}"/> -->
+                    
+                    
+         
+         </apex:outputPanel>
+  
+  
+         
+         <apex:outputPanel rendered="{!button==7}" title="Geographic">
+             <apex:pageBlockSection columns="2">
+                 
+                 <apex:inputField value="{!geo.CBSA__c}"/>
+                 <apex:inputField value="{!geo.City__c}"/>
+                 <apex:inputField value="{!geo.County__c}"/>
+                 <apex:inputField value="{!geo.State__c}"/>
+                 <apex:inputField value="{!geo.StateFIPS__c}"/>
+                 
+             
+             </apex:pageBlockSection>
+             
+                 <div aligned="center">
+                     <apex:commandButton value="Search"  status="loadingstatus1" />
+             </div>
+                    
+                    <!--    <apex:commandButton value="Clear records" action="{!clear}"/> -->
+                    
+                    
+         
+         </apex:outputPanel>
+         
+         
+         
+       <div align="center" draggable="false" >
+
+        
+       <apex:commandButton value="Back To Campaign" action="{!enc_back}" style="font-weight:600;" rendered="{!DetailPage== true}" /><br/>  
+           </div>
+  </apex:pageBlock>
+  
+  <apex:actionFunction name="deleteAllDiagnosisInclusions" action="{!deleteAllDiagnosisInclusions}" reRender="myrelatedlstloc" status="loadingstatus" />
+  <apex:actionFunction name="deleteAllDiagnosisExclusions" action="{!deleteAllDiagnosisExclusions}" reRender="myrelatedlstloc" status="loadingstatus" />
+  <apex:actionFunction name="deleteAllDRGInclusions" action="{!deleteAllDRGInclusions}" reRender="myrelatedlstloc" status="loadingstatus" />
+  <apex:actionFunction name="deleteAllDRGExclusions" action="{!deleteAllDRGExclusions}" reRender="myrelatedlstloc" status="loadingstatus" />
+  <apex:actionFunction name="deleteAllProcedureInclusions" action="{!deleteAllProcedureInclusions}" reRender="myrelatedlstloc" status="loadingstatus" />
+  <apex:actionFunction name="deleteAllProcedureExclusions" action="{!deleteAllProcedureExclusions}" reRender="myrelatedlstloc" status="loadingstatus" />
+  </apex:form>
+    
+      
+      <apex:outputPanel id="myrelatedlstloc" rendered="{!button==1}" >        
+        
+            <apex:relatedList list="ICD_Diagnosis_Informations__r" >
+                <apex:facet name="header">
+                    <table border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+                        <td class="pbTitle"><h3>Diagnosis: Inclusions and Exclusions</h3></td>
+                        <td class="pbButton">
+                            <input type="button" class="btn" onclick="deleteAllDiagnosisInclusions();return false;" value="Delete All Inclusions" />
+                            <input type="button" class="btn" onclick="deleteAllDiagnosisExclusions();return false;" value="Delete All Exclusions" />
+                        </td>
+                    </tr></tbody></table>
+                </apex:facet>
+            </apex:relatedList>
+            
+             <apex:relatedList list="Procedures_Informations__r" >
+                <apex:facet name="header">
+                    <table border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+                        <td class="pbTitle"><h3>Procedures: Inclusions and Exclusions</h3></td>
+                        <td class="pbButton">
+                            <input type="button" class="btn" onclick="deleteAllProcedureInclusions();return false;" value="Delete All Inclusions" />
+                            <input type="button" class="btn" onclick="deleteAllProcedureExclusions();return false;" value="Delete All Exclusions" />
+                        </td>
+                    </tr></tbody></table>
+                </apex:facet>
+            </apex:relatedList>
+            
+            <apex:relatedList list="DRG_Code_Informations__r" >
+                <apex:facet name="header">
+                    <table border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+                        <td class="pbTitle"><h3>DRGs: Inclusions and Exclusions</h3></td>
+                        <td class="pbButton">
+                            <input type="button" class="btn" onclick="deleteAllDRGInclusions();return false;" value="Delete All Inclusions" />
+                            <input type="button" class="btn" onclick="deleteAllDRGExclusions();return false;" value="Delete All Exclusions" />
+                        </td>
+                    </tr></tbody></table>
+                </apex:facet>
+            </apex:relatedList>
+             
+      </apex:outputPanel>
+      
+   
+           
+                    
+    
+</apex:page>

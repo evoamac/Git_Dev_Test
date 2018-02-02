@@ -1,0 +1,146 @@
+<apex:page standardController="Campaign" extensions="GeographicByRadius" sideBar="false">
+   <apex:sectionHeader subtitle="Include Geographies by Distance" title="Campaign: {!campaign.Name}"/>
+   <apex:form id="mainForm">
+        <apex:includeScript value="{!$Resource.jquery1_12}"/>
+        <script src="/soap/ajax/9.0/connection.js" type="text/javascript"></script>
+        <apex:includeScript value="{!URLFOR($Resource.datatable, 'datatables.min.js')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.datatable, 'datatables.min.css')}"/>
+        
+        <script>
+           function checkAll(cb){
+                document.getElementById('{!$Component.masterSelectAll}').value=true;
+                var inputElem = document.getElementsByTagName("input");
+                for(var i=0; i<inputElem.length; i++){
+                    if(inputElem[i].id.indexOf("checkedone")!=-1)
+                        inputElem[i].checked = cb.checked;
+                }
+            }
+            
+            function unSelectAll(cb){
+                if(cb.checked==true)
+                    document.getElementById('{!$Component.masterSelectAll}').value=false;
+            }
+            
+            function allowOnlyNumber(eventInstance) {
+                  eventInstance = eventInstance || window.event;
+                  key = eventInstance.keyCode || eventInstance.which;
+                  if ((47 < key) && (key < 58) || key == 8 || key == 189) {
+                      return true;
+                  } else {
+                      if (eventInstance.preventDefault)
+                          eventInstance.preventDefault();
+                      eventInstance.returnValue = false;
+                      return false;
+                  }
+            }
+             $(document).keypress(function(e) { 
+            if (e.which == 13){
+                e.preventDefault();
+                $(".srchbtn").click();
+                //document.getElementById('srchbtn').click();
+                               
+        }
+      });
+        </script>
+        
+        <apex:pageMessages id="showmsg" />
+        
+        <!-- Search Filter Section -->
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="2" title="Search Field" collapsible="false">
+                <!-- Hospital -->
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Hospital"/>
+                    <apex:selectList id="hospital" value="{!selectedHospital}" size="1" multiselect="false" >
+                        <apex:selectOptions value="{!listhospital}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                 
+                 <!-- Miles -->
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Miles"/>
+                    <apex:inputText value="{!selectedMiles}" onkeypress="return allowOnlyNumber(event)"/>
+                 </apex:pageBlockSectionItem>
+           </apex:pageBlockSection>
+           <apex:pageBlockButtons location="bottom">      
+                <div style="float:left;">
+                    <apex:commandButton value="Search" action="{!searchLocation}"  status="waitStatus" reRender="showmsg,searchResult" style="margin-left:189px;" STYLEClass="srchbtn" />
+                    <apex:commandButton value="Cancel" action="{!cancel}" />
+                </div>
+                <div style="padding-left:10px;float:left;">
+                    <apex:actionStatus id="waitStatus" >       
+                        <apex:facet name="start">
+                            <div id="loadingimage">
+                                <img src="/img/loading32.gif" height="23" width="25"/>
+                            </div>
+                        </apex:facet>
+                    </apex:actionStatus>
+                </div>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        <apex:outputPanel id="searchResult">
+            <apex:inputHidden value="{!masterSelectAll}" id="masterSelectAll"/>
+            <apex:pageBlock rendered="{!showSearchResult}" id="search_PB">
+                <apex:pageBlockSection collapsible="false" title="Search Result" columns="1" id="search_PB_SI">
+                    <apex:pageBlockTable value="{!searchResult}" var="loc" id="locTab">
+                        <apex:column >
+                            <apex:facet name="header">
+                               <apex:outputPanel >
+                                    <div style="float:left;">
+                                        <apex:inputCheckbox id="selectAll"  value="{!selectAll}" onclick="checkAll(this)" />
+                                    </div>
+                                    <div style="float:left;padding-left:5px;">Select All</div>
+                               </apex:outputPanel>
+                            </apex:facet>
+                            <apex:inputCheckbox id="checkedone" value="{!loc.isSelected}" onClick="unSelectAll(this)"/>
+                        </apex:column> 
+                        <apex:column headerValue="CBSA">
+                            <apex:outputField value="{!loc.lo.CBSA__c}"/>
+                        </apex:column>
+                         
+                        <apex:column headerValue="City">
+                            <apex:outputField value="{!loc.lo.City__c}"/>
+                        </apex:column>
+                         
+                        <apex:column headerValue="County">
+                            <apex:outputField value="{!loc.lo.County__c}"/>
+                        </apex:column>
+                         
+                        <apex:column headerValue="ZipCode">
+                            <apex:outputField value="{!loc.lo.ZipCode__c}"/>
+                        </apex:column>
+                         
+                        <apex:column headerValue="State">
+                            <apex:outputField value="{!loc.lo.State__c}"/>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+                <!-- Paging Section -->
+                <apex:pageBlockButtons >
+                    <div style="float:left;padding-right:200px;">
+                    <apex:commandButton value="Save" action="{!saveDemographicServiceArea}"  style="margin-left:173px;"/>
+                    <apex:commandButton value="Quick Save" action="{!quickSave}"  status="waitStatus" reRender="showmsg,searchResult"  style="margin-left:30px;">
+                        <!-- <apex:param name="qc" value="1" /> -->
+                    </apex:commandButton>
+                    </div>
+                    <div style="float:left">
+                        <apex:actionStatus id="pageStatus" >       
+                            <apex:facet name="start">
+                                <div id="loadingimage">
+                                    <img src="/img/loading32.gif" height="23" width="25"/>
+                                </div>
+                            </apex:facet>
+                        </apex:actionStatus>
+                    </div>
+                    <div style="float:right;"> 
+                        <apex:commandLink style="padding-right:10px;" status="pageStatus" reRender="searchResult" value="First" action="{!first}" rendered="{!setCon.hasPrevious}"/> 
+                        <apex:commandLink style="padding-right:10px;" status="pageStatus" reRender="searchResult" value="Previous" action="{!previous}" rendered="{!setCon.hasPrevious}"/> 
+                        <apex:commandLink style="padding-right:10px;" status="pageStatus" reRender="searchResult" value="Next" action="{!next}" rendered="{!setCon.hasNext}"/> 
+                        <apex:commandLink style="padding-right:10px;" status="pageStatus" reRender="searchResult" value="Last" action="{!last}" rendered="{!setCon.hasNext}"/>
+                        <apex:outputText >Total No of Records: {!noOfRecords}</apex:outputText>
+                    </div>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:outputPanel>
+    </apex:form>    
+</apex:page>

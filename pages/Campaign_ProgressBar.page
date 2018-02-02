@@ -1,0 +1,52 @@
+<apex:page standardController="Campaign" extensions="Campaign_ProgressBarController">
+    <apex:form >
+        <apex:actionPoller action="{!refresh}" interval="5" reRender="activateCampaign" rendered="{!OR(status='Order Placed', status='Adding Members',status='Adding Audience Report',status='WDM Deduping', status='Resetting', status='Calculating Upload')}"/>
+        <style>.messageText {font-size:14px;}</style>
+        <apex:outputPanel rendered="{!OR(status='Order Placed',status='Adding Members',status='Adding Audience Report',status='Calculating Upload')}"><style>[title~=Warning]{content:url("/img/loading32.gif");background-image:none!important;}</style></apex:outputPanel>
+        <apex:outputPanel id="activateCampaign">
+	        <!-- Changes for PP6 Start -->
+	        <apex:pageMessage strength="2" severity="Warning" summary="{!$Label.CRM_CalculatingFinalCount}" rendered="{!status='Order Placed'}"/>
+	        <apex:pageMessage strength="2" severity="Warning" summary="{!$Label.CRM_CalculatingFinalCount}" rendered="{!status='Calculating Upload'}"/>
+	        <!-- Changes for PP6 Ends -->
+	        <!-- Changes for PP1 Start -->
+	        <apex:pageMessage strength="2" severity="Warning" summary="{!$Label.CRM_CreatingAudienceReport}" rendered="{!status='Adding Audience Report'}"/>
+	        <!-- Changes for PP1 Ends -->
+	        <!-- Changes for PP6 Start -->
+	        <apex:pageMessage strength="2" severity="Error" summary="{!$Label.CRM_Invalid_File_Upload}" rendered="{!uploadStatus = 'Error'}"/>
+	        <apex:pageMessage strength="2" severity="Confirm" summary="{!$Label.CRM_Audience_Upload_Complete} - Duplicate Count: {!duplicateCount}" rendered="{!uploadStatus = 'Duplicate'}"/>
+	        <apex:pageMessage strength="2" severity="Confirm" summary="{!$Label.CRM_Audience_Upload_Complete}" rendered="{!uploadStatus = 'Complete'}"/>
+	        
+	        <apex:pageMessage strength="2" severity="Warning" summary="{!resettingMessage}" rendered="{!status='Resetting'}"/>
+	        
+	        <apex:pageMessage strength="2" severity="Confirm" summary="{!$Label.CRM_SuccessfullyCalculatedFinalCount}" rendered="{!status='Calculated Net Count'}"/>
+	        <!-- Changes for PP6 Ends -->
+	        
+	        <apex:pageMessage strength="2" severity="Warning" summary="{!recordprocessedMessage}" rendered="{!status='Adding Members'}"/>  <!-- Added for defect CRM-72 795, only 5 campaigns can be activated-->
+	        
+	        <apex:pageMessage strength="2" severity="Warning" summary="{!wdmDedupeProcessMessage}" rendered="{!status='WDM Deduping'}"/>
+	           
+	        <!-- starting of defect 848: change in rendered condition -->
+	        <!-- starting of defect 234: change in rendered condition -->
+	        <!-- <apex:pageMessage strength="2" severity="Confirm" summary="Successfully activated the Campaign." rendered="{!OR(recordType=='Non_Targeted',AND(status='Added Members',countDiff=0))&& CampaignStatus =='Active'}"/> -->
+	        <apex:pageMessage strength="2" severity="Confirm" summary="{!$Label.CRM_ActivatedTheCampaign}" rendered="{!OR(AND(recordType=='Non_Targeted',CampaignStatus =='Active'),AND(status='Added Members',OR(CampaignStatus =='Segment Activated',CampaignStatus =='Active',countDiff=0)))}"/>
+	        <!-- ending of defect 234-->
+	        <!-- ending of defect 848-->
+	        
+	        <!-- starting of defect 234: change in rendered condition -->
+	        <!-- <apex:pageMessage strength="2" severity="Error" summary="There was a problem in completing the Campaign Activation as {!countDiff} campaign members were not added to the campaign. Please click the 'Activate Campaign' button again to resolve this problem." rendered="{!AND(status="Added Members",countDiff<>0)}"/> -->
+	        <apex:pageMessage strength="2" severity="Error" summary="There was a problem in completing the Campaign Activation as {!countDiff} campaign members were not added to the campaign. Please click the 'Activate Campaign' button again to resolve this problem." rendered="{!AND(CampaignStatus !='Segment Activated',CampaignStatus !='Active',status="Added Members",countDiff<>0)}"/>
+	        <!-- ending of defect 234-->
+	        
+	        <apex:pageMessage strength="2" severity="Error" summary="{!$Label.CRM_TooManyMarkedForSuppression}" rendered="{!status='Invalid Suppression Count'}"/>
+	        <!-- starting of defect 810-->        
+	        <apex:pageMessage strength="2" severity="Error" summary="{!$Label.CRM_ErrorInProcessingAudienceReport}" rendered="{!status='Invalid Audience Report'}"/>
+	        <apex:pageMessage strength="2" severity="Error" summary="{!$Label.CRM_NotEnoughCampaignMembersToBeMarked}" rendered="{!status='Invalid Control Group Count'}"/> 
+	        <!-- ending of defect 810--> 
+        </apex:outputPanel> 
+    </apex:form>
+    <script>
+        
+        $( ".msgIcon[alt='Warning']").attr( "src", "/img/loading32.gif");
+        
+    </script>
+</apex:page>

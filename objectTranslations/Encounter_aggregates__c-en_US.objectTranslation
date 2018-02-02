@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Encounter aggregates</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Encounter aggregates</value>
+    </caseValues>
+    <fields>
+        <label><!-- Selected Prefered Hospital Codes --></label>
+        <name>CRM_SelectedPreferedHospitalCodes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Encounter aggregates --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Last Discharge Date Criteria Element Id --></label>
+        <name>Last_Discharge_Date_Criteria_Element_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Discharge Date From --></label>
+        <name>Last_Discharge_Date_From_UI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Discharge Date Ranges --></label>
+        <name>Last_Discharge_Date_Ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Discharge Date To --></label>
+        <name>Last_Discharge_Date_To_UI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Most Recent Primary Payor Type --></label>
+        <name>Most_Recent_Primary_Payor_Type__c</name>
+        <picklistValues>
+            <masterLabel>CHARITY</masterLabel>
+            <translation><!-- CHARITY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MANAGED CARE</masterLabel>
+            <translation><!-- MANAGED CARE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MANAGED EXCHANGE</masterLabel>
+            <translation><!-- MANAGED EXCHANGE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MEDICAID</masterLabel>
+            <translation><!-- MEDICAID --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MEDICAID MANAGED CARE</masterLabel>
+            <translation><!-- MEDICAID MANAGED CARE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MEDICARE</masterLabel>
+            <translation><!-- MEDICARE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MEDICARE MANAGED CARE</masterLabel>
+            <translation><!-- MEDICARE MANAGED CARE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OTHER</masterLabel>
+            <translation><!-- OTHER --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SELF PAY/UNINSURED</masterLabel>
+            <translation><!-- SELF PAY/UNINSURED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UNKNOWN</masterLabel>
+            <translation><!-- UNKNOWN --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- No of ER Encounters ranges --></label>
+        <name>No_of_ER_Encounters_ranges__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of ER Encounters To --></label>
+        <name>Number_of_ER_Encounters_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of ER Encounters --></label>
+        <name>Number_of_ER_Encounters__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preferred Hospital --></label>
+        <name>Preffered_Hospital__c</name>
+        <picklistValues>
+            <masterLabel>Baylor/Tenet JV Region - Baylor Scott &amp; White Medical Center - Centennial</masterLabel>
+            <translation><!-- Baylor/Tenet JV Region - Baylor Scott &amp; White Medical Center - Centennial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>test</masterLabel>
+            <translation><!-- test --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Wunderman Preferred Hospitals --></label>
+        <name>Wunderman_Preferred_Hospitals__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

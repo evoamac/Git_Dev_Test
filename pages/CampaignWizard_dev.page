@@ -1,0 +1,1663 @@
+<apex:page standardController="Campaign" extensions="CampaignWizardController_dev,CampaignMemberCriteriaManager,CampaignMemberManager" title="Campaign Wizard" id="thePage" sidebar="false">
+    <apex:includeScript value="{!$Resource.jquery1_12}"/> 
+    
+    <script type="text/javascript" value="https://github.com/aFarkas/html5shiv/blob/master/dist/html5shiv.min.js"> </script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="/soap/ajax/9.0/connection.js" type="text/javascript"></script>
+    <apex:includeScript value="{!URLFOR($Resource.datatable, 'datatables.min.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.datatable, 'datatables.min.css')}"/> 
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    
+    <script type="text/javascript">
+        var __sfdcSessionId = '{!GETSESSIONID()}';
+    </script>
+    <script src="/soap/ajax/28.0/connection.js" type="text/javascript"></script>
+    <script src="/soap/ajax/28.0/apex.js" type="text/javascript"></script>
+    
+    <script>
+    $ = jQuery.noConflict();
+   
+    function popupmsg()
+    {
+    alert('Campaign has been activated successfully!!');
+    }
+    
+   
+            
+    function printFunc()
+    {
+        window.print();
+    }
+        
+         
+    </script>
+    <style>
+        input[type="checkbox"] { margin: 0 3px; } 
+    </style>
+    <script>
+
+           $(function(){
+
+                $('.datepicker').datepicker({
+    
+                     minDate: 0
+    
+                 }).on('changeDate', function(ev){
+    
+                    $('#sDate1').text($('#datepicker').data('date'));
+    
+                    $('#datepicker').datepicker('hide');
+    
+                });
+                
+            })
+            
+            
+    </script> 
+    <style>
+        .wizard-panel td:nth-child(odd){ font-weight:bold; text-align:right; }
+        .steps { height: 30px; border:1px solid #ddd; border-radius: 4px; }        
+        .steps td div { font-weight:block; font-size: 18px; text-align:center; padding: 10px 0; color: #777; 
+        background-color: #eee; border-radius: 5px; 
+        }
+        .steps .active{ background-color: #42A5F5; color: #000; }
+        .overlay { position:fixed; top:0; left:0; height:100%; width:100%; background-color:#fff; opacity:0.7; z-index: 998; }
+        #loadingimage{ padding: 100px; text-align:center; position:absolute; left:49%;top:0; z-index: 999; }
+    </style>
+    <script>
+        function showStep(cnt){
+            
+            step3(cnt);
+            
+        }
+    </script>
+    <apex:sectionHeader title="Campaign Wizard"/>
+        <apex:outputPanel layout="none"  id="inactive_banner">
+            <apex:include pageName="CampaignRefDataAlerts" rendered="{!detailPage==true && IsAddChildCheck!=True  && objcampaign.status=='In Development'}" />
+        </apex:outputPanel>
+   <!--    Starting Of Defect 848 -->   
+      <apex:include pageName="Campaign_ProgressBar" rendered="{!OR((stepNo==3 ||stepNo==5),AND(isTargetedCampaign==false && stepNo==4 && objcampaign.CRM_ParentSegmentedCampaign__c==null)) && detailPage==true || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepno==2 && detailpage==true)}" />
+   <!--    Ending Of Defect 848 -->
+      <apex:pagemessage title="Audience Selection Locked" strength="2" severity="Info" Summary="{!$Label.CRM_AudienceSelectionHasBeenLocked}"  rendered="{!AND(OR(campaign.Add_Member_Status__c='Order Placed',campaign.Add_Member_Status__c='Adding Audience Report'), stepNo==3, objcampaign.CRM_ParentSegmentedCampaign__c==null) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepNo==2 && detailPage==true && OR(campaign.Add_Member_Status__c='Order Placed',campaign.Add_Member_Status__c='Adding Audience Report'))}"  />
+      <apex:pagemessage title="Audience Selection Locked" strength="2" severity="Info" Summary="{!$Label.CRM_AudienceSelectionhasBeenLockedAndProcessCompleted}"  rendered="{!AND(campaign.Add_Member_Status__c='Calculated Net Count', stepNo==3, objcampaign.CRM_ParentSegmentedCampaign__c==null) || (AND(objcampaign.CRM_ParentSegmentedCampaign__c!=null , stepNo==2 , detailPage==true , campaign.Add_Member_Status__c='Calculated Net Count'))}"  />
+    <apex:form id="theForm">
+        <apex:actionFunction action="{!refreshCount}" name="callControllermethod" status="loadingstatus"/>
+        <apex:actionFunction name="deleteAllGeoServiceArea" action="{!deleteAllGeoServiceArea}" reRender="GeoServiceArea" status="loadingstatus" />
+        <apex:actionFunction name="deleteAllGeoBoundaryDistance" action="{!deleteAllGeoBoundaryDistance}" reRender="Geography_By_Boun_Dis" status="loadingstatus" />
+        
+   
+        <apex:panelGrid styleClass="steps" width="100%" columns="5" cellpadding="5" cellspacing="4" >
+            <!----Alignment fix ----->
+            <!--start of PP4 change-->
+            <apex:outputPanel layout="block" style="text-align:center;width:100%;height: 20px;cursor:pointer" onclick="showStep('{!1}');"  rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}" >Campaign Details</apex:outputPanel>
+            
+            <apex:outputPanel layout="block" style="width:100%;height: 20px;cursor:pointer" onclick="showStep('{!IF(objcampaign.CRM_ParentSegmentedCampaign__c==null,2,1)}');">Channel and Vendor</apex:outputPanel>
+          
+            <apex:outputPanel layout="block" style="width:100%;height: 20px;cursor:pointer" onclick="showStep('{!IF(objcampaign.CRM_ParentSegmentedCampaign__c==null,3,2)}');" rendered="{!IF( ( campflag=='false') || campId==null || tactflag==true, true, false)}" >Audience Selection</apex:outputPanel>
+            <apex:outputPanel layout="block" style="width:100%;height: 20px;cursor:pointer" onclick="showStep('{!IF(TactFlag==true && objcampaign.CRM_ParentSegmentedCampaign__c==null ,4,3)}');" >Summary Reporting</apex:outputPanel>
+           
+            <apex:outputPanel layout="block" id="tab5" style="width:100%;height: 20px;cursor:pointer" onclick="showStep('{!IF(TactFlag==true,5,4)}');" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}">Campaign Activation</apex:outputPanel> 
+            <!--end of PP4 change-->
+            <!----Alignment fix ----->
+        </apex:panelGrid>
+         
+   
+        <apex:actionFunction name="step3" action="{!showTab}" reRender="msgs,pgblock-form,viewcampchild,viewcampmem,myrelatedlstloc,campaignhistory"  >
+            <apex:param id="stepNumFromPage" name="stepNumFromPage" assignTo="{!stepNumFromPage}" value=""/>
+        </apex:actionFunction>
+        
+        <apex:pageMessages escape="false" id="msgs"></apex:pageMessages>
+        <apex:pageBlock id="pgblock-form" >
+            
+            <apex:pageBlockButtons location="top" id="btn_step5">
+                                <!--start of PP4 change-->
+                <apex:commandButton id="unlock" action="{!UnlockAudienceSelection}" status="loadingstatus" Value="Unlock" rerender="pgblock-form" rendered="{!AND(OR(campaign.Add_Member_Status__c='Calculated Net Count',campaign.Add_Member_Status__c='Invalid Suppression Count'), stepNo==3, tactflag==true, objcampaign.CRM_ParentSegmentedCampaign__c==null) || (AND(OR(campaign.Add_Member_Status__c='Calculated Net Count',campaign.Add_Member_Status__c='Invalid Suppression Count'),objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepNo==2 ))}" />
+                    
+                <apex:commandButton id="edit" accesskey="" style="width:40px;margin-left:191px;" action="{!EditCampaign}" status="loadingstatus" Value="Edit" rerender="pgblock-form,inactive_banner" rendered="{!IF(stepNo==1  && DetailPage ==true , true, false) || IF(stepNo==1 && objcampaign.status=='Active' && ($Profile.Name=='Tenet Leadership' || $profile.name=='Tenet Help Desk' || $profile.name=='Tenet Admin' || $Profile.name=='Tenet IT' || $Profile.name=='Tenet Marketer') && detailPage==true , true, false) || IF(stepNo==2 && DetailPage ==true && objcampaign.CRM_ParentSegmentedCampaign__c==null , true, false)  || IF(stepNo==5 && DetailPage ==true && TactFlag==true && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false) || IF(TactFlag==false && stepNo==4 && DetailPage==true, true, false) }" disabled="{!IF((objcampaign.Status == 'Active'  && $Profile.Name!='System Administrator' && $Profile.Name!='Tenet Super User' && $Profile.Name!='Tenet Admin' )|| IF($Profile.Name == 'Tenet Leadership' && objcampaign.Status!='Active', true, false) ,true,if(isLeadershipProfile && stepNo<1 && objcampaign.Status=='Active' ,true,false))  || IF(NotOwner== true  && $Profile.Name != 'System Administrator' && $Profile.Name != 'Tenet Admin' &&  $Profile.Name != 'Tenet IT' && $Profile.Name != 'Tenet Super User' , true, false) || (objcampaign.status=='Segment Activated') }" />
+               
+                <!--    Starting Of Defect 849 --> 
+                <!--    Starting Of PP5 Chnage --> 
+                <apex:commandButton id="CampDel"  action="{!DelCampaign}" onclick="return confirm('{!IF(objcampaign.CRM_ParentSegmentedCampaign__c!=null,$Label.CRM_DeleteSegmentMessage,$Label.CRM_DeleteCampaignMessage)}');" status="loadingstatus" Value="Delete"  rendered="{!IF(stepNo==1 && DetailPage ==true, true, false) || IF(stepNo==2 && DetailPage ==true && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false)  || IF(TactFlag==false && stepNo==4 && DetailPage==true, true, false) }" disabled="{!IF(objcampaign.Status == 'Active' && DetailPage== true && $Profile.Name != 'System Administrator', true, false) ||  IF($Profile.Name = 'Tenet Leadership', true, false) || IF(NotOwner== true && $Profile.Name != 'System Administrator' && $Profile.Name != 'Tenet Admin' &&  $Profile.Name != 'Tenet IT' && $Profile.Name != 'Tenet Super User', true, false) || (objcampaign.status=='Segment Activated') || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && objcampaign.Add_Member_Status__c=='Calculated Net Count')}"/>                
+                 <!--    Ending Of PP5 Chnage -->
+                <!--end of PP4 change-->
+                <!--    Ending Of Defect 849 -->
+                <apex:commandButton action="{!CancelEditCampaign}" status="loadingstatus" immediate="true" Value="Cancel" rerender="pgblock-form" rendered="{!IF((stepNo==1 || stepNo==2 || (stepNo==5 &&  ((TactFlag==true && campid!=null) || campid==null))) && DetailPage!=True && objcampaign.CRM_ParentSegmentedCampaign__c==null , true, false) || IF(stepNo==4 && TactFlag==false && detailPage==false && campid!=null, true, false) || (stepno==1 && objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailPage==false)}" />
+                 <!-- start of changes for PP4 -->
+                <apex:commandButton action="{!CloneCampaign}" style="width:40px;margin-left:191px;" status="loadingstatus" Value="Clone" rerender="pgblock-form,msgs,refresherror2,refresherror" rendered="{!IF( stepNo=4 && TactFlag==true && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false) || IF( (stepNo==4 && campid==null ) || (tactflag==false && stepno==3 && campid!=null && objcampaign.CRM_ParentSegmentedCampaign__c==null), true, false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepNo==3)}" disabled="{!IF($Profile.Name == 'Tenet Leadership' || campId==null, true, false) || (deploymentflag==true || (RefData_Alert && objcampaign.status!='Active') || objcampaign.CRM_ParentSegmentedCampaign__c!=null || detailpage==false)}" />
+               
+               <apex:commandButton value="Add Child Campaign" action="{!addChildCamp}" rendered="{!stepNo=2 && campid!=null && detailPage==true && ObjCampaign.Member_Types__c!='Campaign Segments' && objcampaign.CRM_ParentSegmentedCampaign__c==null}" disabled="{!IF((stepNo==2 && $Profile.Name=='Tenet Leadership') || objcampaign.status=='Cancelled', true, false)}"  />
+                
+                <script type="text/javascript">
+                function popupsegmentWindow(id){
+                    var newwindow = window.open('/apex/SegmentChild?id='+id,'Popup','height=300,width=400,left=100,top=100,resizable=no,scrollbars=no,toolbar=no,status=no'); 
+                    newwindow.focus();
+                }
+                </script>
+                
+                <apex:commandButton value="Add Segment"  rendered="{!stepNo==3 && campid!=null && detailPage==true && ObjCampaign.Member_Types__c=='Campaign Segments' && objcampaign.status=='In Development' && objcampaign.CRM_ParentSegmentedCampaign__c==null}" disabled="{!IF((stepNo==3 && $Profile.Name=='Tenet Leadership') || objcampaign.status=='Cancelled' || objcampaign.status=='Active' || childCampaign.size>=5 || (NOT(ISNULL(Campaign.Add_Member_Status__c))), true, false)}" onclick="popupsegmentWindow('{!objcampaign.id}'); return false">
+                  </apex:commandButton>
+               <!-- end of changes for PP4 --> 
+                <apex:commandButton value="Print" onclick="printFunc();return false;" rendered="{!IF(stepNo=4 && TactFlag==true && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false) || IF((campid==null && stepNo==4) || (stepno==3 && tactflag==false && campid!=null && objcampaign.CRM_ParentSegmentedCampaign__c==null), true, false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepNo==3)}" disabled="{!IF(campid==null || $Profile.Name=='Tenet Leadership', true, false)}"/>
+              <!--start of changes for PP4 -->
+               <!--starting of PP5 Change-->
+               
+               <!-- AXU showing Quick Count button on 
+               <!--apex:commandButton value="Quick Count" id="refreshcount"  action="{!refreshCount}" status="loadingstatus"  rerender="pgblock-form,refresherror2" disabled="{! objcampaign.Member_Types__c=='Campaign Segments' || $Profile.Name=='Tenet Leadership' || RefData_Alert || IF(TactFlag==false, true, false) || IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false)|| IF((objcampaign.Status=='Active') || ((objcampaign.status=='Suspended' || objcampaign.status=='Cancelled') && stepNo==3 && ($Profile.name=='Tenet Help Desk' || $Profile.name=='Tenet IT' || $Profile.name=='Tenet Marketer')) || NOT(ISNULL(campaign.Add_Member_Status__c)), true, false) }" rendered="{!IF(TactFlag==true && stepNo==3 && DetailPage == true && objcampaign.CRM_ParentSegmentedCampaign__c==null , true, false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepNo==2)}"/-->
+               <apex:commandButton value="Quick Count" id="refreshcount"  action="{!refreshCount}" status="loadingstatus"  rerender="pgblock-form,refresherror2" disabled="{! $Profile.Name=='Tenet Leadership' || RefData_Alert || IF(TactFlag==false, true, false) || IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false)|| IF((objcampaign.Status=='Active') || ((objcampaign.status=='Suspended' || objcampaign.status=='Cancelled') && stepNo==3 && ($Profile.name=='Tenet Help Desk' || $Profile.name=='Tenet IT' || $Profile.name=='Tenet Marketer')) || NOT(ISNULL(campaign.Add_Member_Status__c)), true, false) }" rendered="{!IF(TactFlag==true && stepNo==3 && DetailPage == true && objcampaign.CRM_ParentSegmentedCampaign__c==null , true, false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepNo==2)}"/>
+                <apex:commandButton value="Final Count" rendered="{!AND(isTargetedCampaign,stepNo==3,objcampaign.CRM_ParentSegmentedCampaign__c==null,DetailPage,campid!=null)|| (objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepNo==2)}" action="{!refreshNetCount}"  disabled="{!RefData_Alert || (NOT(ISNULL(Campaign.Add_Member_Status__c))) || $Profile.Name=='Tenet Leadership' }"  status="loadingstatus" reRender="msgs,Refreshcountblock1" />
+              <!--Starting of PP6 Change-->  
+                <apex:commandButton value="Count Analysis" action="{!CountAnalysis}" disabled="{!!isCountAnalysisEnable}" rendered="{!stepNo==3 && Objcampaign.Add_Member_Status__c!=Null && Objcampaign.CRM_ParentSegmentedCampaign__c==Null }" status="loadingstatus" reRender="msgs" />
+                
+                 
+             <!--Ending of PP6 Change-->
+             <!--Ending of PP5 Change-->
+              <!-- starting of defect 803: change in rendered condition -->
+              
+       
+                <apex:commandButton value="Activate campaign " action="{!activatecampaign}" disabled="{!RefData_Alert  || IF(AND(isTargetedCampaign,Campaign.Add_Member_Status__c!='Calculated Net Count',objcampaign.Member_Types__c!='Campaign Segments'),IF(Campaign.Add_Member_Status__c=='Added Members',false,true),false) || AND(NOT(TactFlag),stepNo==4,DetailPage,objcampaign.status=='Active' || (stepNo==5 && campid==null))}" rendered="{!AND(NOT(Campaign.IsActive),objcampaign.status=='In Development',stepNo==5,tactflag==true, objcampaign.CRM_ParentSegmentedCampaign__c==null) || (campid==null && detailpage==false && stepNo==5) ||  IF(NOT(Campaign.IsActive) && TactFlag==false && stepNo==4 && DetailPage==true, true, false) || (objcampaign.Add_Member_Status__c=='Added Members' && stepNo==5 && tactflag==true && if(objcampaign.Member_Types__c=='Campaign Segments',false,(campaign.Current_count__c - (campaign.of_CampaignMembers__c + campaign.Missing_Contact_Count__c))<>0))}" status="loadingstatus" reRender="msgs" />
+               <!-- ending of defect 803 -->
+                <!-- end of changes for PP4 -->
+            </apex:pageBlockButtons> 
+               <style>
+               span.dateInput span.dateFormat{
+               display:none;
+               }
+               </style>
+               <!-- start of changes for PP4-->
+                <apex:outputPanel layout="block" styleClass="wizard-step" rendered="{!(stepNo==1 && DetailPage != true && objActivecamp.status!='Active' && objcampaign.CRM_ParentSegmentedCampaign__c==null) || (stepNo==1 && DetailPage != true && objcampaign.status!='Active' && campflag=='false' && objcampaign.CRM_ParentSegmentedCampaign__c==null) || (stepNo==1 && DetailPage != true && objcampaign.status!='Active' && templateflag=='true')}">             
+                <!-- end of changes for PP4-->
+                <div align="center"  >
+                <!--- Alignment Fix---->
+                 <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px">
+                 <!--- Alignment Fix---->
+                        <apex:pageBlockSection id="ThePBS" columns="2" >
+                        <apex:pageBlockSectionItem id="thePBSItem"  >                  
+                   Campaign Name 
+                    <!--- <apex:outputtext value="{!newCampaign}" id="NewCampid" html-readonly="true"/>  -->
+                     <apex:outputtext value="{!objcampaign.Name}" style="margin-left:2px" id="NewCampid" html-readonly="true"/>
+                 </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem > 
+                                <apex:outputLabel >Audience Count</apex:outputLabel>
+                                <apex:outputField value="{!objcampaign.Current_count__c}" rendered="{!tactflag==true}" />
+                            </apex:pageBlockSectionItem>
+                                                      
+                        </apex:pageBlockSection>
+                  </apex:panelGrid>
+                </div>
+                <apex:pageBlockSection columns="2" title="Basics" id="status2">
+           <!--     <apex:pageBlockSectionItem id="thePBSItem"  >                  
+                   Campaign Name 
+                    <!--- <apex:outputtext value="{!newCampaign}" id="NewCampid" html-readonly="true"/>  -->
+                 <!--    <apex:outputtext value="{!objcampaign.Name}" style="margin-left:2px" id="NewCampid" html-readonly="true"/>
+                 </apex:pageBlockSectionItem>  -->
+              <!--   <apex:outputField value="{!myCamp.Status}" rendered="{!campId == null}" />  
+                 <apex:inputField value="{!objcampaign.Status}" rendered="{!campId != null}" />  -->
+                 
+               <apex:pageBlockSectionItem >    
+                     <apex:outputLabel >Program Name</apex:outputLabel>
+                     <!--Start: Program Name limt size issue fix -->
+
+                     <apex:inputText value="{!objcampaign.Program_Name__c}" maxlength="255" style="width:301px;" /> 
+                     <!--End : Program Name limt size issue -->
+
+                 </apex:pageBlockSectionItem>  
+                  <apex:inputField value="{!objcampaign.Status}" id="status" rendered="{! campid!=null && campflag!='false' && templateflag!='true' && objcampaign.status!='In Development' && objcampaign.status!='Completed' && objcampaign.status!='Cancelled' }" />
+                <apex:outputField value="{!objcampaign.status}" rendered="{! (objcampaign.Status=='In Development' || objcampaign.Status=='Completed' || objcampaign.Status=='Cancelled') && campid!=null && campflag=='true' && templateflag!='true' }"/>
+                 <apex:outputField value="{!myCamp.Status}" rendered="{!campId == null || campflag=='false' || templateflag=='true'}" /> 
+                 <apex:inputField value="{!objcampaign.Goal_Objective__c}" style="width:300px; "/>                 
+                 <apex:inputField value="{!objcampaign.Description}" style="width:300px; "/> 
+                 <apex:inputField value="{!objcampaign.Campaign_Toll_Free_Number__c}" />
+                <apex:inputField value="{!objcampaign.StartDate}" id="date" required="true" rendered="{!IF((objcampaign.status!='Suspended' && objcampaign.status!='Completed' && objcampaign.status!='Cancelled') || (objcampaign.StartDate > today() && objcampaign.status=='Suspended'), true, false)}"/> 
+              
+                  <apex:outputField value="{!objcampaign.StartDate}" id="date1" rendered="{!IF((!detailpage && (objcampaign.status=='Cancelled' || objcampaign.status=='Completed'))  || (objcampaign.Status=='Suspended' && objcampaign.StartDate <= today()),true,false)}"/> 
+                 <apex:inputField value="{!objcampaign.Call_Center_Identifier__c}"/>
+        <!--      <apex:inputText id="startdate" size="10" value="{!objcampaign.StartDate}" onmouseover="initialiseCalendar(this, '{!$Component.startdate}')"/>  -->
+                   <apex:inputField value="{!objcampaign.EndDate}" required="true" rendered="{!IF((objcampaign.status!='Suspended' && objcampaign.status!='Completed' && objcampaign.status!='Cancelled' )|| (objcampaign.EndDate > today() && objcampaign.status=='Suspended'), true, false)}"/> 
+                  <apex:outputField value="{!objcampaign.EndDate}"  rendered="{!IF((!detailpage && (objcampaign.status=='Cancelled' || objcampaign.status=='Completed'))  || (objcampaign.Status=='Suspended' && objcampaign.EndDate <= today()),true,false)}"/> 
+                 
+                 <apex:inputField value="{!objcampaign.Save_Campaign_as_Template__c}"/>                
+                 <apex:inputField value="{!objcampaign.Version__c}" style="width:20px; "/>
+              <!--   <apex:outputField value="{!objcampaign.isActive}"  />  -->
+                
+               </apex:pageBlockSection>
+               
+               <apex:actionRegion >
+                    <apex:pageBlockSection id="service" title="Ownership" >
+                       <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="Ownership"/>
+                            <apex:selectList value="{!selectedOwnerType}" multiselect="false" size="1">
+                                <apex:selectOptions value="{!ownershipList}"/>
+                                <apex:actionSupport event="onchange" action="{!clearCriteria}" reRender="ownership_sub,selectedOwner" status="loadingstatus"/>
+                            </apex:selectList>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >&nbsp;</apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first">
+                             <apex:outputLabel />
+                             <apex:outputPanel id="ownership_sub" layout="block" style="overflow:auto; height: 120px;background-color:#ffffff;">
+                                 <apex:selectCheckboxes value="{!selectedCriteria}" layout="pageDirection">
+                                     <apex:selectOptions value="{!ownershiptype}" />
+                                     <apex:actionSupport event="onchange" action="{!fetchOwnershipNames}" reRender="selectedOwner" status="loadingstatus" />
+                                 </apex:selectCheckboxes>
+                             </apex:outputPanel>
+                        </apex:pageBlockSectionItem> 
+                        <apex:pageBlockSectionItem >
+                            <apex:outputLabel />
+                            <apex:outputPanel id="selectedOwner">
+                           
+                                <apex:outputPanel rendered="{!selectedCriteria!=null && selectedCriteria.size>0}" layout="block" style="padding:10px;overflow: auto; height: 120px;background-color:#ffffff;">
+                                    <apex:repeat value="{!selectedCriteria}" var="CO">
+                                        {!if(showSelectedownership[CO].CRM_Region__c!=null,showSelectedownership[CO].CRM_Region__c,if(showSelectedownership[CO].CRM_Market__c!=null,showSelectedownership[CO].CRM_MarketRegion__c,if(showSelectedownership[CO].CRM_Hospital__c!=null,showSelectedownership[CO].CRM_HospitalMarket__c,'')))}<br/><br/>
+                                    </apex:repeat>
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                    
+                       
+                    <!-- Start Campaign detail screen change :Sub Service/Service Line -->
+                 
+                       <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first">
+                           <apex:outputLabel value="Service Line" />
+                           <apex:outputPanel id="ownership_serviceline">
+                               <div class="requiredInput"><div class="requiredBlock"></div>
+                                   <apex:selectList value="{!selectedServiceLine}" size="1">
+                                       <apex:selectOptions value="{!lstServiceLinevalues}"></apex:selectOptions>
+                                        <apex:actionSupport event="onchange" action="{!refreshSubServiceLines}" status="loadingstatus"  reRender="ownership_subserviceline,ownership_subserviceline_selected"/>                    
+                                   </apex:selectList>
+                               </div>
+                           </apex:outputPanel>
+                       </apex:pageBlockSectionItem>
+                       <apex:pageBlockSectionItem >&nbsp;</apex:pageBlockSectionItem>    <!-- 2nd column as blank --> 
+                    <!-- Sub Service Line -->
+                       <apex:pageBlockSectionItem id="subServiceLine_Row" labelStyleClass="labelCol vfLabelColTextWrap  first">      
+                            <apex:outputLabel value="Sub Service Line" id="subServiceLine_label"/>
+                            <apex:outputPanel id="ownership_subserviceline">
+                                <!-- <script>
+                                    document.getElementById('{!$Component.subServiceLine_label}').style.display='none';
+                                </script> -->
+                               
+                                <apex:outputPanel layout="block" id="subservice" style="overflow: auto; height:120px;background-color:#ffffff;" rendered="{!subserviceline.size>0}">
+                                    <apex:selectCheckboxes value="{!selectedValSSL}" layout="pageDirection">&nbsp;
+                                        <apex:selectOptions value="{!subserviceline}"/>
+                                            <apex:actionSupport event="onchange" action="{!fetchSubServiceLineNames}"  status="loadingstatus"  reRender="ownership_subserviceline_selected"/>
+                                    </apex:selectCheckboxes>    
+                                </apex:outputPanel>
+                                <apex:selectList size="1" rendered="{!subserviceline.size<1}" disabled="true">
+                                    <apex:selectOption itemValue="--None--" itemLabel="--None--"/>
+                                </apex:selectList>
+                            </apex:outputPanel> 
+                      </apex:pageBlockSectionItem>
+                      <apex:pageBlockSectionItem >
+                            <apex:outputLabel />
+                            <apex:outputPanel id="ownership_subserviceline_selected">
+                                <apex:outputPanel rendered="{!selectedValSSL.size>0}" layout="block" style="padding:10px;overflow:auto;height:120px;background-color:#ffffff;">
+                                    <apex:repeat value="{!selectedValSSL}" var="SSL">
+                                        {!showSelectedSubService[SSL].CRM_ServiceSubServiceLine__c}<br/><br/>
+                                    </apex:repeat>  
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                      </apex:pageBlockSectionItem>
+                 
+                    <!-- Start Campaign detail screen change :Sub Service/Service Line -->
+                          
+                       <apex:inputField value="{!objcampaign.Requested_By__c}"/>
+                       <apex:inputfield value="{!objCampaign.Ownerid}" /> 
+                    </apex:pageBlockSection>
+                   
+                </apex:actionRegion>
+                <br/>
+                <apex:pageBlockSection columns="2" title="Financial">
+                    <apex:inputField value="{!objcampaign.Actual_Spend__c}"/>
+                    <apex:inputField value="{!objcampaign.Expected_Contribution_Margin__c}"/> 
+                    <apex:inputField value="{!objcampaign.Campaign_Budget__c}"/>
+                    <apex:inputField value="{!objcampaign.Purchase_Invoice_Order__c}" style="width:301px;"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="2" title="System">
+                    <apex:outputField value="{!objcampaign.LastModifiedById}"/>
+                    <apex:panelGrid columns="2">
+                    
+                 <!--  <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}">  -->
+                    <apex:outputText value="Parent Campaign " styleClass="labelCol vfLabelColTextWrap first"/> <apex:inputtext value="{!parentCampName}" size="40"/>
+                 <!--    </apex:outputPanel>  -->
+                     
+                   
+                    </apex:panelGrid>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Created By"></apex:outputLabel>
+                        <apex:outputText value="{!objcampaign.CreatedBy.name}"/>
+                    </apex:pageBlockSectionItem> 
+                   
+                </apex:pageBlockSection>
+          <!--      <apex:pageBlockSection > 
+                
+                    <apex:commandButton value="Add Child Campaign" action="{!addChildCamp}" rendered="{!campId != null && campflag=='true' && DetailPage==true }" />
+                </apex:pageBlockSection>  -->
+            </apex:outputPanel>
+            
+            
+               <script>
+             var statusdetail = document.getElementById('thePage:theForm:pgblock-form:status2:status');
+            var options = statusdetail.getElementsByTagName('OPTION') 
+           console.log(statusdetail );
+           
+           if(statusdetail.options[statusdetail.selectedIndex].value=='In Development'){
+            console.log('Hi111' );
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'Active' || options[i].innerHTML == '--None--'  || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed')
+            {
+            statusdetail.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+            }
+            }
+                        
+           else if(statusdetail.options[statusdetail.selectedIndex].value=='Suspended'){
+            console.log('Hi' );
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'Completed' || options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed' || options[i].innerHTML == '--None--')
+            {
+            statusdetail.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+            }
+            }
+            
+            
+           else if(statusdetail.options[statusdetail.selectedIndex].value=='Cancelled'){
+              console.log('Hiin cancell' );
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'Completed' || options[i].innerHTML == '--None--' || options[i].innerHTML == 'Suspended' || options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed' || options[i].innerHTML == 'Active')
+            {
+            statusdetail.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+            }
+            }
+            
+            
+            else if(statusdetail.options[statusdetail.selectedIndex].value=='Completed'){
+              console.log('Hi in copmple' );
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'Cancelled' ||  options[i].innerHTML == '--None--' || options[i].innerHTML == 'Suspended' || options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed' || options[i].innerHTML == 'Active')
+            {
+            statusdetail.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+            }
+            }
+            
+            
+            </script>
+            
+            
+            <script type="text/javascript">
+                $(function () {
+                    $("thePage:theForm:pgblock-form:service:line").change(function () {
+                     var status = this.value;
+                        console.log(status);
+                       
+                       
+                    });
+                });
+            </script>
+            <script>
+                setTimeout(function(){
+                var startYear=1982; 
+    
+                var endYear=2020; 
+                var optionsString='';
+                if(startYear<endYear){
+                 for(i=startYear;i<endYear+1;i++){
+    
+                        optionsString += "<option value=\""+i+"\">"+i+"</option>";
+                        
+    
+                    }
+                 
+                  
+                   $('#calYearPicker').html(optionsString);
+    
+                }
+                               }, 1000);
+     
+
+
+
+      
+
+                
+            </script> 
+            
+            
+            
+          <!-- start of changes for PP4--> 
+        <apex:outputPanel layout="block" styleClass="wizard-step" rendered="{!(stepNo==1 && objcampaign.Status=='Active' && detailpage==false && ($Profile.Name == 'Tenet Marketer' || $Profile.Name == 'Tenet Super User' || $Profile.Name == 'Tenet Admin' || $Profile.Name == 'Tenet Help Desk' || $Profile.Name=='Tenet Leadership') ) || (stepNo==1 && DetailPage == true && objcampaign.CRM_ParentSegmentedCampaign__c==null) || (stepNo==1 && DetailPage != true && objActivecamp.status=='Active' && campflag!='false' && templateflag!='true' && objcampaign.CRM_ParentSegmentedCampaign__c==null) }">            
+         
+           <!--- Alignment Fix---->     
+            <div align="center">
+               
+                <apex:commandButton value="Totals" rendered="{!(childCampaign.size > 0 || objcampaign.CRM_ParentSegmentedCampaign__c!=null) && objcampaign.id!=null}" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==objcampaign.id && objcampaign.CRM_ParentSegmentedCampaign__c==null}" action="{!segmentnavbar}" reRender="msgs,pgblock-form">   
+                    <apex:param id="IdFromPage" name="IdFromPage" assignTo="{!IdFromPage}" value="{!IF(objcampaign.CRM_ParentSegmentedCampaign__c==null,objcampaign.id,objcampaign.CRM_ParentSegmentedCampaign__r.id)}"/>
+                    <apex:param id="flag1" name="flag" assignTo="{!segmentflag}" value="false"/>
+                </apex:commandButton>
+                
+                <apex:repeat value="{!childCampaign}" var="r">
+                    <apex:commandButton action="{!segmentnavbar}" value="{!r.Segment__c}" status="loadingstatus" reRender="msgs,pgblock-form" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==r.id}" rendered="{!objcampaign.id!=null}">
+                        <apex:param id="IdFromPage" name="IdFromPage" assignTo="{!IdFromPage}" value="{!r.id}"/>
+                         <apex:param id="flag1" name="flag" assignTo="{!segmentflag}" value="true"/>
+                    </apex:commandButton>
+                    
+                    
+                </apex:repeat>  
+                   
+            </div>
+            <!-- end of changes for PP4-->
+             <div align="center" bgcolor="Lavender"  style="width:100%;height: 80px">
+                <apex:panelGrid bgcolor="Lavender" style="width:100%;height: 80px">
+           <!--- Alignment Fix---->     
+             
+                      <apex:pageBlockSection columns="2">
+                       <apex:outputField value="{!objcampaign.Name}" />
+                       <apex:outputField value="{!objcampaign.Status}"  rendered="{!IF(NOT(objcampaign.status=='Active' && ($Profile.Name == 'Tenet Marketer' || $Profile.Name == 'Tenet IT' || $Profile.Name == 'Tenet Super User' || $Profile.Name == 'Tenet Help Desk' || $Profile.Name=='Tenet Admin' || $Profile.Name=='System Administrator')) || detailPage==true , true, false) && objcampaign.CRM_ParentSegmentedCampaign__c==null}"/>
+                       <apex:outputField value="{!objcampaign.Segment__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==true}"/>
+                        <apex:inputField value="{!objcampaign.Segment__c}" required="true" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false}"/>    
+                          <apex:outputField value="{!objcampaign.Program_Name__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}" />
+                       <!-- start of PP4 change-->  
+                        
+                         <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}">
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap first" style="margin-left: 87px;">Segmented Campaign</apex:outputLabel>
+                             <apex:outputText >{!objcampaign.CRM_ParentSegmentedCampaign__r.name}</apex:outputText>
+                    </apex:outputPanel>
+                        
+                              <!-- end of PP4 change-->
+                        <apex:outputField value="{!objcampaign.Current_count__c}" rendered="{!targeted==true}"/>  
+                        
+                      </apex:pageBlockSection>
+                </apex:panelGrid>
+             </div>
+             <apex:pageBlockSection columns="2" title="Basics" id="status1">
+               <!--     <apex:outputField value="{!objcampaign.Name}" />
+                    <apex:outputField value="{!objcampaign.Status}" /> 
+                    <apex:outputField value="{!objcampaign.Program_Name__c}"  />   --> 
+                    
+                    <apex:outputField value="{!objcampaign.Goal_Objective__c}" />
+                   
+                    <apex:inputField value="{!objcampaign.Status}" id="campst" rendered="{!IF(detailpage==false && ($Profile.name=='Tenet Marketer' || $Profile.name=='Tenet Super User' ||  $Profile.name=='Tenet Help Desk' || $Profile.name=='Tenet Admin' || $Profile.name=='Tenet IT' || isLeadershipProfile) && objActivecamp.Status=='Active' ,true,false) }"/>
+                   
+                    <apex:outputField value="{!objcampaign.Description}" style="width:400px; "/>
+                    <apex:outputField value="{!objcampaign.Save_Campaign_as_Template__c}"/>
+                    
+                      <apex:outputField value="{!objcampaign.Call_Center_Identifier__c}" rendered="{!segmentedchildflag==true || objcampaign.CRM_ParentSegmentedCampaign__c!=null || detailPage==true && (objcampaign.status=='Active' || objcampaign.status=='Suspended' || objcampaign.status=='Cancelled' || objcampaign.status=='Completed' || objcampaign.status=='In Development')}"/>   
+                 <apex:inputField value="{!objcampaign.Call_Center_Identifier__c}" rendered="{!IF(!detailpage &&(profileflag==true) && objActivecamp.Status='Active',true,false) }"/> 
+                  <apex:outputField value="{!objcampaign.StartDate}" id="date" rendered="{! segmentedchildflag==true || IF(detailpage==true  || (!detailpage  && objActivecamp.Status=='Active'  && (objcampaign.StartDate <= today())&& objcampaign.CRM_ParentSegmentedCampaign__c==null ),true,false)}"/> 
+                    
+                    
+                      <apex:inputField value="{!objcampaign.StartDate}" id="startdate" rendered="{!IF(!detailpage   && (objcampaign.status!='Cancelled'|| objcampaign.status!='Completed') && (objcampaign.CRM_ParentSegmentedCampaign__c==null && objcampaign.StartDate > today()),true,false)  }"/>
+                                   
+                    <apex:inputField value="{!objcampaign.Campaign_Toll_Free_Number__c}" rendered="{!IF(! detailpage && !isLeadershipProfile && NOT($Profile.Name == 'Tenet Marketer') && objActivecamp.Status='Active',true,false) }"/>
+                      <apex:outputField value="{!objcampaign.Campaign_Toll_Free_Number__c}" rendered="{!segmentedchildflag==true || IF( detailpage==true  || $Profile.Name == 'Tenet Marketer' ||  isLeadershipProfile,true,false)}" />
+                    
+                     <apex:outputField value="{!objcampaign.EndDate}" rendered="{!IF(detailpage==true  ||  isLeadershipProfile || objcampaign.CRM_ParentSegmentedCampaign__c==null!=true || (!detailpage &&  objActivecamp.Status=='Active' && (objcampaign.EndDate <= today()) && objcampaign.CRM_ParentSegmentedCampaign__c==null),true,false)}"/>
+                    
+                   
+                    
+                    <apex:inputField value="{!objcampaign.EndDate}" required="true" rendered="{!IF(!detailpage  && objActivecamp.Status=='Active'  && (objcampaign.EndDate > today()) && objcampaign.CRM_ParentSegmentedCampaign__c==null,true,false)  }"/>
+                    
+                   
+                    <apex:outputField value="{!objcampaign.Version__c}" style="width:20px; "/> 
+               <!--     <apex:outputField value="{!objcampaign.isActive}"  />  -->
+              </apex:pageBlockSection>
+              <apex:pageBlockSection columns="2" title="Ownership"> 
+                   
+                  
+                  <apex:pageBlockSectionItem >
+                      <apex:outputLabel value="{!$ObjectType.Campaign.fields.CRM_OwnershipType__c.Label}"/>
+                      <apex:outputPanel layout="block">
+                        <apex:outputField value="{!objcampaign.CRM_OwnershipType__c}" rendered="{!!showolddatacampaign}"/>
+                        <apex:outputText rendered="{!showolddatacampaign}">
+                            {!IF(objcampaign.Audience_Region__c!=null,'Region',IF(objcampaign.Audience__c!=null,'Market','Hospital'))}
+                        </apex:outputText>
+                      </apex:outputPanel>
+                  </apex:pageBlockSectionItem>
+                  <apex:outputLabel />
+                  <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" >
+                        <apex:outputLabel />
+                        <apex:outputPanel >
+                            <apex:outputPanel rendered="{!!showolddatacampaign}"><!----ownership null fix for active campaign ----->
+                                
+                                <apex:repeat value="{!Selectedownership}" var="CO">
+                                    {!if(Selectedownership[CO].CRM_Region__c!=null,Selectedownership[CO].CRM_Region__c,if(Selectedownership[CO].CRM_Market__c!=null,Selectedownership[CO].CRM_MarketRegion__c,if(Selectedownership[CO].CRM_Hospital__c!=null,Selectedownership[CO].CRM_HospitalMarket__c,'')))}<br/>
+                                    
+                                </apex:repeat>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!showolddatacampaign}">
+                                <apex:outputText value="{!IF(objcampaign.Audience_Region__c!=null,objcampaign.Audience_Region__c,IF(objcampaign.Audience__c!=null,objcampaign.Audience__c,objcampaign.Audience_Hospital__c))}" />
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                       
+                    </apex:pageBlockSectionItem><br/>
+                  
+                   <apex:outputField value="{!objcampaign.Service_Line__c}"/><br/>
+                   
+                    <apex:outputField value="{!objcampaign.CRM_SubServiceLineText__c}" rendered="{!!showolddatacampaign}" />
+                    <apex:outputField value="{!objcampaign.Sub_Service_Line__c}" rendered="{!showolddatacampaign}" />
+                    <br/>
+                   
+                   <apex:outputField value="{!objcampaign.Requested_By__c}"/>
+
+                   
+                   <apex:outputfield value="{!objCampaign.Ownerid}" rendered="{!IF(detailpage==true || (detailPage==false && profileflag==true) ,true,false)}"/>
+              <!--     <apex:inputField value="{!objcampaign.Ownerid}" rendered="{!IF(!detailpage && objActivecamp.Status=='Active' && NOT($Profile.Name == 'Tenet Marketer') && (isLeadershipProfile || $Profile.Name == 'Tenet Help Desk' || $Profile.Name == 'Tenet Admin' ),true,false) }"/>  -->
+              </apex:pageBlockSection>
+              <apex:pageBlockSection columns="2" title="Financial"> 
+                   <apex:outputField value="{!objcampaign.Actual_Spend__c}"/>
+                   <apex:outputField value="{!Campaign.Expected_Contribution_Margin__c}"/> 
+                   <apex:outputField value="{!objcampaign.Campaign_Budget__c}"/>
+                   <apex:outputField value="{!objcampaign.Purchase_Invoice_Order__c}"/>
+               </apex:pageBlockSection>
+              
+               <apex:pageBlockSection Columns="2" title="System">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Created By"></apex:outputLabel>
+                        <apex:outputText value="{!objcampaign.CreatedBy.name}"/>
+                    </apex:pageBlockSectionItem> 
+                   <apex:outputField value="{!objcampaign.LastModifiedById}"/>
+                   <!-- start of changes for PP4-->
+                     <apex:outputField value="{!objcampaign.ParentId}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}"/>
+                   
+               
+           <!-- end of chnages for PP4-->
+            </apex:pageBlockSection>
+                 <script>
+            
+            var activestatus = document.getElementById('thePage:theForm:pgblock-form:status1:campst');
+            var options = activestatus.getElementsByTagName('OPTION') 
+            var startdate = document.getElementById('thePage:theForm:pgblock-form:status1:startdate');
+            var olddate = document.getElementById('thePage:theForm:pgblock-form:status1:date');
+            if(startdate){
+            console.log(startdate);  
+            var e = startdate.value;
+             console.log('value of e=============='+ e);
+             var date = Date.parse(e);
+             }
+             
+             if(olddate){
+             
+            console.log(olddate);
+            var d = olddate.innerHTML;
+            console.log('value of d=============='+ d);
+           var date1= Date.parse(d);
+           console.log('olddate date==='+ date1);
+          }
+           var today = new Date();
+          console.log('todays date==='+ today);
+            console.log('values-------');
+           
+          if(date < today){
+          console.log('inside if ')}
+          
+          if(date > today){
+          console.log('else if')
+          }
+         if(olddate){
+         if((activestatus.options[activestatus.selectedIndex].value=='Active') && (date1 < today)){
+         console.log('hi');
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed'  || options[i].innerHTML == '--None--')
+            {
+            activestatus.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+         }
+         }
+         
+          if((activestatus.options[activestatus.selectedIndex].value=='Suspended') && (date1 < today)){
+         console.log('hi');
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Cancelled' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed'  || options[i].innerHTML == '--None--')
+            {
+            activestatus.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+         }
+         }
+         
+        if((activestatus.options[activestatus.selectedIndex].value=='Cancelled') && (date1 < today)){
+         console.log('hi');
+            for(var i=0; i<options.length; i++) {
+             if( options[i].innerHTML == 'Completed' || options[i].innerHTML == '--None--' || options[i].innerHTML == 'Suspended' || options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed' || options[i].innerHTML == 'Active')
+            {
+            activestatus.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+         }
+         }
+         
+         if((activestatus.options[activestatus.selectedIndex].value=='Completed') && (date1 < today)){
+         console.log('hi');
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'Cancelled' ||  options[i].innerHTML == '--None--' || options[i].innerHTML == 'Suspended' || options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed' || options[i].innerHTML == 'Active')
+            {
+            activestatus.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+         }
+         }
+         
+         }
+         if(startdate){
+          if((activestatus.options[activestatus.selectedIndex].value=='Active') && (date >= today)){
+          console.log('hi66666666');
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'Completed' || options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed' || options[i].innerHTML == 'Suspended' || options[i].innerHTML == '--None--')
+            {
+            activestatus.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+           }
+           }
+           
+            if((activestatus.options[activestatus.selectedIndex].value=='Suspended') && (date >= today)){
+          console.log('hi66666666');
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Cancelled' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed'  || options[i].innerHTML == '--None--')
+            {
+            activestatus.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+           }
+           }
+            if((activestatus.options[activestatus.selectedIndex].value=='Cancelled') && (date >= today)){
+          console.log('hi66666666');
+           for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'Completed' || options[i].innerHTML == '--None--' || options[i].innerHTML == 'Suspended' || options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed' || options[i].innerHTML == 'Active')
+            {
+           activestatus.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+           }
+           }
+           }
+           
+           if((activestatus.options[activestatus.selectedIndex].value=='Completed') && (date >= today)){
+          console.log('hi66666666');
+            for(var i=0; i<options.length; i++) {
+            if( options[i].innerHTML == 'Cancelled' ||  options[i].innerHTML == '--None--' || options[i].innerHTML == 'Suspended' || options[i].innerHTML == 'In Development' || options[i].innerHTML == 'Template' || options[i].innerHTML == 'Members Added' || options[i].innerHTML == 'Order Processed' || options[i].innerHTML == 'Active')
+            {
+            activestatus.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+            }
+           }
+           }
+           
+           }
+            </script> 
+             </apex:outputPanel>
+            <!-- start of PP4 changes-->
+             <apex:outputPanel layout="block" styleClass="wizard-step" rendered="{!(stepNo==2 && DetailPage != true && objcampaign.CRM_ParentSegmentedCampaign__c==null) }">
+               <!-- End of PP4 changes-->
+                 <div align="center" draggable="false" >
+                   <!--- Alignment Fix---->
+                    <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px">
+                  <!--- Alignment Fix---->
+                        <apex:pageBlockSection columns="2" >
+                <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first"  > 
+            
+                    <apex:outputLabel value="Campaign Name" />
+                            <apex:outputField value="{!objcampaign.Name}"  />
+                </apex:pageblockSectionItem>   
+                <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!campId == null  || templateflag=='true'}" >
+                    <apex:outputLabel value="Campaign Status" />      
+                        <apex:outputField value="{!myCamp.Status}" />  
+                 </apex:pageblockSectionItem>     
+                 <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!campid!=null && templateflag!='true'}" >                         
+                    <apex:outputLabel value="Campaign Status" />       
+                       <apex:outputField value="{!objcampaign.Status}" id="statusbanner" /> 
+                  </apex:pageblockSectionItem>               
+                  <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first">            
+                    <apex:outputLabel value="Program Name" /> 
+                            <apex:outputField value="{!objcampaign.Program_Name__c}"  />
+                  </apex:pageblockSectionItem>                
+                   <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first">                                      
+                    <apex:outputLabel value="Audience Count" /> 
+                            <apex:outputField value="{!objcampaign.Current_count__c}" rendered="{!tactflag==true}"/>
+                   </apex:pageblockSectionItem>         
+                    </apex:pageBlockSection>
+                    </apex:panelGrid>
+                </div>
+               
+      <apex:actionRegion >
+       <apex:pageBlockSection id="theBlock1" >
+                <!--- Design change for channel vendor screen  -->
+                  
+                <apex:pageblockSectionItem id="pBS1" labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!IF((!detailPage && ObjActiveCamp.status!='Active')  || (campflag=='false' && objcampaign.status!='Active' && detailPage==false) || (templateflag=='true' && objcampaign.status!='Active' && detailPage==false), true, false)}"> 
+                
+                    <apex:outputLabel value="Channel"  />
+                    <apex:outputPanel layout="block" id="oPP1">
+                       <div class="requiredInput"><div class="requiredBlock"></div>
+                           <apex:selectList value="{!selectedChannel}" size="1"  id="channel" rendered="{!IF((!detailPage && ObjActiveCamp.status!='Active')  || (campflag=='false' && objcampaign.status!='Active' && detailPage==false) || (templateflag=='true' && objcampaign.status!='Active' && detailPage==false), true, false)}"  disabled="{!lockChannelValue==true || objcampaign.Add_Member_Status__c=='Calculated Net Count' || objcampaign.Add_Member_Status__c == 'Adding Audience Report' || objcampaign.Add_Member_Status__c == 'Order Placed'}">
+                               <apex:selectOptions value="{!lstchannelvalues}"></apex:selectOptions>
+                                <apex:actionSupport event="onchange" action="{!tactic}"  rerender="pgblock-form, theBlock1,msgs"  status="loadingstatus"/>                    
+                            </apex:selectList>
+                       </div>
+                   </apex:outputPanel>
+                   </apex:pageblockSectionItem>
+                   
+                   <apex:outputField value="{!objcampaign.Channel__c}" id="channeledits" rendered="{!IF(detailPage==false && ObjActiveCamp.status=='Active' && campflag=='true' && templateflag!='true' && ($Profile.Name == 'Tenet Marketer' || $Profile.Name == 'Tenet Help Desk' || $Profile.Name == 'Tenet Super User' || $Profile.Name == 'Tenet Admin' || $Profile.Name == 'Tenet IT' || $Profile.Name == 'Tenet Leadership'), true, false )}" />      
+                   <apex:outputField value="{!objcampaign.Vendor_Name__c}" rendered="{!IF(detailPage==false && ObjActiveCamp.status=='Active' && campflag=='true' && templateflag!='true' && ($Profile.Name == 'Tenet Marketer' || $Profile.Name == 'Tenet Help Desk'), true, false )}" />
+                    
+                   
+                   <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first">    
+                 
+                       <apex:outputLabel value="Vendor Name" />
+                         <apex:outputPanel >
+                           <apex:selectList value="{!selectedVendor}" size="1"  id="calltoaction"  rendered="{!IF((!detailPage && ObjActiveCamp.status!='Active') || (ObjActiveCamp.status=='Active' && ($Profile.Name != 'Tenet Marketer' && $Profile.Name != 'Tenet Help Desk') && detailPage==false) || (campflag=='false' && objcampaign.status!='Active' && detailPage==false) || (templateflag=='true' && objcampaign.status!='Active' && detailPage==false), true, false)}">
+                           <apex:selectOptions value="{!lstVenderNamesValues}"></apex:selectOptions>
+                           <!-- <apex:actionSupport event="onchange" action="{!vendorname}" rerender="pgblock-form,vendor" status="loadingstatus"/> -->
+                           </apex:selectList>
+                         </apex:outputPanel>
+                   </apex:pageBlockSectionItem>
+               
+                </apex:pageblockSection>
+                
+                  <apex:outputPanel >
+                    
+                    <apex:pageblockSection id="vendor">
+                  
+                   <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!IF((!detailPage && ObjActiveCamp.status!='Active' && tactflag==false ) || (ObjActiveCamp.status=='Active' && ($Profile.Name != 'Tenet Marketer' && $Profile.Name != 'Tenet Help Desk' ) && detailPage==false && tactflag==false) ||  (campflag=='false' && objcampaign.status!='Active' && detailPage==false && tactflag==false) || (templateflag=='true' && objcampaign.status!='Active' && detailPage==false && tactflag==false), true, false)}"  >    
+                        <apex:outputlabel value="# Of Member" />   
+                        <apex:outputPanel >
+                         <apex:inputField value="{!objcampaign.of_Members__c}" /> 
+                        </apex:outputPanel>
+                   </apex:pageblockSectionItem>      
+                   
+                        <apex:outputField value="{!objcampaign.of_Members__c}" rendered="{!IF(detailPage==false && ObjActiveCamp.status=='Active' && campflag=='true' && templateflag!='true' && $Profile.Name == 'Tenet Marketer' && tactflag==false, true, false )}"/>                          
+                   
+                   <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!TactFlag  && templateflag!='true'}">     
+                       <apex:outputlabel value="Total Campaign Members" />  
+                     
+                        <apex:outputField value="{!objcampaign.of_CampaignMembers__c}"  />                       
+                     
+                   </apex:pageblockSectionItem>        
+                   
+                    <apex:outputField value="{!objcampaign.Call_to_Action__c}" rendered="{!IF(detailPage==false && ObjActiveCamp.status=='Active' && campflag=='true' && templateflag!='true' && (profileflag==true), true, false ) }" />
+               
+                   <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!IF((!detailPage && (ObjActiveCamp.status!='Active'  && objcampaign.status!='Suspended')) || (!detailPage && (ObjActiveCamp.status!='Active'  && objcampaign.status!='Cancelled')) || (!detailPage && (ObjActiveCamp.status!='Active'  && objcampaign.status!='Completed')) || (campflag=='false' && objcampaign.status!='Active' && detailpage==false) || (templateflag=='true' && objcampaign.status!='Active' && detailPage==false), true, false)}" >   
+                 <apex:outputLabel value="Call To Action"  />
+                   <apex:outputpanel >
+                   
+                   <apex:selectList value="{!selectedCallToAction}" size="1"  id="calltoaction" disabled="{!IsChannelInbound}" >
+                   <apex:selectOptions value="{!lstCallTOActionValues }"></apex:selectOptions>
+                    </apex:selectList>
+                   </apex:outputpanel>
+                   </apex:pageblockSectionItem>   
+             
+                    </apex:pageblockSection>
+                  
+                  <apex:pageblockSection id="memval" columns="2" >
+                 
+                   
+                   <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!IF((!detailPage && (objcampaign.status!='Active' && objcampaign.status!='Suspended'  && objcampaign.status!='Completed'  && objActiveCamp.status!='Active' && objActiveCamp.status!='Suspended' ) && tactflag==true) || (campflag=='false' && (objcampaign.status!='Active' ) && detailPage==false && tactflag==true) || (templateflag=='true' && (objcampaign.status!='Active' ) && detailPage==false && tactflag==true), true, false)}" id="membertype">   
+                   <apex:outputLabel value="Member Type"    />
+                       <apex:outputPanel >  
+                           
+                               <apex:selectList value="{!objcampaign.member_types__c }" size="1"  disabled="{! campaign.Add_Member_Status__c='Calculated Net Count' && stepNo==3 && tactflag==true || lockMemberType }">
+                               <apex:selectOptions value="{!lstMemberTypeValues }" ></apex:selectOptions>
+                                   <apex:actionSupport event="onchange" action="{!membervalues}" rerender="pgblock-form,memval" status="loadingstatus"/>                    
+                               </apex:selectList>
+                                 
+                       </apex:outputPanel>
+                   
+                   </apex:pageblockSectionItem> 
+                   <apex:outputField value="{!objcampaign.Member_Types__c}" rendered="{! ($Profile.name=='Tenet Admin' || $Profile.name=='Tenet Super User') && objcampaign.status=='Active'}"/>
+                  <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!(proFlag && ObjActiveCamp.status!='Active' && tactflag==false && campflag=='true' && templateflag!='true') || IF(proflag && ObjActiveCamp.status=='Active' && tactflag==false && campflag=='true' && templateflag!='true', true, false) || IF(proflag==true && campflag=='false' && tactflag==false , true, false) || (templateflag=='true' && objcampaign.status!='Active' && tactflag==false && detailPage==false) }">   
+                    
+                      <apex:outputLabel rendered="{!tactflag==false}" value="Member Type" />  
+              
+                   <apex:outputPanel >
+                             <apex:outputfield id="one" value="{!objcampaign.Member_Types__c}" />
+                   </apex:outputPanel>
+                   </apex:pageblockSectionItem>   
+                      
+                      
+                 
+                      <!--- Design change for channel vendor screen  -->
+                  
+                    </apex:pageblockSection>
+                
+                </apex:outputPanel>
+                 
+               </apex:actionRegion>  
+                <script>
+                    var select=document.getElementById('thePage:theForm:pgblock-form:memval:membertype');
+                    console.log(select);
+                    for (i=0;i<select.length;  i++) {
+                        if (select.options[i].value=='') {
+                            select.remove(i);
+                        }
+                        if (select.options[i].value=='None') {
+                            select.remove(i);
+                        }
+                    }
+                     
+                  
+                  
+                 
+                </script>
+                
+            </apex:outputPanel>
+            
+            <!-- start of changes for PP4-->
+             <apex:outputPanel layout="block" styleClass="wizard-step" rendered="{!(stepNo==2 && DetailPage==true && objcampaign.CRM_ParentSegmentedCampaign__c==null ) || (stepNo==1  && objcampaign.CRM_ParentSegmentedCampaign__c!=null )}" >        
+                 <div align="center">
+                     
+                     <apex:commandButton value="Totals" rendered="{!(childCampaign.size > 0 || objcampaign.CRM_ParentSegmentedCampaign__c!=null) && objcampaign.id!=null}" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==objcampaign.id && objcampaign.CRM_ParentSegmentedCampaign__c==null}" action="{!segmentnavbar}" reRender="msgs,pgblock-form">   
+                         <apex:param id="IdFromPage4" name="IdFromPage" assignTo="{!IdFromPage}" value="{!IF(objcampaign.CRM_ParentSegmentedCampaign__c==null,objcampaign.id,objcampaign.CRM_ParentSegmentedCampaign__r.id)}"/>
+                         <apex:param id="flag2" name="flag" assignTo="{!segmentflag}" value="false"/>
+                     </apex:commandButton>
+                     
+                     <apex:repeat value="{!childCampaign}" var="r">
+                         <apex:commandButton action="{!segmentnavbar}" value="{!r.Segment__c}" status="loadingstatus" reRender="msgs,pgblock-form" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==r.id}" rendered="{!objcampaign.id!=null}">
+                             <apex:param id="IdFromPage5" name="IdFromPage" assignTo="{!IdFromPage}" value="{!r.id}"/>
+                             <apex:param id="flag2" name="flag" assignTo="{!segmentflag}" value="true"/>
+                         </apex:commandButton>
+                         
+                         
+                     </apex:repeat> 
+                     
+                 </div>
+                 <!-- end of chnages for PP4-->
+                <div align="center" draggable="false" >
+                    <!--- Alignment Fix---->
+                    <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px">
+                     <!--- Alignment Fix---->
+                        <apex:pageBlockSection columns="2">
+                            <apex:outputField value="{!objcampaign.Name}" />
+                             <!-- start of changes for PP4-->
+                             <apex:outputField value="{!objcampaign.Status}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}"/> 
+                            
+                            <apex:inputField value="{!objcampaign.Segment__c}" rendered="{!objcampaign.Add_Member_Status__c!='Calculated Net Count' && objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false}"/>
+                            <apex:outputField value="{!objcampaign.Segment__c}" rendered="{!(objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==true) || objcampaign.Add_Member_Status__c=='Calculated Net Count'}"/>
+                        
+                         <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}">
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap first" style="margin-left: 87px;">Segmented Campaign</apex:outputLabel>
+                             <apex:outputText >{!objcampaign.CRM_ParentSegmentedCampaign__r.name}</apex:outputText>
+                    </apex:outputPanel>
+                        
+                        <!--     <apex:commandButton value="Refresh Count" style="margin-left:93px"  ></apex:commandButton> -->
+                            <apex:outputField value="{!objcampaign.Program_Name__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}" />
+                             <!-- end of changes for PP4--> 
+                             <apex:outputField value="{!objcampaign.Current_count__c}" rendered="{!tactflag==true}"/>
+                        </apex:pageBlockSection>
+                    </apex:panelGrid>
+                </div>
+                <apex:pageBlockSection >     
+                    <!-- chnage for PP4-->
+                    <apex:outputField value="{!Objcampaign.Channel__c}" id="channeldetail"/>
+                    <apex:outputField value="{!Objcampaign.Vendor_Name__c}" />
+                    <!-- end of changes for PP4-->
+                    <!-- <apex:outputField value="{!Campaign.Call_to_Action__c}"/> -->                       
+                </apex:pageBlockSection> 
+                
+                <apex:outputPanel >
+                    <apex:pageblockSection id="members1" columns="2">
+
+                        <apex:outputField value="{!Campaign.of_Members__c}" rendered="{!TactFlag==false}" /> 
+                        <!--  <apex:outputText value="{!Campaign.of_CampaignMembers__c}" rendered="{!TactFlag}" /> -->
+                        <apex:outputField value="{!Campaign.of_CampaignMembers__c}" rendered="{!TactFlag}" />  
+                        
+                         <apex:outputField value="{!objcampaign.Call_to_Action__c}"/> 
+               <!--        <apex:outputField value="{!Campaign.Other__c}" rendered="{!IF(vendornameflag==false || detailpage==true, true, false)}"/>   -->
+                       <!--- Design change for channel vendor screen  -->  
+                       <!-- start of chnages for PP4-->
+                        <apex:outputField value="{!objcampaign.Member_Types__c}" rendered="{!detailpage==true || objcampaign.Add_Member_Status__c=='Calculated Net Count'}"/> 
+                      <apex:pageblockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" rendered="{!IF (objcampaign.Add_Member_Status__c!='Calculated Net Count' && objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false, true, false)}" id="membertype">   
+                    <apex:outputLabel value="Member Type"   rendered="{!detailpage==false}" />
+                       <apex:outputPanel >  
+                                
+                               <apex:selectList value="{!objcampaign.member_types__c }" size="1"  disabled="{! campaign.Add_Member_Status__c='Calculated Net Count' && stepNo==3 && tactflag==true || (lockMemberType && objcampaign.CRM_ParentSegmentedCampaign__c==null)}">
+                               <apex:selectOptions value="{!lstMemberTypeValues }" ></apex:selectOptions>
+                                   <apex:actionSupport event="onchange" action="{!membervalues}" rerender="pgblock-form,memval" status="loadingstatus"/>                    
+                               </apex:selectList>
+                                 
+                       </apex:outputPanel>
+                   
+                   </apex:pageblockSectionItem>
+                      <!-- end of changes for PP4-->
+                      
+                       <!--- Design change for channel vendor screen  -->
+                       </apex:pageblockSection>
+                        
+                    
+                    
+                </apex:outputPanel>                
+                
+            </apex:outputPanel>
+            
+            
+            
+      <!--      <apex:outputPanel layout="block" styleClass="wizard-step"  rendered="{!IF(((stepNo==3 && DetailPage != true && campid!=null && isTargetedCampaign==true) || (stepNo==3 && DetailPage!=true && campid==null)) && objcampaign.CRM_ParentSegmentedCampaign__c==null , true, false) }">
+                <apex:pageMessages id="refresherror"></apex:pageMessages>
+                <div align="center" draggable="false" >                     
+                    <apex:outputLabel rendered="{!TactFlag==false}" style="color:red ;font-weight: bold;" >
+                        Note : Since it is a non-targeted campaign, audience selection process is not necessary.
+                    </apex:outputLabel><br/>
+                </div>  
+                <apex:outputPanel >
+                
+                <div align="center" draggable="false" >  -->
+                   <!--- Alignment Fix---->
+                <!--    <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px"> -->
+                   <!--- Alignment Fix---->
+                     <!--   <apex:pageBlockSection columns="2" id="Refreshcountblock">    -->                        
+                           <!---Starting of PP5 Change-->
+                         <!--    <apex:outputField value="{!objcampaign.Name}" /> 
+                            <apex:outputField value="{!objcampaign.Segment__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/>
+                        
+                         <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}">
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap first" style="margin-left: 87px;">Segmented Campaign</apex:outputLabel>
+                             <apex:outputText >{!objcampaign.CRM_ParentSegmentedCampaign__r.name}</apex:outputText>
+                    </apex:outputPanel>
+                             <apex:outputField value="{!objcampaign.Current_count__c}" />                             
+                             <apex:outputField value="{!objcampaign.Program_Name__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}" />
+                               <apex:outputField value="{!objcampaign.List_Order_Id__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/> 
+                            <apex:outputField value="{!Campaign.Suppression_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members'}"/>
+                              <apex:outputField value="{!Campaign.Supp_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members'}"/> 
+                             <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/> 
+                            <apex:outputField value="{!objcampaign.Status}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}"/>
+                            
+                             <apex:outputField value="{!Campaign.Missing_Contact_Count__c}" />
+                             <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/> 
+                             <apex:outputField value="{!objcampaign.List_Order_Id__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}"/> 
+                            
+                             <apex:outputField value="{!Campaign.Control_Group_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members'}"/>
+                           
+                            <apex:outputField value="{!Campaign.CG_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members'}"/>
+                             <div/>
+                            
+                             <apex:outputField value="{!Campaign.Net_Count__c}" rendered="{!Campaign.Net_Count__c!=0}"/>
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap" style="margin-left: 29%;" rendered="{!Campaign.Net_Count__c==0}">Final</apex:outputLabel> 
+                              -->
+                        <!---Ending of PP5 Change-->
+                    <!--    </apex:pageBlockSection>
+                    </apex:panelGrid>
+                </div>
+                </apex:outputPanel>
+                <apex:pageBlockSection columns="2"  id="selection" > -->
+                <!-----Alignment fix------>
+                   
+              <!--      <apex:commandButton value="Geography" style="margin-left:25%;" action="{!AddLoc}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development'&& IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)||IF(stepNo==3 && objcampaign.status!='Active' && $Profile.Name=='Tenet Leadership', true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) && $Profile.name!='Tenet Super User' && $Profile.name!='Tenet Admin' ), true, false) || IF(externaluploadflag==true,true,false) || IsParentCampaign }" rendered="{!IF(deploymentflag==true,true,false)}"/>
+                   -->
+                    <!--Changes for PP1 and PP4Start-->
+                    <!---starting of PP5 Change -->
+                 <!--   <apex:commandButton value="Geography" style="margin-left:25%;" action="{!AddHomeAddress}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development'&& IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)||IF(stepNo==3 && objcampaign.status!='Active' && $Profile.Name=='Tenet Leadership', true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) && $Profile.Name!='Tenet Super User' && $Profile.Name!='Tenet Admin' ), true, false) || IF(externaluploadflag==true,true,false) || IsParentCampaign}" rendered="{!IF(deploymentflag!=true,true,false)}" />
+                        -->
+                    <!---Ending of PP5 Change -->
+                <!--    <apex:commandButton value="Demographics" style="margin-left:25%;;" action="{!demo}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments'), true, false)||IF(TactFlag==true && objcampaign.status!='In Development'&& IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && $Profile.Name=='Tenet Leadership', true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) && $Profile.Name!='Tenet Super User' && $Profile.Name!='Tenet Admin' ), true, false)  || IF(externaluploadflag==true,true,false) || IsParentCampaign}"/>
+                    <apex:commandButton value="Models" style="margin-left:25%;" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments'), true, false)||IF(TactFlag==true && objcampaign.status!='In Development'&& IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && $Profile.Name=='Tenet Leadership', true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) && $Profile.Name!='Tenet Super User' && $Profile.Name!='Tenet Admin' ), true, false)  || IF(externaluploadflag==true,true,false)|| IsParentCampaign}" action="{!model}"/>
+                    <apex:commandButton value="Lifestyles" style="margin-left:25%;" action="{!LifeStyle}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development'&& IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && $Profile.Name=='Tenet Leadership', true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) && $Profile.Name!='Tenet Super User' && $Profile.Name!='Tenet Admin' ), true, false)  || IF(externaluploadflag==true,true,false) || IsParentCampaign}"/>
+                    <apex:commandButton value="Interactions" style="margin-left:25%;" disabled="true" /> --> <!-- {!TactFlag==false} -->
+                  <!--  <apex:commandButton value="HRAs " style="margin-left:25%;;"  disabled="true"/>  --> <!-- {!TactFlag==false} -->
+                   
+                  <!--  <apex:commandButton value="Encounter Aggregates" style="margin-left:25%;" action="{!encounter_aggregates}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development'&& IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && $Profile.Name=='Tenet Leadership', true, false) || IF(disflag3==true, true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) && $Profile.Name!='Tenet Super User' && $Profile.Name!='Tenet Admin' ), true, false)  || IF(externaluploadflag==true,true,false) || IsParentCampaign}" />
+                    <apex:commandButton value="Encounters " style="margin-left:25%;;" action="{!encounter}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development'&& IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && $Profile.Name=='Tenet Leadership', true, false) || IF(disflag3==true, true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) && $Profile.Name!='Tenet Super User' && $Profile.Name!='Tenet Admin' ), true, false)  || IF(externaluploadflag==true,true,false) || IsParentCampaign}"/>  -->
+                    <!-----Alignment fix------>
+                   
+                 <!--   <apex:commandButton value="Load Audience" style="margin-left:25%;" disabled="{!IF(externaluploadflag==false,true,(NOT(ISNULL(campaign.Add_Member_Status__c)))) || IF((TactFlag==false || campId==null || campflag=='false'), true, false) || Objcampaign.Member_Types__c!='Upload List'|| loadaudienceflag==false || IsParentCampaign}" onclick="window.open('/dataimporter/dataImporter.app?objectSelection=CRM_AudienceUpload__c','_blank','height=600,width=800');return false;"/>
+                    <apex:commandButton value="Delete Audience" style="margin-left:25%;" disabled="{!IF(externaluploadflag==false,true,(NOT(ISNULL(campaign.Add_Member_Status__c)))) || IF((TactFlag==false || campId==null || campflag=='false'), true, false) || Objcampaign.Member_Types__c!='Upload List' || objcampaign.CRM_UploadAudienceCount__c==0 || objcampaign.CRM_UploadAudienceCount__c==null  || (objcampaign.CRM_UploadAudienceCount__c==0 && objcampaign.status=='Active') || IsParentCampaign}" onclick="return confirm('{!$Label.CRM_DeleteAudienceUploadMessage}');" action="{!deleteaudience}"/>
+                    -->
+                    <!--Changes for PP1 and PP4 End-->      
+<!--                </apex:pageBlockSection>
+                                
+            </apex:outputPanel>  -->
+           <!-- start of PP4 change-->
+            <apex:outputPanel layout="block" styleClass="wizard-step" rendered="{!IF(isTargetedCampaign==true && stepNo==3  && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && stepNo==2)}">
+             
+                <apex:pageMessages id="refresherror2"></apex:pageMessages>
+                <div align="center" id="navbar">
+                    
+                    <apex:commandButton value="Totals" rendered="{!(childCampaign.size > 0 || objcampaign.CRM_ParentSegmentedCampaign__c!=null) && objcampaign.id!=null}" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==objcampaign.id && objcampaign.CRM_ParentSegmentedCampaign__c==null}" action="{!segmentnavbar}" reRender="msgs,pgblock-form">   
+                        <apex:param id="IdFromPage2" name="IdFromPage" assignTo="{!IdFromPage}" value="{!IF(objcampaign.CRM_ParentSegmentedCampaign__c==null,objcampaign.id,objcampaign.CRM_ParentSegmentedCampaign__r.id)}"/>
+                        <apex:param id="flag" name="flag" assignTo="{!segmentflag}" value="false"/>
+                    </apex:commandButton>
+                    
+                    <apex:repeat value="{!childCampaign}" var="r">
+                        <apex:commandButton action="{!segmentnavbar}" value="{!r.Segment__c}" status="loadingstatus" reRender="msgs,pgblock-form" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==r.id}" rendered="{!objcampaign.id!=null}">
+                            <apex:param id="IdFromPage3" name="IdFromPage" assignTo="{!IdFromPage}" value="{!r.id}"/>
+                            <apex:param id="flag" name="flag" assignTo="{!segmentflag}" value="true"/>
+                        </apex:commandButton>
+                    </apex:repeat> 
+                    
+                </div>
+                 <!-- end of PP4 change-->
+                <div align="center" draggable="false" >
+                    
+                    <apex:outputLabel rendered="{!TactFlag==false}" style="color:red;font-weight: bold;">
+                        Note : Since it is a non-targeted campaign, audience selection process is not necessary.
+                    </apex:outputLabel>
+                    <apex:outputtext value="{!objcampaign.Error_Message__c}" style="color:red;font-weight:bold"/>
+                    <apex:outputtext value="{!objcampaign.List_Order_ID_Error_Message__c}" style="color:red;font-weight:bold" />
+                    
+                </div>
+               
+                <div align="center" draggable="false" >
+                   <!--- Alignment Fix---->
+                    <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px">
+                   <!--- Alignment Fix---->
+                        <apex:pageBlockSection columns="2" id="Refreshcountblock1">
+                            <!---Starting of PP5 Change-->
+                            <apex:outputField value="{!objcampaign.Name}" />   
+                            <!-- start of PP4 change-->
+                            <apex:outputField value="{!objcampaign.Segment__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/>
+                        
+                         <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}">
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap first" style="margin-left: 87px;">Segmented Campaign</apex:outputLabel>
+                             <apex:outputText >{!objcampaign.CRM_ParentSegmentedCampaign__r.name}</apex:outputText>
+                    </apex:outputPanel>
+                            <apex:outputField value="{!objcampaign.Current_count__c}" /> 
+                            <apex:outputField value="{!objcampaign.Program_Name__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}" />
+                            <apex:outputField value="{!objcampaign.List_Order_Id__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null }"/> 
+                            <apex:outputField value="{!Campaign.Suppression_Count__c}" rendered="{!(Campaign.Add_Member_Status__c=='Added Members' && objcampaign.CRM_ParentSegmentedCampaign__c==null) }"/>
+                              <apex:outputField value="{!Campaign.Supp_Count__c}" rendered="{!(Campaign.Add_Member_Status__c!='Added Members' || objcampaign.CRM_ParentSegmentedCampaign__c!=null) }"/> 
+                            <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/> 
+                            <apex:outputField value="{!objcampaign.Status}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}"/>
+                              <apex:outputField value="{!Campaign.Missing_Contact_Count__c}" />
+                                                    
+                            <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/>                              
+                            <apex:outputField value="{!objcampaign.List_Order_Id__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null }"/> 
+                            <!-- ending of PP4 change-->
+                             <apex:outputField value="{!Campaign.Control_Group_Count__c}" rendered="{!(Campaign.Add_Member_Status__c=='Added Members' && objcampaign.CRM_ParentSegmentedCampaign__c==null) }"/>
+                            
+                            <apex:outputField value="{!Campaign.CG_Count__c}" rendered="{!(Campaign.Add_Member_Status__c!='Added Members' || objcampaign.CRM_ParentSegmentedCampaign__c!=null) }"/>
+                           <div/>
+                            
+                             <apex:outputField value="{!Campaign.Net_Count__c}" rendered="{!Campaign.Add_Member_Status__c!=null }"/>
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap" style="margin-left: 29%;"  rendered="{!Campaign.Add_Member_Status__c=null}">Final</apex:outputLabel> 
+                                                
+                        <!---Ending of PP5 Change-->
+                        </apex:pageBlockSection>
+                    </apex:panelGrid>
+                </div>
+                <apex:pageBlockSection columns="2" >
+                <!-----Alignment fix------>
+                    
+                    <apex:commandButton value="Geography" style="margin-left:25%;" action="{!AddLoc}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments' || objcampaign.status=='Segment Activated'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development'&& IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)||IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c))  ), true, false) || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false) }" rendered="{!IF(deploymentflag==true,true,false)}"/>
+                    <!--Changes for PP1 and PP4Start-->
+                    <!--Starting of PP5 Change-->
+                    <apex:commandButton value="Geography" style="margin-left:25%;" action="{!AddHomeAddress}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.Member_Types__c=='Campaign Segments' || objcampaign.status=='Segment Activated'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development' &&  objcampaign.status!='Segmented Campaign Not Activated' && IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)||IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c))  ), true, false) ||IF(externaluploadflag==true,true,false) || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && ($Profile.Name=='Tenet Help Desk' || $Profile.Name=='Tenet Leadership'))}" rendered="{!IF(deploymentflag!=true,true,false)}" />
+                   <!--Ending of PP5 Change-->
+                   
+                    <apex:commandButton value="Demographics" style="margin-left:25%;" action="{!demo}" disabled="{!IF(TactFlag==false || objcampaign.Member_Types__c=='Campaign Segments' || objcampaign.status=='Segment Activated', true, false) ||IF(TactFlag==true && objcampaign.status!='In Development' &&  objcampaign.status!='Segmented Campaign Not Activated' && IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)||IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c))  ), true, false)  || IF(externaluploadflag==true,true,false) || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false)|| (objcampaign.CRM_ParentSegmentedCampaign__c!=null && ($Profile.Name=='Tenet Help Desk' || $Profile.Name=='Tenet Leadership'))}"/>                    
+                    <apex:commandButton value="Models" style="margin-left:25%;" disabled="{!IF(TactFlag==false || objcampaign.Member_Types__c=='Campaign Segments' || objcampaign.status=='Segment Activated', true, false)||IF(TactFlag==true && objcampaign.status!='In Development' &&  objcampaign.status!='Segmented Campaign Not Activated' && IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c))  ), true, false)  || IF(externaluploadflag==true,true,false) || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && ($Profile.Name=='Tenet Help Desk' || $Profile.Name=='Tenet Leadership'))}" action="{!model}"/>
+                    <apex:commandButton value="Lifestyles" style="margin-left:25%;" action="{!LifeStyle}" disabled="{!IF(TactFlag==false || objcampaign.Member_Types__c=='Campaign Segments' || objcampaign.status=='Segment Activated', true, false)||IF(TactFlag==true && objcampaign.status!='In Development' &&  objcampaign.status!='Segmented Campaign Not Activated' && IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) ), true, false) || IF(externaluploadflag==true,true,false) || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && ($Profile.Name=='Tenet Help Desk'|| $Profile.Name=='Tenet Leadership'))}"/>
+                    <apex:commandButton value="Interactions"  style="margin-left:25%;" disabled="true"  /><!-- {!TactFlag==false} -->
+                    <apex:commandButton value="HRAs " style="margin-left:25%;"  disabled="true"/> <!-- {!TactFlag==false} -->
+                    <apex:commandButton value="Encounter Aggregates" style="margin-left:25%;" action="{!encounter_aggregates}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.status=='Segment Activated'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development' &&  objcampaign.status!='Segmented Campaign Not Activated' && IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false) || IF(disflag3==true, true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c)) ), true, false)  || IF(externaluploadflag==true,true,false) || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && ($Profile.Name=='Tenet Help Desk' || $Profile.Name=='Tenet Leadership'))}" />
+                    <apex:commandButton value="Encounters " style="margin-left:25%;;" action="{!encounter}" disabled="{!IF((TactFlag==false || campId==null || campflag=='false' || objcampaign.status=='Segment Activated'), true, false) ||IF(TactFlag==true && objcampaign.status!='In Development' &&  objcampaign.status!='Segmented Campaign Not Activated' && IF($Profile.Name=='Tenet Marketer' ||$Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet IT'|| $Profile.Name=='Tenet Help Desk',true,false) , true, false)|| IF(stepNo==3 && objcampaign.status!='Active' && ($Profile.Name=='Tenet Leadership' || $Profile.Name=='Tenet Help Desk'), true, false) || IF(disflag3==true, true, false) || IF((objcampaign.Status=='Active' )  || (NOT(ISNULL(campaign.Add_Member_Status__c))  ), true, false)  || IF(externaluploadflag==true,true,false) || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false)|| (objcampaign.CRM_ParentSegmentedCampaign__c!=null && ($Profile.Name=='Tenet Help Desk' || $Profile.Name=='Tenet Leadership'))}"/>
+                    <!-----Alignment fix------>
+                    <!-- 
+                    <apex:commandButton value="Load Audience" style="margin-left:25%;" disabled="{!IF(externaluploadflag==false,true,(NOT(ISNULL(campaign.Add_Member_Status__c)))) || IF((TactFlag==false || campId==null || campflag=='false'), true, false) || Objcampaign.Member_Types__c!='Upload List' || loadaudienceflag==false || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false) }"  onclick="window.open('/dataimporter/dataImporter.app?objectSelection=CRM_AudienceUpload__c','_blank','height=600,width=800');return false;"/>
+                    <apex:commandButton value="Delete Audience" style="margin-left:25%;" disabled="{!IF(externaluploadflag==false,true,(NOT(ISNULL(campaign.Add_Member_Status__c)))) || IF((TactFlag==false || campId==null || campflag=='false'), true, false) || Objcampaign.Member_Types__c!='Upload List' || objcampaign.CRM_UploadAudienceCount__c==0 || objcampaign.CRM_UploadAudienceCount__c==null  || (objcampaign.CRM_UploadAudienceCount__c==0 && objcampaign.status=='Active') || IsParentCampaign || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false)}" onclick="return confirm('{!$Label.CRM_DeleteAudienceUploadMessage}');" action="{!deleteaudience}"/>
+                     -->
+                    <!--Changes for PP1 and PP4 Ends-->
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+            
+            <!-- start of PP4 change-->
+            <apex:outputPanel layout="block" styleClass="wizard-step" rendered="{!IF(stepNo==4 && DetailPage != true && (isTargetedCampaign==true || campid==null) && objcampaign.CRM_ParentSegmentedCampaign__c==null , true, false) || IF(isTargetedCampaign==false && stepNo==3 && DetailPage!=true && campId!=null && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false)}">
+                <!-- end of PP4 change-->
+                <div align="center" draggable="false" >
+                     <!--- Alignment Fix---->
+                     <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px">
+                      <!--- Alignment Fix---->
+                        <apex:pageBlockSection columns="2">
+                 <!---Starting of PP5 Change-->
+                            <apex:outputField value="{!objcampaign.Name}" />   
+                            <!-- starting of PP4 changes-->
+                            <apex:outputField value="{!objcampaign.Segment__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/>
+                        
+                         <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}">
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap first" style="margin-left: 87px;">Segmented Campaign</apex:outputLabel>
+                             <apex:outputText >{!objcampaign.CRM_ParentSegmentedCampaign__r.name}</apex:outputText>
+                    </apex:outputPanel>
+                           
+                           
+                            
+                             <apex:outputField value="{!objcampaign.Current_count__c}" rendered="{!tactflag==true}"/>  
+                              <apex:outputField value="{!objcampaign.Program_Name__c}"  />
+                              
+                             <apex:outputField value="{!Campaign.Suppression_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members' && tactflag==true}"/>
+                              <apex:outputField value="{!Campaign.Supp_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members' && tactflag==true}"/> 
+                            <apex:outputField value="{!objcampaign.Status}" />
+                            <apex:outputField value="{!Campaign.Missing_Contact_Count__c}" rendered="{!tactflag==true}"/>
+                            <apex:outputField value="{!objcampaign.List_Order_Id__c}" rendered="{!tactflag==true}"/>  
+                             <!---Ending of PP4 Change-->
+                             <apex:outputField value="{!Campaign.Control_Group_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members' && tactflag==true}"/>
+                             <apex:outputField value="{!Campaign.CG_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members' && tactflag==true}"/>
+                             <div/>
+                            
+                             <apex:outputField value="{!Campaign.Net_Count__c}" rendered="{!Campaign.Add_Member_Status__c!=null && tactflag==true}"/>
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap" style="margin-left: 29%;"  rendered="{!Campaign.Add_Member_Status__c=null && tactflag==true}">Final</apex:outputLabel> 
+                                         <!---Ending of PP5 Change-->
+                        </apex:pageBlockSection>
+                    </apex:panelGrid>       </div>
+                <apex:pageBlockSection columns="2">
+                   
+                    <apex:outputField value="{!Campaign.Goal_Objective__c}" />
+                    <apex:outputField value="{!Campaign.Description}" style="width:580px; "/> 
+                    <apex:outputField value="{!Campaign.StartDate}"/>                  
+                    <apex:outputField value="{!Campaign.EndDate}"/>
+                    <apex:outputField value="{!Campaign.Purchase_Invoice_Order__c}"/>
+                    <apex:outputField value="{!Campaign.Service_Line__c}"/>
+                    <apex:outputField value="{!Campaign.CRM_SubServiceLineText__c}" rendered="{!!showolddatacampaign}" />
+                    <apex:outputField value="{!Campaign.Sub_Service_Line__c}" rendered="{!showolddatacampaign}" /> 
+                    <apex:outputField value="{!Campaign.Actual_Spend__c}"/>
+                    <apex:outputField value="{!Campaign.Campaign_Budget__c}"/>
+                    <apex:outputField value="{!Campaign.Expected_Contribution_Margin__c}"/>
+                    <apex:outputField value="{!Campaign.LastModifiedById}"/>
+                        <apex:outputfield value="{!Campaign.Ownerid}"/> 
+                    <apex:outputField value="{!Campaign.Requested_By__c}"/>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Created By"></apex:outputLabel>
+                        <apex:outputText value="{!Campaign.CreatedBy.name}"/>
+                    </apex:pageBlockSectionItem>
+                  <!---- ownership changes for old active campaign---> 
+                  <apex:pageBlockSectionItem >
+                      <apex:outputLabel value="{!$ObjectType.Campaign.fields.CRM_OwnershipType__c.Label}"/>
+                      <apex:outputPanel layout="block">
+                        <apex:outputField value="{!objcampaign.CRM_OwnershipType__c}" rendered="{!!showolddatacampaign}"/>
+                        <apex:outputText rendered="{!showolddatacampaign}">
+                            {!IF(objcampaign.Audience_Region__c!=null,'Region',IF(objcampaign.Audience__c!=null,'Market','Hospital'))}
+                        </apex:outputText>
+                      </apex:outputPanel>
+                  </apex:pageBlockSectionItem>
+                  <apex:outputLabel />
+                  <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" >
+                        <apex:outputLabel />
+                        <apex:outputPanel >
+                            <apex:outputPanel rendered="{!objcampaign.CRM_SelectedOwnershipCriteria__c!=null && !showolddatacampaign}"><!----Alignment fix ----->
+                                
+                                <apex:repeat value="{!Selectedownership}" var="CO">
+                                    {!if(Selectedownership[CO].CRM_Region__c!=null,Selectedownership[CO].CRM_Region__c,if(Selectedownership[CO].CRM_Market__c!=null,Selectedownership[CO].CRM_MarketRegion__c,if(Selectedownership[CO].CRM_Hospital__c!=null,Selectedownership[CO].CRM_HospitalMarket__c,'')))}<br/>
+                                    
+                                </apex:repeat>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!showolddatacampaign}">
+                                <apex:outputText value="{!IF(objcampaign.Audience_Region__c!=null,objcampaign.Audience_Region__c,IF(objcampaign.Audience__c!=null,objcampaign.Audience__c,objcampaign.Audience_Hospital__c))}" />
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                       
+                    </apex:pageBlockSectionItem><br/>
+                    <!---- ownership changes for old active campaign---> 
+                    <apex:outputField value="{!Campaign.Member_Types__c}"/>
+                    <apex:outputField value="{!Campaign.of_Members__c}" /> 
+                    <apex:outputField value="{!objcampaign.Version__c}" style="width:20px; "/> 
+                    <apex:outputField value="{!Campaign.Channel__c}"/>
+                     <apex:outputField value="{!objcampaign.Call_to_Action__c}" />
+                    <apex:outputField value="{!Campaign.Vendor_Name__c}" />
+                    
+           <!--    <apex:outputField value="{!Campaign.Other__c}" rendered="{!IF(vendornameflag==false, true, false)}"/>  -->
+                </apex:pageBlockSection>  
+            </apex:outputPanel>
+            
+            <!-- start of PP4 change -->
+            <apex:outputPanel layout="block" styleClass="wizard-step" rendered="{!IF(stepNo==4 && DetailPage == true && isTargetedCampaign==true && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false) || IF(isTargetedCampaign==false && stepNo==3 && DetailPage==true && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null  && stepNo==3)}">
+           
+                <div align="center">
+                
+             <apex:commandButton value="Totals" rendered="{!(childCampaign.size > 0 || objcampaign.CRM_ParentSegmentedCampaign__c!=null)&& objcampaign.id!=null}" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==objcampaign.id && objcampaign.CRM_ParentSegmentedCampaign__c==null}" action="{!segmentnavbar}" reRender="msgs,pgblock-form">   
+               <apex:param id="IdFromPage1" name="IdFromPage" assignTo="{!IdFromPage}" value="{!IF(objcampaign.CRM_ParentSegmentedCampaign__c==null,objcampaign.id,objcampaign.CRM_ParentSegmentedCampaign__r.id)}"/>
+                 <apex:param id="flag4" name="flag" assignTo="{!segmentflag}" value="false"/>
+                    </apex:commandButton>
+                
+                <apex:repeat value="{!childCampaign}" var="r">
+                    <apex:commandButton action="{!segmentnavbar}" value="{!r.Segment__c}" status="loadingstatus" reRender="msgs,pgblock-form" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==r.id}" rendered="{! objcampaign.id!=null}">
+                        <apex:param id="IdFromPage" name="IdFromPage" assignTo="{!IdFromPage}" value="{!r.id}"/>
+                         <apex:param id="flag4" name="flag" assignTo="{!segmentflag}" value="true"/>
+                    </apex:commandButton>
+                    
+                    
+                </apex:repeat>
+                   
+            </div>
+                 <!-- end of PP4 change-->
+            <div align="center" draggable="false" >
+               <!--- Alignment Fix---->
+                <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px">
+                <!--- Alignment Fix---->
+                   <apex:pageBlockSection columns="2">
+                       <!---Starting of PP5 Change-->
+                            <apex:outputField value="{!objcampaign.Name}" />  
+                        <!---Starting of PP4 Change-->
+                            <apex:outputField value="{!objcampaign.Segment__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}"/>
+                        
+                         <apex:outputPanel rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c!=null}">
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap first" style="margin-left: 87px;">Segmented Campaign</apex:outputLabel>
+                             <apex:outputText >{!objcampaign.CRM_ParentSegmentedCampaign__r.name}</apex:outputText>
+                    </apex:outputPanel>
+                            <apex:outputField value="{!objcampaign.Current_count__c}" rendered="{!tactflag==true}"/>
+                            <apex:outputField value="{!objcampaign.Status}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}"/>
+                            
+                       
+                             <apex:outputField value="{!Campaign.Suppression_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members' && objcampaign.CRM_ParentSegmentedCampaign__c==null && tactflag==true}"/>
+                              <apex:outputField value="{!Campaign.Supp_Count__c}" rendered="{!(Campaign.Add_Member_Status__c!='Added Members' && objcampaign.CRM_ParentSegmentedCampaign__c==null && tactflag==true) }"/> 
+                            
+                            <apex:outputField value="{!objcampaign.Program_Name__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}" />
+                             
+                           
+                              <apex:outputField value="{!Campaign.Missing_Contact_Count__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null && tactflag==true}"/>
+                       <apex:outputField value="{!objcampaign.List_Order_Id__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null && tactflag==true}"/>   
+                            
+                             
+                             <apex:outputField value="{!Campaign.Control_Group_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members' && objcampaign.CRM_ParentSegmentedCampaign__c==null && tactflag==true}"/>
+                             <apex:outputField value="{!Campaign.CG_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members' && objcampaign.CRM_ParentSegmentedCampaign__c==null && tactflag==true}"/>
+                             <div/>
+                       		 <apex:outputField value="{!Campaign.Net_Count__c}" rendered="{!Campaign.Add_Member_Status__c!=null && objcampaign.CRM_ParentSegmentedCampaign__c==null && tactflag==true}"/>
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap" style="margin-left: 29%;"  rendered="{!Campaign.Add_Member_Status__c=null &&objcampaign.CRM_ParentSegmentedCampaign__c==null && tactflag==true}">Final</apex:outputLabel> 
+                             <!---Ending of PP54 Change-->      
+                             <!--apex:outputField value="{!Campaign.Net_Count__c}" rendered="{!objcampaign.CRM_ParentSegmentedCampaign__c==null}"/-->
+                        <!---Ending of PP5 Change-->
+                   </apex:pageBlockSection>
+                </apex:panelGrid>       
+            </div>
+                <apex:pageBlockSection columns="2">
+                     
+                    <apex:outputField value="{!Campaign.Goal_Objective__c}" />
+                    <apex:outputField value="{!Campaign.Description}" style="width:580px; "/> 
+                    <apex:outputField value="{!Campaign.StartDate}"/>                  
+                    <apex:outputField value="{!Campaign.EndDate}"/>
+                    <apex:outputField value="{!Campaign.Purchase_Invoice_Order__c}"/>
+                   
+                   
+                    <apex:outputField value="{!Campaign.Service_Line__c}"/>
+                    <apex:outputField value="{!Campaign.CRM_SubServiceLineText__c}" rendered="{!!showolddatacampaign}" />
+                    <apex:outputField value="{!Campaign.Sub_Service_Line__c}" rendered="{!showolddatacampaign}" /> 
+                    <apex:outputField value="{!Campaign.Actual_Spend__c}"/>
+                    <apex:outputField value="{!Campaign.Campaign_Budget__c}"/>
+                    <apex:outputField value="{!Campaign.Expected_Contribution_Margin__c}"/>
+                   
+                    <apex:outputField value="{!Campaign.Requested_By__c}"/>
+                    
+                 <apex:outputField value="{!Campaign.Ownerid}"/>  
+                    
+                 <!---- ownership changes for old active campaign--->    
+                  <apex:pageBlockSectionItem >
+                      <apex:outputLabel value="{!$ObjectType.Campaign.fields.CRM_OwnershipType__c.Label}"/>
+                      <apex:outputPanel layout="block">
+                        <apex:outputField value="{!objcampaign.CRM_OwnershipType__c}" rendered="{!!showolddatacampaign}"/>
+                        <apex:outputText rendered="{!showolddatacampaign}">
+                            {!IF(objcampaign.Audience_Region__c!=null,'Region',IF(objcampaign.Audience__c!=null,'Market','Hospital'))}
+                        </apex:outputText>
+                      </apex:outputPanel>
+                  </apex:pageBlockSectionItem>
+                  <apex:outputLabel />
+                  <apex:pageBlockSectionItem labelStyleClass="labelCol vfLabelColTextWrap  first" >
+                        <apex:outputLabel />
+                        <apex:outputPanel >
+                            <apex:outputPanel rendered="{!objcampaign.CRM_SelectedOwnershipCriteria__c!=null && !showolddatacampaign}"><!----Alignment fix ----->
+                                
+                                <apex:repeat value="{!Selectedownership}" var="CO">
+                                    {!if(Selectedownership[CO].CRM_Region__c!=null,Selectedownership[CO].CRM_Region__c,if(Selectedownership[CO].CRM_Market__c!=null,Selectedownership[CO].CRM_MarketRegion__c,if(Selectedownership[CO].CRM_Hospital__c!=null,Selectedownership[CO].CRM_HospitalMarket__c,'')))}<br/>
+                                    
+                                </apex:repeat>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!showolddatacampaign}">
+                                <apex:outputText value="{!IF(objcampaign.Audience_Region__c!=null,objcampaign.Audience_Region__c,IF(objcampaign.Audience__c!=null,objcampaign.Audience__c,objcampaign.Audience_Hospital__c))}" />
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                       
+                    </apex:pageBlockSectionItem><br/>
+                    <!---- ownership changes for old active campaign--->
+                    <apex:outputField value="{!Campaign.Member_Types__c}"/>
+                    <apex:outputField value="{!Campaign.of_Members__c}" /> 
+                    <apex:outputField value="{!objcampaign.Version__c}" style="width:20px; "/> 
+                    <apex:outputField value="{!Campaign.Channel__c}"/>
+                     <apex:outputField value="{!objcampaign.Call_to_Action__c}" />
+                    <apex:outputField value="{!Campaign.Vendor_Name__c}" />
+                <!--   <apex:outputField value="{!Campaign.Other__c}" rendered="{!IF(vendornameflag==false, true, false)}"/>  -->
+                    <apex:outputField value="{!Campaign.LastModifiedById}"/>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Created By"></apex:outputLabel>
+                        <apex:outputText value="{!Campaign.CreatedBy.name}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                </apex:pageBlockSection>  
+                
+                  
+            </apex:outputPanel>
+            
+           
+            <!--start of PP4 change-->
+            <apex:outputPanel layout="block" styleClass="wizard-step" rendered="{!(stepNo==5 && DetailPage != true && objActivecamp.status!='Active'  && objcampaign.CRM_ParentSegmentedCampaign__c==null)  || IF(isTargetedCampaign==false && stepNo==4 && DetailPage!=true && objActivecamp.status!='Active' && campId!=null  && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false)  }" id="step5">
+             <!-- end of PP4 change-->   
+                <div align="center" draggable="false" >
+                   <!--- Alignment Fix---->
+                    <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px">
+                   <!--- Alignment Fix---->
+                        <apex:pageBlockSection columns="2" id="Refreshcountblock2">
+                        <!---Starting of PP5 Change-->
+                            <apex:outputField value="{!objcampaign.Name}" />                            
+                             <apex:outputField value="{!objcampaign.Current_count__c}" rendered="{!tactflag==true}"/> 
+                                                       
+                             <apex:outputField value="{!objcampaign.Program_Name__c}"  />
+                             <apex:outputField value="{!Campaign.Suppression_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members' && tactflag==true}"/>
+                              <apex:outputField value="{!Campaign.Supp_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members' && tactflag==true}"/> 
+                             <apex:outputField value="{!objcampaign.Status}" /> 
+                              <apex:outputField value="{!Campaign.Missing_Contact_Count__c}" rendered="{!tactflag==true}"/>
+                             <apex:outputField value="{!objcampaign.List_Order_Id__c}" rendered="{!tactflag==true}"/>
+                             <apex:outputField value="{!Campaign.Control_Group_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members' && tactflag==true}"/>
+                             <apex:outputField value="{!Campaign.CG_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members' && tactflag==true}"/>
+                             <div/>
+                             <apex:outputField value="{!Campaign.Net_Count__c}" rendered="{!Campaign.Add_Member_Status__c!=null && tactflag==true}"/>
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap" style="margin-left: 29%;"  rendered="{!Campaign.Add_Member_Status__c=null && tactflag==true}">Final</apex:outputLabel> 
+                            
+                        <!---Ending of PP5 Change-->  
+                        </apex:pageBlockSection>
+                    </apex:panelGrid>
+                 </div>      
+              <apex:actionRegion >  
+                <apex:pageblocksection id="theBlock" columns="2" title="Approval" >
+                    <apex:inputField value="{!objcampaign.Approved__c}" onclick="approvedclick();" id="approved" rendered="{!IF((stepNo==5 && (isTargetedCampaign==true && campid!=null) && objcampaign.status!='Active') || (stepNo==4 && tactflag==false && objcampaign.status!='Active'  && campid!=null), true, false)}">
+                      <!--  <apex:actionSupport event="onclick" rerender="theBlock, msgs" action="{!method1}"/> -->
+                    </apex:inputField> 
+                    <apex:outputField value="{!objcampaign.Approved__c}" rendered="{!campid==null}"/> 
+                    <apex:pageBlockSectionItem id="approved_by">
+                   
+                        <apex:outputLabel >Approved By</apex:outputLabel>
+                   <!--   <apex:panelGroup styleClass="{!IF(objcampaign.Approved__c==true,'col02 requiredInput','')}" layout="block">
+                        <apex:panelGroup styleClass="{!IF(objcampaign.Approved__c==true,'requiredBlock','' )}" layout="block"/>
+                          
+                            <apex:inputText value="{!objcampaign.Approved_By__c}"  required="" id="approvedby" disabled="{!disflag2}"/>
+                        </apex:panelGroup> -->
+                       <apex:panelGroup > 
+                        <div class = "requiredInput" >
+                        <div class = "requiredBlock" id="reqinput"></div>
+                        <apex:inputtext value="{!objcampaign.Approved_By__c}"  id="approvedby"  disabled="{!campid==null}" />
+                        
+                        </div>
+                        </apex:panelGroup>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >MARS Approval #</apex:outputLabel>
+                        <apex:inputText value="{!objcampaign.MARS_Approval__c}"  disabled="{!campid==null}"/>
+                    </apex:pageBlockSectionItem> 
+                       <apex:inputField value="{!objcampaign.Approval_Comments__c}" style="width:200px;height:100px" rendered="{!IF((stepNo==5 && (tactflag==true  && campid!=null) && objcampaign.status!='Active') || (stepNo==4 && tactflag==false && objcampaign.status!='Active'  && campid!=null), true, false)}"/> 
+                     <apex:outputField value="{!objcampaign.Approval_Comments__c}" rendered="{!campid==null}" />
+                </apex:pageblocksection>
+                <apex:outputPanel >
+                 <apex:pageblocksection title="Control group" id="groupid" rendered="{!IF(TactFlag!=False && campid!=null && ($Profile.Name=='Tenet Super User' || $Profile.Name=='Tenet Admin' || $Profile.Name=='System Administrator') && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false)}" >
+                     <apex:inputField value="{!objcampaign.Control_Group_Size__c}"  id="controlgroupsize" rendered="{!(objcampaign.Status=='In Development' || objcampaign.Status=='Template')&& ($Profile.name=='Tenet Super User' || $Profile.Name=='Tenet Admin' || $Profile.Name=='System Administrator') && campid!=null }">
+                      </apex:inputField>
+                       <apex:outputField value="{!objcampaign.Control_Group_Size__c}" rendered="{!campid==null || (objcampaign.status!='In Development')}" />
+                   <apex:inputField value="{!objcampaign.Control_Group_Percentage__c}" id="controlgroup_percent" rendered="{!(objcampaign.Status=='In Development' || objcampaign.Status=='Template') && campid!=null }">
+                    <!--<apex:actionSupport event="onclick" rerender="theBlock, groupid" action="{!method1}"/> -->
+                    </apex:inputField>   
+                   <apex:outputField value="{!objcampaign.Control_Group_Percentage__c}"  rendered="{!objcampaign.Status=='Suspended' || objcampaign.Status=='Cancelled' || objcampaign.Status=='Completed' || objcampaign.Status=='Active'}"/>
+                      
+                             
+                </apex:pageblocksection>
+                    <!--start of PP4 change-->
+                <apex:pageblocksection title="Control group"  rendered="{!IF((TactFlag==False || campid==null || $Profile.Name!='Tenet Super User' && $Profile.Name!='Tenet Admin' && $Profile.Name!='System Administrator'), true, false) || objcampaign.CRM_ParentSegmentedCampaign__c!=null}" >
+                    <!--end of PP4 change--> 
+                    <apex:outputField value="{!objcampaign.Control_Group_Size__c}"  >
+                      </apex:outputField>
+                      
+                    <apex:outputField value="{!objcampaign.Control_Group_Percentage__c}"  >
+                     <!--<apex:actionSupport event="onclick" rerender="theBlock, groupid" action="{!method1}"/> -->
+                    </apex:outputField>   
+                             
+                </apex:pageblocksection>
+                </apex:outputPanel>
+               <apex:outputPanel >
+                <apex:pageblocksection title="Override Suppressions" rendered="{!IF(TactFlag!=False && campid!=null, true, false)}">
+                    <apex:inputField value="{!objcampaign.Ignore_Bad_Debt_Suppression__c}"/>
+                <apex:inputField value="{!objcampaign.Ignore_Minor_Suppression__c}"/> 
+                </apex:pageblocksection>
+                 <apex:pageblocksection title="Override Suppressions" rendered="{!IF((TactFlag==False || campid==null), true, false)}">
+                    <apex:outputField value="{!objcampaign.Ignore_Bad_Debt_Suppression__c}"/>
+                <apex:outputField value="{!objcampaign.Ignore_Minor_Suppression__c}"/> 
+                </apex:pageblocksection>
+                </apex:outputPanel>
+                                   
+                </apex:actionRegion>
+            
+            </apex:outputPanel> 
+             <script>
+              var d = document.getElementById('reqinput');
+               d.style.display='none';
+             approvedclick();
+                
+             function approvedclick()
+             {
+              var d = document.getElementById('reqinput');
+                console.log('inside d=='+ d);
+                var a = document.getElementById('thePage:theForm:pgblock-form:theBlock:approved');
+                 console.log('inside a=='+ a);
+                if(a.checked==false){
+                 console.log('inside if');
+                d.style.display='none';
+                }
+                else if(a.checked==true){
+                d.style.display='block';
+                }
+               $("input[id='thePage:theForm:pgblock-form:theBlock:approved_by:approvedby']").attr('disabled', !$("input[id='thePage:theForm:pgblock-form:theBlock:approved']").is(':checked'));
+             }
+          
+            </script>
+            
+            <!--start of PP4 change-->
+            <apex:outputPanel id="activate_panel" layout="block" styleClass="wizard-step" rendered="{!stepNo==5 && DetailPage == true  && objcampaign.CRM_ParentSegmentedCampaign__c==null || IF(isTargetedCampaign==false && stepNo==4 && DetailPage==true, true, false) || IF((stepNo==5 && objActivecamp.status=='Active' && isTargetedCampaign==true)|| (stepno==4 && objActivecamp.status=='Active' && isTargetedCampaign==false), true, false)}">
+                <div align="center">
+                    
+                    <apex:commandButton value="Totals" rendered="{!(childCampaign.size > 0 || objcampaign.CRM_ParentSegmentedCampaign__c!=null)&& objcampaign.id!=null}" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==objcampaign.id && objcampaign.CRM_ParentSegmentedCampaign__c==null}" action="{!segmentnavbar}" reRender="msgs,pgblock-form">   
+                        <apex:param id="IdFromPage5" name="IdFromPage" assignTo="{!IdFromPage}" value="{!IF(objcampaign.CRM_ParentSegmentedCampaign__c==null,objcampaign.id,objcampaign.CRM_ParentSegmentedCampaign__r.id)}"/>
+                        <apex:param id="flag5" name="flag" assignTo="{!segmentflag}" value="false"/>
+                    </apex:commandButton>
+                    
+                    <apex:repeat value="{!childCampaign}" var="r">
+                        <apex:commandButton action="{!segmentnavbar}" value="{!r.Segment__c}" status="loadingstatus" reRender="msgs,pgblock-form" disabled="{!CASESAFEID($CurrentPage.parameters.Id)==r.id}" rendered="{! objcampaign.id!=null}">
+                            <apex:param id="IdFromPage5" name="IdFromPage" assignTo="{!IdFromPage}" value="{!r.id}"/>
+                            <apex:param id="flag5" name="flag" assignTo="{!segmentflag}" value="true"/>
+                        </apex:commandButton>
+                        
+                        
+                    </apex:repeat>
+                    
+                </div>
+                
+                
+                <!--end of PP4 change-->  
+                <div align="center" draggable="false" >
+                   <!--- Alignment Fix---->
+                    <apex:panelGrid bgcolor="Lavender"  style="width:100%;height: 80px">
+                   <!--- Alignment Fix---->
+                        <apex:pageBlockSection columns="2" id="Refreshcountblock3">
+                        <!---Starting of PP5 Change-->
+                            <apex:outputField value="{!objcampaign.Name}" />                            
+                             <apex:outputField value="{!objcampaign.Current_count__c}" rendered="{!tactflag==true}"/>                             
+                             <apex:outputField value="{!objcampaign.Status}" />
+                             <apex:outputField value="{!Campaign.Suppression_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members' && tactflag==true}"/>
+                              <apex:outputField value="{!Campaign.Supp_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members' && tactflag==true}"/> 
+                              
+                              <apex:outputField value="{!objcampaign.Program_Name__c}"  />
+                              <apex:outputField value="{!Campaign.Missing_Contact_Count__c}" rendered="{!tactflag==true}"/>
+                             <apex:outputField value="{!objcampaign.List_Order_Id__c}" rendered="{!tactflag==true}"/>
+                             <apex:outputField value="{!Campaign.Control_Group_Count__c}" rendered="{!Campaign.Add_Member_Status__c=='Added Members' && tactflag==true}"/>
+                             <apex:outputField value="{!Campaign.CG_Count__c}" rendered="{!Campaign.Add_Member_Status__c!='Added Members' && tactflag==true}"/>
+                             <div/>
+                             <apex:outputField value="{!Campaign.Net_Count__c}" rendered="{!Campaign.Add_Member_Status__c!=null && tactflag==true}"/>
+                             <apex:outputLabel styleClass="labelCol vfLabelColTextWrap" style="margin-left: 29%;"  rendered="{!Campaign.Add_Member_Status__c=null && tactflag==true}">Final</apex:outputLabel> 
+                            
+                        <!---Ending of PP5 Change-->
+                        </apex:pageBlockSection>
+                    </apex:panelGrid>
+                </div>
+                <apex:pageblocksection title="Approval" columns="2">
+                     <apex:outputField value="{!objcampaign.Approved__c}"/>
+                     <apex:outputField value="{!objcampaign.Approved_By__c}"/>
+                     <apex:outputField value="{!objcampaign.MARS_Approval__c}" />  
+                     <apex:outputField value="{!objcampaign.Approval_Comments__c}" /> 
+                </apex:pageblocksection>
+                 <apex:pageblocksection title="Control group" >
+                    <apex:outputField value="{!objcampaign.Control_Group_Size__c}"/>
+                    <apex:outputField value="{!objcampaign.Control_Group_Percentage__c}"/>
+                 </apex:pageblocksection>
+                
+                <apex:pageblocksection title="Override Suppressions" >
+                    <apex:outputField value="{!objcampaign.Ignore_Bad_Debt_Suppression__c}"/>
+                    <apex:outputField value="{!objcampaign.Ignore_Minor_Suppression__c}"/> 
+                </apex:pageblocksection>
+             
+            </apex:outputPanel> 
+            <hr/>
+            <div style="text-align:right;">               
+                <apex:actionStatus id="loadingstatus" >       
+                    <apex:facet name="start">
+                        <div id="loadingimage">
+                            <img src="/img/loading32.gif"/>
+                        </div>
+                        <div id="overlay" class="overlay"></div>
+                    </apex:facet>
+                </apex:actionStatus>
+                <!--start of PP4 change-->
+                <apex:commandButton value="Previous" action="{!previousStep}" status="loadingstatus" immediate="true" style="width:60px;" rerender="pgblock-form,viewcampmem,myrelatedlstloc,myrelatedlstmem,viewcampchild,test,members,campaignhistory,msgs" rendered="{!(IF(stepNo>1 && DetailPage==True, true, false)) || (IF((stepNo==2 && objcampaign.CRM_ParentSegmentedCampaign__c==null) || (stepNo==5 && Tactflag==true) || (stepNo==4 && (Tactflag==true || campid==null)) || stepNo==3 && DetailPage==true, true, false))}"/>
+                &nbsp;&nbsp;&nbsp;&nbsp; 
+               
+                <apex:commandButton value="Next" action="{!nextStep}" status="loadingstatus" style="width:60px;" rerender="pgblock-form,Refreshcountblock1,viewcampmem,myrelatedlstloc,myrelatedlstmem,viewcampchild,test,members,campaignhistory,msgs" rendered="{!IF((stepNo==1 && objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailPage==true)|| (stepNo==1  && objcampaign.CRM_ParentSegmentedCampaign__c==null)  || (stepNo==2 && DetailPage==true) || (stepNo==4  && objcampaign.CRM_ParentSegmentedCampaign__c==null && (TactFlag==true || campid==null)) || (stepNo==3 && TactFlag==true && objcampaign.CRM_ParentSegmentedCampaign__c==null) , true , false) || IF(DetailPage==true && stepNo<maxStep && TactFlag==true && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false) || IF(StepNo==3 && Tactflag==false, true, false) }" />
+              
+                <apex:commandButton value="Save Campaign" style="width:100px;" rendered="{!IF((stepNo==2 && objcampaign.CRM_ParentSegmentedCampaign__c==null)   || (stepNo==5 && (Tactflag==true || campid==null)) || (stepNo==4 && TactFlag==false && campid!=null), true, false) && detailPage!=true || (StepNo==1 && objcampaign.CRM_ParentSegmentedCampaign__c!=null && detailpage==false) }" action="{!SaveCampaign}" />
+             <!-- end of PP4 change-->
+            </div>
+            <script>
+                var stepNo = parseInt("{!stepNo}")-1;
+                var wizardsteps = $(".steps").find("div");
+                $(".steps").find("div").removeClass("active");
+                $(".steps").find("div").eq(stepNo).addClass("active");
+            </script>
+            
+            <style type="text/css">
+                table.exceptionText td {
+                font-style:italic;
+                font-size:16px;
+                font-weight:bold;
+                text-align:center;
+                color:red;}
+            </style>
+        </apex:pageBlock>
+   </apex:form> 
+        <apex:outputPanel id="viewcampchild" rendered="{!campId != null }">
+            <apex:form >
+                <apex:actionFunction action="{!DeleteChild}" name="DeleteChild" reRender="theForm" >
+                    <apex:param name="childid" value="" assignTo="{!SelectedChildId}"/>
+                </apex:actionFunction>
+            </apex:form>
+        <!--start of PP4 change-->
+            <apex:pageBlock id="test" rendered="{!IF(((stepNo==1 && campflag=='true' && objcampaign.CRM_ParentSegmentedCampaign__c==null) || (stepNo==4 && Tactflag==true && objcampaign.CRM_ParentSegmentedCampaign__c==null)) && DetailPage==true , true, false) || IF(stepNo==2 && DetailPage==true && campflag=='true' && objcampaign.CRM_ParentSegmentedCampaign__c==null , true, false) || IF(relatedlistflagstep1==true && campflag=='true' && templateflag=='false', true, false) || IF(tactFlag==false && stepNo==3 && objcampaign.CRM_ParentSegmentedCampaign__c==null, true, false)}" >
+             <!--end of PP4 change-->
+               <apex:outputText value="Child Campaign" style="font-weight:Bold;font-size:13px;color:#000;"/>
+                <apex:pageBlockTable value="{!lstCamp_memb1}" var="d"  id="myrelatedlstloc1" rendered="{!(stepNo==1 && campflag=='true') || stepNo==2 || (relatedlistflagstep1==true && campflag=='true')}">  
+                    <apex:column width="90"> 
+                        <apex:facet name="header">Action</apex:facet> 
+                        <a href="javascript:if (window.confirm('Are you sure?')) DeleteChild('{!d.Id}');" style="font-weight:bold">Remove</a>
+                        <apex:param name="camp_child_id" assignTo="{!SelectedchildId}" value=""/>
+                    </apex:column>
+                    <apex:column headerValue="name">
+                        <apex:outputLink value="/apex/campaignWizard?Id={!d.id}">{!d.name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column headerValue="Status">
+                        <apex:outputField value="{!d.status}"></apex:outputField>                  
+                    </apex:column>
+                    <apex:column headerValue="Program Name">
+                        <apex:outputField value="{!d.Program_Name__c}"></apex:outputField>                  
+                    </apex:column>
+                    <apex:column headerValue="Description">
+                        <apex:outputField value="{!d.Description}"></apex:outputField>                  
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:outputPanel>
+        <style>
+            /*.dataTable th { border-top: 1px solid #111; }*/        
+            table.dataTable thead .sorting {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_both.png')}") no-repeat center right !important;        
+            }
+            table.dataTable thead .sorting_asc {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_asc.png')}") no-repeat center right !important;        
+            }
+            table.dataTable thead .sorting_desc {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_desc.png')}") no-repeat center right !important;        
+            }
+            table.dataTable thead .sorting_asc_disabled {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_asc_disabled.png')}") no-repeat center right !important;        
+            }
+            table.dataTable thead .sorting_desc_disabled {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_desc_disabled.png')}") no-repeat center right !important;        
+            }        
+        </style>  
+        <script>
+           
+            $(document).ready(function() {
+            $('.MemTable').DataTable( {
+            "searching":   false,
+            "ordering": true,
+            "info":     true
+            } );
+            } );
+            
+          
+        </script>
+       
+    <script>
+        $(document).ready(function(){
+                          $("[id$=Status]").change(function(){
+                                                       if(this.value=="Inactive"){
+                                                           $("[id$=Goal_Objective__c]").prop("disabled",true);
+                                                       }else{
+                                                           
+                                                       }               
+                                                   });
+       
+                      });
+    </script>
+    
+ 
+    
+    <apex:outputPanel id="myrelatedlstloc" >
+      
+  
+        <!-- start of PP4 change-->
+        <apex:relatedList subject="{!campaign}" list="CombinedAttachments" rendered="{!IF(((stepNo==2 && objcampaign.CRM_ParentSegmentedCampaign__c==null)  || (stepNo==4 && Tactflag==true && objcampaign.CRM_ParentSegmentedCampaign__c==null))&& DetailPage==true , true, false) || IF(relatedlistflagstep1==true  && campflag=='true' && templateflag=='false', true, false) || IF(tactFlag==false && stepNo==3, true, false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && (stepNo==1 ||stepNo==3) && detailPage==true)}"  />  
+         <!-- end of PP4 change-->
+  
+        
+        <apex:relatedList list="CampaignMembers" id="Member" rendered="{!IF(stepNo==5 && Tactflag==true && $Profile.Name != 'Tenet Marketer' && $Profile.Name !='Tenet Leadership' &&  $Profile.Name !='Tenet Help Desk' && templateflag!='true' && campflag!='false', true, false) }" >
+            <apex:facet name="header"><apex:outputText value="Campaign Members" style="font-weight:Bold;font-size:13px;color:#000;"/></apex:facet> 
+        </apex:relatedList>
+        
+        <!-- Changes for PP1 Start -->
+         <apex:include pageName="CampaignCriteria" rendered="{!IF((stepNo==3 ||stepNo==4) && TactFlag==true && campflag!='false' && objcampaign.id!=null && objcampaign.Member_Types__c!='Campaign Segments' , true, false) || (objcampaign.CRM_ParentSegmentedCampaign__c!=null && (stepNo==2 || stepNo==3))}" />
+        <!-- Changes for PP1 End -->
+        
+    </apex:outputPanel>  
+    
+    <style>
+        /*.dataTable th { border-top: 1px solid #111; }*/        
+        table.dataTable thead .sorting {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_both.png')}") no-repeat center right !important;        
+        }
+        table.dataTable thead .sorting_asc {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_asc.png')}") no-repeat center right !important;        
+        }
+        table.dataTable thead .sorting_desc {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_desc.png')}") no-repeat center right !important;        
+        }
+        table.dataTable thead .sorting_asc_disabled {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_asc_disabled.png')}") no-repeat center right !important;        
+        }
+        table.dataTable thead .sorting_desc_disabled {
+            background: #f2f3f3 url("{!URLFOR($Resource.datatable, 'DataTables-1.10.12/images/sort_desc_disabled.png')}") no-repeat center right !important;        
+        }        
+    </style>
+    <script>
+        document.getElementById('thePage:theForm:pgblock-form:ThePBS:thePBSItem:NewCampid').readOnly=true;
+    </script>
+</apex:page>

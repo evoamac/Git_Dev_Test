@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Member Type Reference Data</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Member Type Reference Data</value>
+    </caseValues>
+    <fields>
+        <label><!-- Is Active --></label>
+        <name>CRM_IsActive__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked then external upload options on audience selection screen will be enabled --></help>
+        <label><!-- Is External Upload --></label>
+        <name>CRM_IsExternalUpload__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Parent Campaign --></label>
+        <name>CRM_IsParentCampaign__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checkbox which enables encounter buttons to will be enable for audience selection criteria --></help>
+        <label><!-- Is Encounter Enabled --></label>
+        <name>CRM_Is_EncounterEnabled__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

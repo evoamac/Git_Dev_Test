@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Geographic Info Information</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Geographic Info Informations</value>
+    </caseValues>
+    <fields>
+        <label><!-- Audience Search Type --></label>
+        <name>Audience_Search_Type__c</name>
+        <picklistValues>
+            <masterLabel>Geography By Boundary</masterLabel>
+            <translation><!-- Geography By Boundary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Geography By Distance</masterLabel>
+            <translation><!-- Geography By Distance --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- CBSA_Name --></label>
+        <name>CBSA_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Geography By Boundary --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
+        <label><!-- County --></label>
+        <name>County__c</name>
+    </fields>
+    <fields>
+        <label><!-- Geographic Info --></label>
+        <name>Geographic_Info__c</name>
+        <relationshipLabel><!-- Geographic Info Informations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- StateFIPS --></label>
+        <name>StateFIPS__c</name>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+    </fields>
+    <fields>
+        <label><!-- ZipCode --></label>
+        <name>ZipCode__c</name>
+    </fields>
+    <fields>
+        <label><!-- radius flag --></label>
+        <name>radius_flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- source --></label>
+        <name>source__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Track History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Track History</value>
+    </caseValues>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <relationshipLabel><!-- Track History --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- FieldHistory --></label>
+        <name>FieldHistory__c</name>
+    </fields>
+    <fields>
+        <label><!-- NewValue --></label>
+        <name>NewValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- OldValue --></label>
+        <name>OldValue__c</name>
+    </fields>
+    <fields>
+        <label><!-- User --></label>
+        <name>User__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

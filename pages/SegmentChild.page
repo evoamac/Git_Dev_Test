@@ -1,0 +1,39 @@
+<apex:page standardController="campaign" extensions="SegmentChildController" sidebar="false"  showHeader="false" id="pageblock">
+	<script>
+    	function popupclose(id, flag){
+	        if(id!=null && flag=='true'){
+                 
+                if(document.getElementById('pageblock:j_id2:pageid:j_id3:segment').value == "" )
+                {
+                   
+                    return false;            
+                }
+                else{
+	                 window.opener.location.href = '/apex/campaignWizard?Id='+id+'&stepNo=3';
+	                 window.opener.location.reload(true);
+	                 window.close();
+                    }
+	        }else{
+	              
+	              window.close();
+	        }
+        }
+    function setFocusOnLoad() { 
+        document.getElementById('pageblock:j_id2:pageid:j_id3:segment').focus(); 
+    } 
+    onload=setFocusOnLoad; 
+    </script>
+    <apex:message />
+    <apex:form >
+    	<apex:pageBlock id="pageid">
+            <apex:pageBlockSection >
+            	<apex:inputField value="{!camp.Segment__c}" required="true" id="segment"  />
+            </apex:pageBlockSection>
+            <apex:commandButton value="Save"  onclick="afterSave()" rerender="pageblock,msgs"/>
+            <apex:actionFunction name="afterSave" action="{!segmentchild}" oncomplete="popupclose('{!parentid}','true');return false"  reRender="msgs"/> 
+            &nbsp;&nbsp;&nbsp;&nbsp; 
+            <apex:commandButton value="Cancel" onclick="popupclose('{!parentid}', 'false');" />
+            <apex:pageMessages escape="false" id="msgs"></apex:pageMessages>          
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

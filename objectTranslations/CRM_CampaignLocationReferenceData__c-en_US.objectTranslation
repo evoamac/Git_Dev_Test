@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Ref Data - Location</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Ref Data - Locations</value>
+    </caseValues>
+    <fields>
+        <help><!-- Stores the Hospital Code --></help>
+        <label><!-- Hospital Code --></label>
+        <name>CRM_HospitalCode__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores the latitude and longitute for Hospital --></help>
+        <label><!-- Location --></label>
+        <name>CRM_HospitalLocation__c</name>
+    </fields>
+    <fields>
+        <help><!-- Represents Hospital&apos;s Market --></help>
+        <label><!-- Hospital-Market --></label>
+        <name>CRM_HospitalMarket__c</name>
+    </fields>
+    <fields>
+        <help><!-- Hospital Name --></help>
+        <label><!-- Hospital --></label>
+        <name>CRM_Hospital__c</name>
+    </fields>
+    <fields>
+        <help><!-- Market mapping of the respective Hospital --></help>
+        <label><!-- Hospital&apos;s Market ID --></label>
+        <name>CRM_HospitalsMarketID__c</name>
+        <relationshipLabel><!-- Ref Data - Locations (Hospital&apos;s Market ID) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Market Name of the Hospital Record --></help>
+        <label><!-- Hospital&apos;s Market Name --></label>
+        <name>CRM_HospitalsMarketName__c</name>
+    </fields>
+    <fields>
+        <help><!-- Region Name of the Hospital Record --></help>
+        <label><!-- Hospital&apos;s Region Name --></label>
+        <name>CRM_HospitalsRegionName__c</name>
+    </fields>
+    <fields>
+        <help><!-- Activate value for piclkist. --></help>
+        <label><!-- Active --></label>
+        <name>CRM_IsActive__c</name>
+    </fields>
+    <fields>
+        <help><!-- Market Record: Stores Value of the Market Code --></help>
+        <label><!-- Market Code --></label>
+        <name>CRM_MarketCode__c</name>
+    </fields>
+    <fields>
+        <help><!-- Market&apos;s Region --></help>
+        <label><!-- Market-Region --></label>
+        <name>CRM_MarketRegion__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores Market Name of the Market Record --></help>
+        <label><!-- Market --></label>
+        <name>CRM_Market__c</name>
+    </fields>
+    <fields>
+        <help><!-- Region Name of the respective Market record --></help>
+        <label><!-- Market&apos;s Region ID --></label>
+        <name>CRM_MarketsRegionID__c</name>
+        <relationshipLabel><!-- Ref Data - Locations (Market&apos;s Region ID) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Value of the Region Name on the Market Record --></help>
+        <label><!-- Market&apos;s Region Name --></label>
+        <name>CRM_MarketsRegionName__c</name>
+    </fields>
+    <fields>
+        <help><!-- Code of the respective Region Record --></help>
+        <label><!-- Region Code --></label>
+        <name>CRM_RegionCode__c</name>
+    </fields>
+    <fields>
+        <help><!-- Stores Region Name --></help>
+        <label><!-- Region --></label>
+        <name>CRM_Region__c</name>
+    </fields>
+    <fields>
+        <label><!-- Service Area Code --></label>
+        <name>CRM_ServiceAreaCode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Service Area Sort Order --></label>
+        <name>CRM_ServiceAreaSortOrder__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the Service Area --></help>
+        <label><!-- Service Area --></label>
+        <name>CRM_ServiceArea__c</name>
+    </fields>
+    <layouts>
+        <layout>CRM Geographies Ref Data Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>CRM_HospitalPageLayout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>CRM_MarketPageLayout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>CRM_RegionPageLayout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>CRM_ServiceAreaLayout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Hospital --></label>
+        <name>Hospital</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Market --></label>
+        <name>Market</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Region --></label>
+        <name>Region</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Service Area --></label>
+        <name>ServiceArea</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Hospital Code cannot be changed --></errorMessage>
+        <name>Hospital_Codes_cannot_be_changed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Market Code cannot be changed --></errorMessage>
+        <name>Market_Codes_cannot_be_changed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Record Type Change is not allowed --></errorMessage>
+        <name>RecordTypeChange</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Region code cannot be chnaged --></errorMessage>
+        <name>Region_Codes_cannot_be_changed</name>
+    </validationRules>
+</CustomObjectTranslation>

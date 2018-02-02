@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Test Audience Upload</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Test Audience Uploads</value>
+    </caseValues>
+    <fields>
+        <label><!-- Wunderman Id --></label>
+        <name>Wunderman_Id__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

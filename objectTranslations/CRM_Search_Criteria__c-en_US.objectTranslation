@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Search Criteria</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Search Criterias</value>
+    </caseValues>
+    <fields>
+        <label><!-- Additional ZIP codes --></label>
+        <name>CRM_AdditionalZipCodes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>CRM_Campaign__c</name>
+        <relationshipLabel><!-- Search Criterias --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Excluded ZIP Codes --></label>
+        <name>CRM_ExcludedZipCodes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Search Criteria Level 1 --></label>
+        <name>CRM_Search_Criteria_Level_1__c</name>
+        <picklistValues>
+            <masterLabel>By CBSA</masterLabel>
+            <translation><!-- By CBSA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>By County</masterLabel>
+            <translation><!-- By County --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>By Distance</masterLabel>
+            <translation><!-- By Distance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>By Hospital</masterLabel>
+            <translation><!-- By Hospital --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>By Market</masterLabel>
+            <translation><!-- By Market --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>By Region</masterLabel>
+            <translation><!-- By Region --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>By State</masterLabel>
+            <translation><!-- By State --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Search Criteria Level 2 --></label>
+        <name>CRM_Search_Criteria_Level_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Search Criteria Level 3 --></label>
+        <name>CRM_Search_Criteria_Level_3__c</name>
+    </fields>
+    <layouts>
+        <layout>CBSA</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>County</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Distance</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Market</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Region</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Search Criteria Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Service Area</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>State</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Region --></label>
+        <name>Region</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

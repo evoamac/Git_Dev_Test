@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Stores the zip codes and its mapping to specified CBSA, County, City</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>CRM_IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Used to check whether the record is active/ inactive</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check the box to active /inactive the record</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CRM_Location__c</fullName>
+        <description>Describes the Location based on Latitute nad Longitude</description>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter the Latitute and Longitude values</inlineHelpText>
+        <label>Location</label>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>CRM_ZipCode__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Displays the zipCode for the hospital</description>
+        <externalId>true</externalId>
+        <inlineHelpText>Enter the ZipCode for the Hospital</inlineHelpText>
+        <label>ZIP Code</label>
+        <length>5</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ZipsCBSAID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Zip&apos;s CBSA ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Value does not exist or does not match CBSA filter criteria.</errorMessage>
+            <filterItems>
+                <field>CRM_CampaignGeographyReferenceData__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>CBSA</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>CRM_CampaignGeographyReferenceData__c</referenceTo>
+        <relationshipName>CRM_CountyRelatedZipCodes</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_ZipsCBSAName__c</fullName>
+        <description>Shows the CBSA name for the selected Zip</description>
+        <externalId>false</externalId>
+        <formula>CRM_ZipsCBSAID__r.CRM_CBSA__c</formula>
+        <inlineHelpText>Shows the CBSA name for the selected Zip</inlineHelpText>
+        <label>Zip&apos;s CBSA Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CRM_ZipsCountyID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Zip&apos;s County ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Value does not exist or does not match County filter criteria.</errorMessage>
+            <filterItems>
+                <field>CRM_CampaignGeographyReferenceData__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>County</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>CRM_CampaignGeographyReferenceData__c</referenceTo>
+        <relationshipName>CRM_CountyRelatedZipCode</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_ZipsCountyName__c</fullName>
+        <description>Shows County Name for the Selected Zip Code</description>
+        <externalId>false</externalId>
+        <formula>CRM_ZipsCountyID__r.CRM_County__c</formula>
+        <inlineHelpText>Shows County Name for the Selected Zip Code</inlineHelpText>
+        <label>Zip&apos;s County Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Ref Data - Zip Code</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CRM_ZipCode__c</columns>
+        <columns>CRM_ZipsCountyName__c</columns>
+        <columns>CRM_ZipsCBSAName__c</columns>
+        <columns>CRM_ZipsCBSAID__c</columns>
+        <columns>CRM_ZipsCountyID__c</columns>
+        <columns>CRM_Location__Latitude__s</columns>
+        <columns>CRM_Location__Longitude__s</columns>
+        <columns>CRM_IsActive__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CZRD-{0000000}</displayFormat>
+        <label>Zip Reference Data ID</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Ref Data - Zip Codes</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>CRM_ZipCode__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_ZipsCountyName__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_ZipsCBSAName__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_ZipsCBSAID__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_ZipsCountyID__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CRM_IsActive__c</customTabListAdditionalFields>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>CRM_ZipCode__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_ZipsCBSAName__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CRM_ZipsCountyName__c</lookupDialogsAdditionalFields>
+        <lookupFilterFields>NAME</lookupFilterFields>
+        <lookupFilterFields>CRM_ZipsCBSAName__c</lookupFilterFields>
+        <lookupFilterFields>CRM_ZipsCountyName__c</lookupFilterFields>
+        <searchFilterFields>CRM_ZipsCBSAID__c</searchFilterFields>
+        <searchFilterFields>CRM_ZipsCountyID__c</searchFilterFields>
+        <searchResultsAdditionalFields>CRM_ZipCode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CRM_ZipsCBSAName__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CRM_ZipsCountyName__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>zip_code_number</fullName>
+        <active>true</active>
+        <description>Validation to ensure only numbers are added to the zip code</description>
+        <errorConditionFormula>OR (NOT(ISNUMBER(CRM_ZipCode__c)), LEN(CRM_ZipCode__c)!= 5)</errorConditionFormula>
+        <errorDisplayField>CRM_ZipCode__c</errorDisplayField>
+        <errorMessage>Invalid Zip Code</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>
